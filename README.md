@@ -36,7 +36,7 @@ Las conexiones intelectuales que se labran con el intercambio cultural se intens
 Tiene mucho sentido que conectar con otra persona por nuestros intereses literarios y cinematográficos sea algo emotivo, porque las novelas que leemos y los filmes que contemplamos forjan en parte nuestra memoria emocional. Y como esta memoria es imperfecta, las redes sociales de películas y libros pueden ser una buena muleta para nosotros, así que merecen una oportunidad.
 
 ### Hipótesis
-En el Perú y en Latinoamérica hay una gran cantidad de artistas y personas interesadas en actividades culturales  que carecen de un espacio propio en donde- además de compartir su talento y eventos-puedan generar redes de contacto. 
+En el Perú y en Latinoamérica hay una gran cantidad de artistas y personas interesadas en actividades culturales  que carecen de un espacio digital propio en donde- además de compartir su talento y eventos-puedan generar redes de contacto. 
 
 ### Guía de preguntas
 ![](https://user-images.githubusercontent.com/39272944/43011573-882f38ea-8c09-11e8-9402-6e0c547fe83a.jpg)
@@ -59,6 +59,9 @@ A partir de la encuesta online realizada a 30 usuarios, se llegó a las siguient
 ## Prototipado
 
 ### - Prototipo de baja fidelidad
+**-Login**
+![login](https://user-images.githubusercontent.com/39272944/43022802-11c58784-8c2e-11e8-9743-ddf673b66b0f.jpg)
+
 ### - Prototipo de media fidelidad
 ### - Prototipo ideal
 ###  Test con usuario: conclusiones 
@@ -100,6 +103,18 @@ Behance es la red social pensada para artistas e ilustradores propiedad de Adobe
 Resumen de entrevistas con usuarios
  Link/screenshots del prototipo de alta fidelidad.
  Conclusiones de testing con el producto en HTML.
+
+## Planificación
+
+### Metodología ágil
+
+Para desarrollar este producto decidimos usar la metodología ágil. El tablero Kan-ban fue nuestra principal herramienta de organización. De igual forma, digitalizamos esta información en un tablero de Trello. Asimismo, asignamos responsabilidades a través de Issues de GitHub.
+
+![sprint1](https://user-images.githubusercontent.com/39272944/43022530-34bf16f2-8c2d-11e8-90fe-742fe421d16c.jpeg)
+
+![trello](https://user-images.githubusercontent.com/39272944/43022533-395ad1b0-8c2d-11e8-9589-4ec38b191725.jpg)
+
+![issues](https://user-images.githubusercontent.com/39272944/43022557-4623e0e4-8c2d-11e8-88c7-d89ccb79cd70.png)
 
 
 
