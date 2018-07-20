@@ -85,10 +85,6 @@ Bajo el lema “Be you. Go global” se ha lanzado Fiction City, una red social 
  
 Una red social europea para aficionados del arte y la cultura.
 
-[**_Pure Volume_**](http://www.purevolume.com/)
-
-Es una red social para el descubrimiento y la promoción de artistas emergentes. En ella cada usuario cuenta con un perfil donde colgar fotos, espectáculos, música y videos. Además en ella los artistas tienen la opción de dejar sus canciones disponibles para descarga gratuita.
-
 [**_Dribble_**](https://dribbble.com)
 
 Es sin duda alguna una de las redes sociales referentes del arte. Una web con una estética muy cuidada y muy buen material, un excelente proyecto donde los diseñadores se sienten como en casa. Si un proyecto tiene una gran cantidad de 'Me gusta' y comentarios positivos serà destacado en portada y ganará más visibilidad. 
@@ -100,12 +96,6 @@ Quizás, la red social más utilizada por ilustradores en el mundo. En ella pued
 [**Behance**](https://www.behance.net)
 
 Behance es la red social pensada para artistas e ilustradores propiedad de Adobe. Sin duda, una de las plataformas online líder a nivel mundial. El sitio web muestra el talento de profesionales del sector, da visibilidad a escuelas y organizaciones creativas, distribuye el trabajo a otras galerías online y se sincroniza con ProSite, un creador de portfolios online totalmente personalizable.
-
-[**_Fiction City_**]( https://www.fictioncity.net/register?l=es)
-
-Olemiarte olemiarte.com
-Es una red social que pone en contacto a todos los amantes del arte con espacios de exposición online gratuitos.Entre los artistas y usuarios se encuentran pintores, escultores, fotógrafos… una comunidad con un gran nivel y dispuesta a colaborar y compartir. Además tiene el añadido de que cada semana se escogen las mejores obras de la semana y se promociona a los artistas.
-
 
 Resumen de entrevistas con usuarios
  Link/screenshots del prototipo de alta fidelidad.
