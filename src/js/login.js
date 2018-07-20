@@ -66,12 +66,12 @@ const loginWithFirebase = () => {
 
   firebase.auth().signInWithEmailAndPassword(emailValue, passwordValue)
     .then(() => {
-      console.log('usuario inició sesiòn con èxito');
+      console.log('usuario inició sesión con éxito');
     })
 
     .catch((error) => {
       //Aquì podemos colocar mensaje de error en HTML
-      console.log('Error Firebase > còdigo > ' + error.code); //Contraseña o correo no valido
+      console.log('Error Firebase > código > ' + error.code); //Contraseña o correo no valido
       console.log('Error Firebase > Mensaje > ' + error.messaje); //
     });
 }
@@ -85,7 +85,7 @@ const logoutWithFirebase = () => {
       console.log('Usuario finalizó su sesión');
     })
     .catch((error) => {
-      console.log('Error Firebase > còdigo > ' + error.code); //Contraseña o correo no valido
+      console.log('Error Firebase > código > ' + error.code); //Contraseña o correo no valido
       console.log('Error Firebase > Mensaje > ' + error.messaje); //
     });
 }
@@ -107,7 +107,7 @@ const facebookLoginWithFirebase = () => {
 
     })
     .catch((error) => {
-      console.log('Error Firebase > còdigo > ' + error.code); //Contraseña o correo no valido
+      console.log('Error Firebase > código > ' + error.code); //Contraseña o correo no valido
       console.log('Error Firebase > Mensaje > ' + error.messaje); //
     });
 }
