@@ -1,10 +1,5 @@
 # RED SOCIAL
 
-## Planeación
-![](https://drive.google.com/file/d/1cKV-r8FALYa2j5EvPF3agd0WENYsKDxA/view)
-![](https://drive.google.com/file/d/12o7zfnCMVoA_aXWS-sbt2J5YPCXnGEZb/view)
-
-
 ## ¿Qué es **nombre de red social**?
 ## ¿Quiénes son los principales usuarios de **nombre de red social**?
 
