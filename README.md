@@ -54,20 +54,7 @@ A partir de la encuesta online realizada a 30 usuarios, se llegó a las siguient
 
 ![](https://user-images.githubusercontent.com/39272944/43011572-880d7854-8c09-11e8-94fa-acb202e45fcd.jpg)
 
-## Definición 
-
-## Prototipado
-
-### - Prototipo de baja fidelidad
-**-Login**
-![login](https://user-images.githubusercontent.com/39272944/43022802-11c58784-8c2e-11e8-9743-ddf673b66b0f.jpg)
-
-### - Prototipo de media fidelidad
-### - Prototipo ideal
-###  Test con usuario: conclusiones 
-
-
-##  Benchmark: competencia (Red social para artistas)
+##  Benchmark: Antecedentes (Red social para artistas)
 
 [**_Arte Manifiesto - Perú_**](http://www.artemanifiesto.com/)
 
@@ -103,6 +90,18 @@ Behance es la red social pensada para artistas e ilustradores propiedad de Adobe
 Resumen de entrevistas con usuarios
  Link/screenshots del prototipo de alta fidelidad.
  Conclusiones de testing con el producto en HTML.
+
+## Definición 
+
+## Prototipado
+
+### - Prototipo de baja fidelidad
+**-Login**
+![login](https://user-images.githubusercontent.com/39272944/43022802-11c58784-8c2e-11e8-9743-ddf673b66b0f.jpg)
+
+### - Prototipo de media fidelidad
+### - Prototipo ideal
+###  Test con usuario: conclusiones 
 
 ## Planificación
 

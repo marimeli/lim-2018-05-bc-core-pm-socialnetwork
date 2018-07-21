@@ -9,10 +9,10 @@ const logoutButton = document.getElementById('logout');
 //Botones de login
 const secLoggedIn = document.getElementById('loggedIn');
 const secLoggedOut = document.getElementById('loggedOut');
-
+//Logueo con redes
 const facebookButton = document.getElementById('facebookButton');
 const googleButton = document.getElementById('googleButton')
-
+//Usuario Facebook Gmail
 let username = document.getElementById('username');
 let userImage = document.getElementById('userImage');
 
@@ -118,17 +118,17 @@ facebookButton.addEventListener('click', facebookLoginWithFirebase);
 
 const googleLoginWithFirebase = () => {
   var provider = new firebase.auth.GoogleAuthProvider();
-  firebase.auth().signInWithPopup(provider).then(function(result) {
-   console.log('Sesión con Google')
-   
+  firebase.auth().signInWithPopup(provider).then(function (result) {
+    console.log('Sesión con Google')
+
     // ...
-  }).catch(function(error) {
-   console.log(error.code);
-   console.log(error.message);;
-   console.log(error.email);
-   console.log(error.credential);
+  }).catch(function (error) {
+    console.log(error.code);
+    console.log(error.message);;
+    console.log(error.email);
+    console.log(error.credential);
     // ...
-  }); 
+  });
 }
 
 googleButton.addEventListener('click', googleLoginWithFirebase);
