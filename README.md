@@ -1,7 +1,10 @@
-# RED SOCIAL
+# COOLTURAL
 
-## ¿Qué es **nombre de red social**?
-## ¿Quiénes son los principales usuarios de **nombre de red social**?
+La cultura y las artes juegan un papel importante en nuestra sociedad,porque promueven experiencias y aprendizajes fundamentales para todos los seres humanos. Nos enseñan a descubrir quienes somos y cómo nos relacionamos con nuestro entorno.
+
+## ¿Qué es Cooltural?
+## ¿Quiénes son los principales usuarios de Cooltural?
+ 
 
 ## Antes de empezar: ¿Cuáles son los elementos de una red social?
 
@@ -36,13 +39,16 @@ Las conexiones intelectuales que se labran con el intercambio cultural se intens
 Tiene mucho sentido que conectar con otra persona por nuestros intereses literarios y cinematográficos sea algo emotivo, porque las novelas que leemos y los filmes que contemplamos forjan en parte nuestra memoria emocional. Y como esta memoria es imperfecta, las redes sociales de películas y libros pueden ser una buena muleta para nosotros, así que merecen una oportunidad.
 
 ### Hipótesis
-En el Perú y en Latinoamérica hay una gran cantidad de artistas y personas interesadas en actividades culturales  que carecen de un espacio digital propio en donde- además de compartir su talento y eventos-puedan generar redes de contacto. 
+
+La educación cultural y artística desempeña un papel fundamental en la vida de los ciudadanos porque estimula experiencias y aprendizajes básicos para todas las personas. Sin embargo, en Perú y Latinoamérica existe poca difusión de actividades culturales y del talento artístico. 
+
 
 ### Guía de preguntas
 ![](https://user-images.githubusercontent.com/39272944/43011573-882f38ea-8c09-11e8-9402-6e0c547fe83a.jpg)
 
-### Resultado, análisis y conclusiones de encuesta a usuarios
+### Resultados y conclusiones de encuesta a usuarios
 
+### Resultados
 A partir de la encuesta online realizada a 30 usuarios, se llegó a las siguientes conclusiones:
 
 * Gran parte de los usuarios son estudiantes.
@@ -53,6 +59,12 @@ A partir de la encuesta online realizada a 30 usuarios, se llegó a las siguient
 * Más del 90% de usuarios interesados o muy interesados en cultura estarían dispuestos a pertenecer a una red social que promueva la participación de los propios ciudadanos en cuanto a la difusión de cultura y otras expresiones artísticas. 
 
 ![](https://user-images.githubusercontent.com/39272944/43011572-880d7854-8c09-11e8-94fa-acb202e45fcd.jpg)
+
+
+### Conclusiones
+
+En el Perú y en Latinoamérica hay una gran cantidad de artistas y personas interesadas en actividades culturales que carecen de un espacio digital propio en donde- además de compartir su talento y eventos-puedan generar redes de contacto. 
+
 
 ##  Benchmark: Antecedentes (Red social para artistas)
 
