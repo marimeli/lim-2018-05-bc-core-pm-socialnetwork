@@ -115,6 +115,21 @@ Resumen de entrevistas con usuarios
 ### - Prototipo ideal
 ###  Test con usuario: conclusiones 
 
+## Creación de marca: Cooltural
+
+El nombre de la marca surgió a partir de dos palabras: Cool  y cultura. 
+
+### Nuestro eslogan:
+
+Antes de llegar al eslogan final, propusimos 4 eslogans: 
+-Vive la cultura
+-Arte con conciencia
+-Cultura para todos
+-Conecta, comparte, crea
+
+El eslogan con más puntaje fue:’ Conecta, comparte,  crea’. No obstante, por sugerencia de algunos usuarios, decidimos acortarlo a Comparte y conecta, pues tiene más fuerza y describe la propuesta de valor de nuestra red social. 
+
+
 ## Planificación
 
 ### Metodología ágil
