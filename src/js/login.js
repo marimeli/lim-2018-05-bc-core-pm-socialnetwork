@@ -21,7 +21,7 @@ let errorAdvice = document.getElementById('error-advice');
 //******************FUNCIONES******************
 
 window.onload = () => {
-  //Listener en tempo real
+  //Listener en tiempo real
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {//Si está logeado mostramos la opcion de logout y nombre de usuario
       //También podemos traer los sections directamente pero por orden mejor lo declaramos arriba
@@ -29,7 +29,7 @@ window.onload = () => {
       userPhoto.style.display = 'block';
       secLoggedOut.style.display = 'none';
       
-      //Imprimiendo nombre de usuario en el pàrrafo
+      //Imprimiendo nombre de usuario en el párrafo
       username.innerText = `Bienvenidx ${user.displayName}`;
       //Imprimiendo imagen de usuario usando dom y settAttribute       
       let userPhotoURL = user.photoURL
@@ -45,7 +45,7 @@ window.onload = () => {
 
 
   });
-}
+};
 
 //*********REGISTRO***********
 const registerWithFirebase = () => {
@@ -60,7 +60,7 @@ const registerWithFirebase = () => {
       console.log('Error Firebase > còdigo > ' + error.code); //Contraseña o correo no valido
       console.log('Error Firebase > Mensaje > ' + error.messaje); //
     })
-}
+};
 
 registerButton.addEventListener('click', registerWithFirebase);
 
@@ -84,10 +84,10 @@ const loginWithFirebase = () => {
       else if (error.code =='auth/user-not-found') {
         errorEmail.innerText = 'No existe un usuario con este correo';
       }
-      console.log('Error Firebase > còdigo > ' + error.code); //Contraseña o correo no valido
+      console.log('Error Firebase > código > ' + error.code); //Contraseña o correo no valido
       console.log('Error Firebase > Mensaje > ' + error.messaje); //
     });
-}
+};
 
 loginButton.addEventListener('click', loginWithFirebase);
 
@@ -98,10 +98,10 @@ const logoutWithFirebase = () => {
       console.log('Usuario finalizó su sesión');
     })
     .catch((error) => {
-      console.log('Error Firebase > código > ' + error.code); //Contraseña o correo no valido
-      console.log('Error Firebase > Mensaje > ' + error.messaje); //
+      console.log('Error Firebase > código > ' + error.code); 
+      console.log('Error Firebase > Mensaje > ' + error.messaje); 
     });
-}
+};
 
 logoutButton.addEventListener('click', logoutWithFirebase);
 
@@ -123,7 +123,7 @@ const facebookLoginWithFirebase = () => {
       console.log('Error Firebase > código > ' + error.code); //Contraseña o correo no valido
       console.log('Error Firebase > Mensaje > ' + error.messaje); //
     });
-}
+};
 
 facebookButton.addEventListener('click', facebookLoginWithFirebase);
 
@@ -141,6 +141,6 @@ const googleLoginWithFirebase = () => {
     console.log(error.email);
     console.log(error.credential);
   });
-}
+};
 
 googleButton.addEventListener('click', googleLoginWithFirebase);

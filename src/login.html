@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <title>Cooltural</title>
+</head>
+
+<body>
+    <!-- LOGOUT -->
+    <section id="logged-out">
+        <form accept-charset="UTF-8" role="form">
+            <fieldset>
+                <div class="form-group">
+                    <input id="email" class="form-control" placeholder="yourmail@example.com" name="email" type="email">
+                    <p id="error-email" style="color: red"></p>
+                </div>
+                <div class="form-group">
+                    <input id="password" class="form-control" placeholder="Password" name="password" type="password">
+                    <p id="error-advice" style="color: red"></p>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input name="remember" type="checkbox" value="Remember Me"> Recordarme
+                    </label>
+                </div>
+                <input id="login-button" class="btn btn-lg btn-success btn-block" type="button"  href="index.html" value="Iniciar sesión">
+                <input id="register-button" class="btn btn-lg btn-success btn-block" type="button" value="Registrarse">
+            </fieldset>
+        </form>
+        <hr/>
+        <center>
+            <h4>También puedes:</h4>
+        </center>
+        <!-- LOGIN CON FACEBOOK Y GOOGLE -->
+        <input id="facebook-button" class="btn btn-lg btn-facebook btn-block" type="submit" value="Acceder con Facebook">
+        <input id="google-button" class="btn btn-lg btn-google btn-block" type="submit" value="Acceder con Google">
+    </section>
+</body>
+
+</html>
