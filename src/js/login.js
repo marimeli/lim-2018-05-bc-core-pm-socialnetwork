@@ -6,7 +6,7 @@ const nameForRegister = document.getElementById('name-register');
 const emailRegister = document.getElementById('email-register');
 const passwordRegister = document.getElementById('password-register');
 //Botones de login
-const createUser = document.getElementById('create-user');
+// const createUser = document.getElementById('create-user');
 const registerButton = document.getElementById('register-button');
 const loginButton = document.getElementById('login-button');
 const logoutButton = document.getElementById('logout');
@@ -33,7 +33,7 @@ window.onload = () => {
       secLoggedIn.style.display = 'block';
       userPhoto.style.display = 'block';
       secLoggedOut.style.display = 'none';
-      secRegisterForm.style.display = 'none';
+      // secRegisterForm.style.display = 'none';
 
       //Imprimiendo nombre de usuario en el pàrrafo
       username.innerText = `Bienvenidx ${user.displayName}`;
@@ -45,7 +45,7 @@ window.onload = () => {
       secLoggedIn.style.display = 'none';
       userPhoto.style.display = 'none';
       secLoggedOut.style.display = 'block';
-      secRegisterForm.style.display = 'none';
+      // secRegisterForm.style.display = 'none';
     }
     //Imprimimos datos que Firebase tiene del usuario
     console.log('user > ' + JSON.stringify(user));
@@ -57,7 +57,7 @@ window.onload = () => {
 //*********REGISTRO***********
 const registerWithFirebase = () => {
   //Crea usuario con email y password
-  firebase.auth().createUserWithEmailAndPassword(emailRegister.value, passwordRegister.value)
+  firebase.auth().createUserWithEmailAndPassword(email.value, password.value)
     .then(() => {
       console.log('usuario creado con èxito');
     })
@@ -97,7 +97,7 @@ const showRegisterForm = () => {
 //     });
 // };
 
-createUser.addEventListener('click', showRegisterForm);
+// createUser.addEventListener('click', showRegisterForm);
 registerButton.addEventListener('click', registerWithFirebase);
 
 //*********LOGIN***********
@@ -175,3 +175,9 @@ const googleLoginWithFirebase = () => {
 }
 
 googleButton.addEventListener('click', googleLoginWithFirebase);
+
+//Todo esto de abajo son documentos y colecciones
+//Tareas Laboratoria
+//Tarea: nombre, duración, tipo, dificultad //Colección hecha??
+//Estudiantes: Quién hace la tarea
+//Coach 
