@@ -46,6 +46,10 @@ La educación cultural y artística desempeña un papel fundamental en la vida d
 ### Guía de preguntas
 ![](https://user-images.githubusercontent.com/39272944/43011573-882f38ea-8c09-11e8-9402-6e0c547fe83a.jpg)
 
+![](https://user-images.githubusercontent.com/39272944/43245203-17c007a6-9073-11e8-8370-062082df3d18.jpg)
+
+![](https://user-images.githubusercontent.com/39272944/43245252-3e4d0c8e-9073-11e8-8f81-bb5241b1aabe.jpg)
+
 ### Resultados y conclusiones de encuesta a usuarios
 
 ### Resultados

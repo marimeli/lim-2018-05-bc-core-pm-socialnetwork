@@ -6,10 +6,11 @@ const nameForRegister = document.getElementById('name-register');
 const emailRegister = document.getElementById('email-register');
 const passwordRegister = document.getElementById('password-register');
 //Botones de login
-// const createUser = document.getElementById('create-user');
+const createUser = document.getElementById('create-user');
 const registerButton = document.getElementById('register-button');
 const loginButton = document.getElementById('login-button');
 const logoutButton = document.getElementById('logout');
+const backButton = document.getElementById('back-button');
 //Secciòn LoggedIn y LoggedOut
 const secLoggedIn = document.getElementById('logged-in');
 const secLoggedOut = document.getElementById('logged-out');
@@ -20,6 +21,8 @@ const googleButton = document.getElementById('google-button')
 //Usuario Facebook Gmail
 let username = document.getElementById('user-name');
 let userPhoto = document.getElementById('user-image');
+//Errores registro y logueo
+let addviceEmailRegister = document.getElementById('advice-emailRegister');
 let errorEmail = document.getElementById('error-email');
 let errorAdvice = document.getElementById('error-advice');
 //Espacio Post
@@ -39,7 +42,7 @@ window.onload = () => {
       bd.classList.remove('hidden');
       posts.classList.remove('hidden');
       secLoggedOut.style.display = 'none';
-      // secRegisterForm.style.display = 'none';
+      secRegisterForm.style.display = 'none';
 
       //Imprimiendo nombre de usuario en el pàrrafo
       username.innerText = `Bienvenidx ${user.displayName}`;
@@ -51,12 +54,22 @@ window.onload = () => {
       secLoggedIn.style.display = 'none';
       userPhoto.style.display = 'none';
       secLoggedOut.style.display = 'block';
-      // secRegisterForm.style.display = 'none';
+      secRegisterForm.style.display = 'none';
     }
     //Imprimimos datos que Firebase tiene del usuario
     console.log('user > ' + JSON.stringify(user));
   });
 }
+
+//Salir de form de registro y regresar al loggin inicial
+const backToLogin = () => {
+  secLoggedIn.style.display = 'none';
+  userPhoto.style.display = 'none';
+  secLoggedOut.style.display = 'block';
+  secRegisterForm.style.display = 'none';
+}
+
+backButton.addEventListener('click', backToLogin)
 
 //  Función para escribir dato de usuario en Firebase, cuando está logeado 
 writeUserData = (userId, name, email, imageUrl) => {
@@ -73,18 +86,16 @@ console.log(error);
   });
 };
 
-
-
 //*********REGISTRO***********
 const registerWithFirebase = () => {
   //Crea usuario con email y password
-  firebase.auth().createUserWithEmailAndPassword(email.value, password.value)
+  firebase.auth().createUserWithEmailAndPassword(emailRegister.value, passwordRegister.value)
     .then(() => {
       console.log('usuario creado con èxito');
     })
     .catch((error) => {
       if (error.code === 'auth/email-already-in-use') {
-        errorEmail.innerText = 'Este correo ya fue registrado. Ingrese otro';
+        addviceEmailRegister.innerText = 'Ya existe un usuario con este correo. Por favor, ingrese otro';
       }
       console.log('Error Firebase > còdigo > ' + error.code); //Contraseña o correo no valido
       console.log('Error Firebase > Mensaje > ' + error.messaje); //
@@ -98,27 +109,7 @@ const showRegisterForm = () => {
   secRegisterForm.style.display = 'block';
 }
 
-// const showRegisterWithFirebase = (user) => {
-//   if (user.emailVerified) {
-
-//   }
-//   //Caso contrario que me salga un alert
-// };
-
-// const verificationWithFirebase = () => {
-//   const user = firebase.auth().currentUser;
-//   user.sendEmailVerification()
-//     .then(() => {
-//       // Email sent.
-//       console.log('Enviando correo...');
-//     })
-//     .catch((error) => {
-//       // An error happened.
-//       console.log(error);
-//     });
-// };
-
-// createUser.addEventListener('click', showRegisterForm);
+createUser.addEventListener('click', showRegisterForm);
 registerButton.addEventListener('click', registerWithFirebase);
 
 //*********LOGIN***********
@@ -134,7 +125,7 @@ const loginWithFirebase = () => {
         errorAdvice.innerText = 'Su contraseña es incorrecta';
       }
       else if (error.code === 'auth/user-not-found') {
-        errorEmail.innerText = 'No existe un usuario con este correo';
+        errorEmail.innerText = 'No existe un usuario con este correo. Por favor, regístrese';
       }
       console.log('Error Firebase > código > ' + error.code); //Contraseña o correo no valido
       console.log('Error Firebase > Mensaje > ' + error.messaje); //
