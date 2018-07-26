@@ -22,7 +22,11 @@ let username = document.getElementById('user-name');
 let userPhoto = document.getElementById('user-image');
 let errorEmail = document.getElementById('error-email');
 let errorAdvice = document.getElementById('error-advice');
-
+//Espacio Post
+const bd = document.getElementById('bd'); //contendor de base de datos
+const posts = document.getElementById('posts'); //div que guardara todos los posts
+const post = document.getElementById('post'); //espacio para hacer una publicacion
+const btnSave = document.getElementById('btn-save');//boton para publicar
 //******************FUNCIONES******************
 
 window.onload = () => {
@@ -32,6 +36,8 @@ window.onload = () => {
       //También podemos traer los sections directamente pero por orden mejor lo declaramos arriba
       secLoggedIn.style.display = 'block';
       userPhoto.style.display = 'block';
+      bd.classList.remove('hidden');
+      posts.classList.remove('hidden');
       secLoggedOut.style.display = 'none';
       secRegisterForm.style.display = 'none';
 
@@ -49,10 +55,25 @@ window.onload = () => {
     }
     //Imprimimos datos que Firebase tiene del usuario
     console.log('user > ' + JSON.stringify(user));
+  });
+}
 
-
+//  Función para escribir dato de usuario en Firebase, cuando está logeado 
+writeUserData = (userId, name, email, imageUrl) => {
+  firebase.database().ref('users/' + userId).set({
+    username: name,
+    email: email,
+    profile_picture : imageUrl
+  }).then(result => {
+    console.log(result);
+    
+  })
+  .catch(error => {
+console.log(error);
   });
 };
+
+
 
 //*********REGISTRO***********
 const registerWithFirebase = () => {
@@ -68,7 +89,7 @@ const registerWithFirebase = () => {
       console.log('Error Firebase > còdigo > ' + error.code); //Contraseña o correo no valido
       console.log('Error Firebase > Mensaje > ' + error.messaje); //
     })
-};
+}
 
 const showRegisterForm = () => {
   secLoggedIn.style.display = 'none';
@@ -104,7 +125,7 @@ registerButton.addEventListener('click', registerWithFirebase);
 const loginWithFirebase = () => {
   firebase.auth().signInWithEmailAndPassword(email.value, password.value)
     .then(() => {
-      console.log('usuario inició sesión con éxito');
+      console.log('usuario inició sesiòn con èxito');
     })
 
     .catch((error) => {
@@ -118,7 +139,7 @@ const loginWithFirebase = () => {
       console.log('Error Firebase > código > ' + error.code); //Contraseña o correo no valido
       console.log('Error Firebase > Mensaje > ' + error.messaje); //
     });
-};
+}
 
 loginButton.addEventListener('click', loginWithFirebase);
 
@@ -132,7 +153,7 @@ const logoutWithFirebase = () => {
       console.log('Error Firebase > código > ' + error.code); //Contraseña o correo no valido
       console.log('Error Firebase > Mensaje > ' + error.messaje); //
     });
-};
+}
 
 logoutButton.addEventListener('click', logoutWithFirebase);
 
@@ -151,20 +172,25 @@ const facebookLoginWithFirebase = () => {
 
     })
     .catch((error) => {
-      console.log('Error Firebase > código > ' + error.code); //Contraseña o correo no valido
+      console.log('Error Firebase > còdigo > ' + error.code); //Contraseña o correo no valido
       console.log('Error Firebase > Mensaje > ' + error.messaje); //
     });
-};
+}
 
 facebookButton.addEventListener('click', facebookLoginWithFirebase);
 
 //*********LOGIN GOOGLE***********
+
+let userData = {}
 
 const googleLoginWithFirebase = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
   firebase.auth().signInWithPopup(provider)
     .then(function (result) {
       console.log('Sesión con Google')
+      const user = result.user;
+      // /* userData //aignar valores *
+      writeUserData(user.uid, user.displayName, user.email, user.photoURL) 
     })
     .catch((error) => {
       console.log(error.code);
