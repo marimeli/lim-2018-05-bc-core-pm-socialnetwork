@@ -115,10 +115,10 @@ btnSave.addEventListener('click', () => {
   const newPost = writeNewPost(userId, post.value);
 
   var btnUpdate = document.createElement('input');
-  btnUpdate.setAttribute('value','Update')
+  btnUpdate.setAttribute('value','Editar')
   btnUpdate.setAttribute('type','button')
   var btnDelete = document.createElement('input');
-  btnDelete.setAttribute('value','Delete')
+  btnDelete.setAttribute('value','Eliminar')
   btnDelete.setAttribute('type','button')
   var contPost = document.createElement('div');
   var textPost = document.createElement('textarea');
