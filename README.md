@@ -135,8 +135,16 @@ Resumen de entrevistas con usuarios
 ### - Prototipo de baja fidelidad
 **-Login**
 ![login](https://user-images.githubusercontent.com/39272944/43022802-11c58784-8c2e-11e8-9743-ddf673b66b0f.jpg)
+![photo5105341124570097637](https://user-images.githubusercontent.com/38727384/43291543-6843e33a-90f7-11e8-877e-826b24c341d0.jpg)
+![photo5105341124570097634](https://user-images.githubusercontent.com/38727384/43291544-6873b3c6-90f7-11e8-8374-fa7acfafb6a5.jpg)
+![photo5105341124570097635](https://user-images.githubusercontent.com/38727384/43291545-688ef492-90f7-11e8-948a-65dc4763ab3a.jpg)
+![photo5105341124570097636](https://user-images.githubusercontent.com/38727384/43291546-68b756ee-90f7-11e8-929a-0a88df9d133e.jpg)
+
 
 ### - Prototipo de media fidelidad
+
+[Ver en Figma](https://www.figma.com/file/bFp2KSQNXLA33ndHvjCXKAsP/Cooltural-Social-Network?node-id=0%3A1)
+
 ### - Prototipo ideal
 ###  Test con usuario: conclusiones 
 
