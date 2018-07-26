@@ -22,9 +22,9 @@ const googleButton = document.getElementById('google-button')
 let username = document.getElementById('user-name');
 let userPhoto = document.getElementById('user-image');
 //Errores registro y logueo
-let addviceEmailRegister = document.getElementById('advice-emailRegister');
+let adviceEmailRegister = document.getElementById('advice-emailRegister');
 let errorEmail = document.getElementById('error-email');
-let errorAdvice = document.getElementById('error-advice');
+let errorPassword = document.getElementById('error-password');
 //Espacio Post
 const bd = document.getElementById('bd'); //contendor de base de datos
 const posts = document.getElementById('posts'); //div que guardara todos los posts
@@ -95,7 +95,10 @@ const registerWithFirebase = () => {
     })
     .catch((error) => {
       if (error.code === 'auth/email-already-in-use') {
-        addviceEmailRegister.innerText = 'Ya existe un usuario con este correo. Por favor, ingrese otro';
+        adviceEmailRegister.innerText = 'Ya existe un usuario con este correo. Por favor, ingrese otro';
+      }
+      else if (error.code === 'auth/invalid-email') {
+        adviceEmailRegister.innerText = 'Por favor, agregue un correo válido';
       }
       console.log('Error Firebase > còdigo > ' + error.code); //Contraseña o correo no valido
       console.log('Error Firebase > Mensaje > ' + error.messaje); //
@@ -122,7 +125,10 @@ const loginWithFirebase = () => {
     .catch((error) => {
       //Aquì podemos colocar mensaje de error en HTML
       if (error.code === 'auth/wrong-password') {
-        errorAdvice.innerText = 'Su contraseña es incorrecta';
+        errorPassword.innerText = 'Su contraseña es incorrecta';
+      }
+      else if (error.code === 'auth/invalid-email') {
+        errorEmail.innerText = 'Por favor, agregue un correo válido';
       }
       else if (error.code === 'auth/user-not-found') {
         errorEmail.innerText = 'No existe un usuario con este correo. Por favor, regístrese';
