@@ -30,7 +30,7 @@ const bd = document.getElementById('bd'); //contendor de base de datos
 const posts = document.getElementById('posts'); //div que guardara todos los posts
 const post = document.getElementById('post'); //espacio para hacer una publicacion
 const btnSave = document.getElementById('btn-save');//boton para publicar
-let userData = {}
+
 //******************FUNCIONES******************
 
 window.onload = () => {
@@ -98,7 +98,7 @@ function writeNewPost(uid, body) {
     body: body
   };
 
-  // Get a key for a new Post. EZ POST O POSTSS??
+  // Get a key for a new Post. 
   var newPostKey = firebase.database().ref().child('posts').push().key;
 
   // Write the new post's data simultaneously in the posts list and the user's post list.
@@ -124,6 +124,11 @@ btnSave.addEventListener('click', () => {
   var textPost = document.createElement('textarea');
   textPost.setAttribute('id', newPost);
   textPost.innerHTML = post.value;
+
+  contPost.appendChild(textPost);
+  contPost.appendChild(btnUpdate);
+  contPost.appendChild(btnDelete);
+  posts.appendChild(contPost);
 });
 
 
