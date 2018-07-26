@@ -46,13 +46,12 @@ La educación cultural y artística desempeña un papel fundamental en la vida d
 
 
 ### Guía de preguntas
+
+### Encuesta a usuarios
+
+### Guía de preguntas
+
 ![](https://user-images.githubusercontent.com/39272944/43011573-882f38ea-8c09-11e8-9402-6e0c547fe83a.jpg)
-
-![](https://user-images.githubusercontent.com/39272944/43245203-17c007a6-9073-11e8-8370-062082df3d18.jpg)
-
-![](https://user-images.githubusercontent.com/39272944/43245252-3e4d0c8e-9073-11e8-8f81-bb5241b1aabe.jpg)
-
-### Resultados y conclusiones de encuesta a usuarios
 
 ### Resultados
 A partir de la encuesta online realizada a 30 usuarios, se llegó a las siguientes conclusiones:
@@ -71,6 +70,26 @@ A partir de la encuesta online realizada a 30 usuarios, se llegó a las siguient
 
 En el Perú y en Latinoamérica hay una gran cantidad de artistas y personas interesadas en actividades culturales que carecen de un espacio digital propio en donde- además de compartir su talento y eventos-puedan generar redes de contacto. 
 
+### Entrevista 1 :Usuarios
+
+###Guía de preguntas
+![](https://user-images.githubusercontent.com/39272944/43245203-17c007a6-9073-11e8-8370-062082df3d18.jpg)
+
+### Conclusiones
+
+Luego de entrevistas a los usuarios llegamos a las siguientes conclusiones:
+
+* Los usuarios usan dispositivos móviles gran parte del día, pues lo pueden transportar con facilidad y les ofrece la ventaja de realizar distintas funciones.
+* Las redes sociales más usadas son Facebook e Instagram.
+* Los usuarios que interesados en actividades culturales y artísticas que buscan información de forma activa tuvieron experiencias productivas en el colegio o han ejercido alguna actividad artística.
+* Los usuarios indican que desean un red social que les permita publicar  y compartir al igual que Facebook. Además, indican que quieren encontrar todos los eventos culturales. 
+* El tema visual es importante para ellos. Priorizan las imágenes sobre el texto. Desean información sucinta. Tambièn desean algo colorido.
+
+### Entrevista 1: Artistas
+
+### Guía de preguntas
+
+![](https://user-images.githubusercontent.com/39272944/43245252-3e4d0c8e-9073-11e8-8f81-bb5241b1aabe.jpg)
 
 ##  Benchmark: Antecedentes (Red social para artistas)
 
