@@ -30,6 +30,7 @@ const bd = document.getElementById('bd'); //contendor de base de datos
 const posts = document.getElementById('posts'); //div que guardara todos los posts
 const post = document.getElementById('post'); //espacio para hacer una publicacion
 const btnSave = document.getElementById('btn-save');//boton para publicar
+
 //******************FUNCIONES******************
 
 window.onload = () => {
@@ -37,13 +38,13 @@ window.onload = () => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {//Si está logeado mostramos la opcion de logout y nombre de usuario
       //También podemos traer los sections directamente pero por orden mejor lo declaramos arriba
+      console.log('user is signed in');
       secLoggedIn.style.display = 'block';
       userPhoto.style.display = 'block';
       bd.classList.remove('hidden');
       posts.classList.remove('hidden');
       secLoggedOut.style.display = 'none';
       secRegisterForm.style.display = 'none';
-
       //Imprimiendo nombre de usuario en el pàrrafo
       username.innerText = `Bienvenidx ${user.displayName}`;
       //Imprimiendo imagen de usuario usando dom y settAttribute       
@@ -51,8 +52,11 @@ window.onload = () => {
       userPhoto.setAttribute('src', userPhotoURL);
 
     } else {//Si NO está logueado, mostramos formulario(OPCION LOGGEDOUT)
+      console.log('no user is signed in');
       secLoggedIn.style.display = 'none';
       userPhoto.style.display = 'none';
+      posts.classList.add('hidden');
+      bd.classList.add('hidden');
       secLoggedOut.style.display = 'block';
       secRegisterForm.style.display = 'none';
     }
@@ -71,7 +75,7 @@ const backToLogin = () => {
 
 backButton.addEventListener('click', backToLogin)
 
-//  Función para escribir dato de usuario en Firebase, cuando está logeado 
+//  Función para guardar dato de usuario en Firebase, cuando está logeado con gmail. 
 writeUserData = (userId, name, email, imageUrl) => {
   firebase.database().ref('users/' + userId).set({
     username: name,
@@ -82,9 +86,51 @@ writeUserData = (userId, name, email, imageUrl) => {
     
   })
   .catch(error => {
-console.log(error);
+ console.log(error);
   });
-};
+ };
+
+//  Función para escribir un post
+function writeNewPost(uid, body) {
+  // A post entry.
+  var postData = {
+    uid: uid,
+    body: body
+  };
+
+  // Get a key for a new Post. 
+  var newPostKey = firebase.database().ref().child('posts').push().key;
+
+  // Write the new post's data simultaneously in the posts list and the user's post list.
+  var updates = {};
+  updates['/posts/' + newPostKey] = postData;
+  updates['/user-posts/' + uid + '/' + newPostKey] = postData;
+
+  firebase.database().ref().update(updates);
+  return newPostKey;
+}
+
+btnSave.addEventListener('click', () => {
+  var userId = firebase.auth().currentUser.uid;
+  const newPost = writeNewPost(userId, post.value);
+
+  var btnUpdate = document.createElement('input');
+  btnUpdate.setAttribute('value','Editar')
+  btnUpdate.setAttribute('type','button')
+  var btnDelete = document.createElement('input');
+  btnDelete.setAttribute('value','Eliminar')
+  btnDelete.setAttribute('type','button')
+  var contPost = document.createElement('div');
+  var textPost = document.createElement('textarea');
+  textPost.setAttribute('id', newPost);
+  textPost.innerHTML = post.value;
+
+  contPost.appendChild(textPost);
+  contPost.appendChild(btnUpdate);
+  contPost.appendChild(btnDelete);
+  posts.appendChild(contPost);
+});
+
 
 //*********REGISTRO***********
 const registerWithFirebase = () => {
@@ -178,7 +224,6 @@ facebookButton.addEventListener('click', facebookLoginWithFirebase);
 
 //*********LOGIN GOOGLE***********
 
-let userData = {}
 
 const googleLoginWithFirebase = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
