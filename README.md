@@ -45,14 +45,11 @@ Tiene mucho sentido que conectar con otra persona por nuestros intereses literar
 La educación cultural y artística desempeña un papel fundamental en la vida de los ciudadanos porque estimula experiencias y aprendizajes básicos para todas las personas. Sin embargo, en Perú y Latinoamérica existe poca difusión de actividades culturales y del talento artístico. 
 
 
+### Encuesta Usuarios
+
 ### Guía de preguntas
+
 ![](https://user-images.githubusercontent.com/39272944/43011573-882f38ea-8c09-11e8-9402-6e0c547fe83a.jpg)
-
-![](https://user-images.githubusercontent.com/39272944/43245203-17c007a6-9073-11e8-8370-062082df3d18.jpg)
-
-![](https://user-images.githubusercontent.com/39272944/43245252-3e4d0c8e-9073-11e8-8f81-bb5241b1aabe.jpg)
-
-### Resultados y conclusiones de encuesta a usuarios
 
 ### Resultados
 A partir de la encuesta online realizada a 30 usuarios, se llegó a las siguientes conclusiones:
@@ -71,6 +68,21 @@ A partir de la encuesta online realizada a 30 usuarios, se llegó a las siguient
 
 En el Perú y en Latinoamérica hay una gran cantidad de artistas y personas interesadas en actividades culturales que carecen de un espacio digital propio en donde- además de compartir su talento y eventos-puedan generar redes de contacto. 
 
+### Entrevista 01:  Usuarios
+
+### Guía de preguntas
+
+![](https://user-images.githubusercontent.com/39272944/43245203-17c007a6-9073-11e8-8370-062082df3d18.jpg)
+
+### Fotografías
+
+![](https://user-images.githubusercontent.com/39272944/43249364-197a376c-9080-11e8-946e-b514f68261aa.jpg)
+
+
+### Entrevista 01: Artistas
+
+### Guía de preguntas
+![](https://user-images.githubusercontent.com/39272944/43245252-3e4d0c8e-9073-11e8-8f81-bb5241b1aabe.jpg)
 
 ##  Benchmark: Antecedentes (Red social para artistas)
 
