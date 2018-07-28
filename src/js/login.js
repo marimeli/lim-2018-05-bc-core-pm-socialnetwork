@@ -15,6 +15,7 @@ const backButton = document.getElementById('back-button');
 const secLoggedIn = document.getElementById('logged-in');
 const secLoggedOut = document.getElementById('logged-out');
 const secRegisterForm = document.getElementById('sec-register');
+const secGifContainer = document.getElementById('gif-container')
 //Logueo con redes
 const facebookButton = document.getElementById('facebook-button');
 const googleButton = document.getElementById('google-button')
@@ -25,11 +26,10 @@ let userPhoto = document.getElementById('user-image');
 let adviceEmailRegister = document.getElementById('advice-emailRegister');
 let errorEmail = document.getElementById('error-email');
 let errorPassword = document.getElementById('error-password');
-//Espacio Post
-const bd = document.getElementById('bd'); //contendor de base de datos
-const posts = document.getElementById('posts'); //div que guardara todos los posts
-const post = document.getElementById('post'); //espacio para hacer una publicacion
-const btnSave = document.getElementById('btn-save');//boton para publicar
+
+//DATABASE
+const gifArea = document.getElementById('gif-area');
+const sendGifButton = document.getElementById('send-gif');
 
 //******************FUNCIONES******************
 
@@ -38,13 +38,11 @@ window.onload = () => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {//Si está logeado mostramos la opcion de logout y nombre de usuario
       //También podemos traer los sections directamente pero por orden mejor lo declaramos arriba
-      console.log('user is signed in');
       secLoggedIn.style.display = 'block';
       userPhoto.style.display = 'block';
-      bd.classList.remove('hidden');
-      posts.classList.remove('hidden');
       secLoggedOut.style.display = 'none';
       secRegisterForm.style.display = 'none';
+
       //Imprimiendo nombre de usuario en el pàrrafo
       username.innerText = `Bienvenidx ${user.displayName}`;
       //Imprimiendo imagen de usuario usando dom y settAttribute       
@@ -52,18 +50,26 @@ window.onload = () => {
       userPhoto.setAttribute('src', userPhotoURL);
 
     } else {//Si NO está logueado, mostramos formulario(OPCION LOGGEDOUT)
-      console.log('no user is signed in');
       secLoggedIn.style.display = 'none';
       userPhoto.style.display = 'none';
-      posts.classList.add('hidden');
-      bd.classList.add('hidden');
       secLoggedOut.style.display = 'block';
       secRegisterForm.style.display = 'none';
     }
     //Imprimimos datos que Firebase tiene del usuario
     console.log('user > ' + JSON.stringify(user));
   });
-}
+  //Escuchador, se agrega cada que alguien agrega algo nuevo
+  firebase.database().ref('gifs')//database de firebase, escucha la referencia gifs
+    //Evento para escucha cada hijo que se agrega, cada regalo que se envìa.Permite escuchar cada que alguien agrega un nuevo gif
+    .on('child_added', (newGif) => {
+      secGifContainer.innerHTML += `
+      <p>${newGif.creatorName}</p>
+      <img style = 'width: 200px' src = '${newGif.gifURL}'>
+      </img>
+      `;
+
+    })
+};
 
 //Salir de form de registro y regresar al loggin inicial
 const backToLogin = () => {
@@ -75,62 +81,20 @@ const backToLogin = () => {
 
 backButton.addEventListener('click', backToLogin)
 
-//  Función para guardar dato de usuario en Firebase, cuando está logeado con gmail. 
+//  Función para escribir dato de usuario en Firebase, cuando está logeado 
 writeUserData = (userId, name, email, imageUrl) => {
   firebase.database().ref('users/' + userId).set({
     username: name,
     email: email,
-    profile_picture : imageUrl
+    profile_picture: imageUrl
   }).then(result => {
     console.log(result);
-    
+
   })
-  .catch(error => {
- console.log(error);
-  });
- };
-
-//  Función para escribir un post
-function writeNewPost(uid, body) {
-  // A post entry.
-  var postData = {
-    uid: uid,
-    body: body
-  };
-
-  // Get a key for a new Post. 
-  var newPostKey = firebase.database().ref().child('posts').push().key;
-
-  // Write the new post's data simultaneously in the posts list and the user's post list.
-  var updates = {};
-  updates['/posts/' + newPostKey] = postData;
-  updates['/user-posts/' + uid + '/' + newPostKey] = postData;
-
-  firebase.database().ref().update(updates);
-  return newPostKey;
-}
-
-btnSave.addEventListener('click', () => {
-  var userId = firebase.auth().currentUser.uid;
-  const newPost = writeNewPost(userId, post.value);
-
-  var btnUpdate = document.createElement('input');
-  btnUpdate.setAttribute('value','Editar')
-  btnUpdate.setAttribute('type','button')
-  var btnDelete = document.createElement('input');
-  btnDelete.setAttribute('value','Eliminar')
-  btnDelete.setAttribute('type','button')
-  var contPost = document.createElement('div');
-  var textPost = document.createElement('textarea');
-  textPost.setAttribute('id', newPost);
-  textPost.innerHTML = post.value;
-
-  contPost.appendChild(textPost);
-  contPost.appendChild(btnUpdate);
-  contPost.appendChild(btnDelete);
-  posts.appendChild(contPost);
-});
-
+    .catch(error => {
+      console.log(error);
+    });
+};
 
 //*********REGISTRO***********
 const registerWithFirebase = () => {
@@ -224,6 +188,7 @@ facebookButton.addEventListener('click', facebookLoginWithFirebase);
 
 //*********LOGIN GOOGLE***********
 
+let userData = {}
 
 const googleLoginWithFirebase = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
@@ -232,7 +197,7 @@ const googleLoginWithFirebase = () => {
       console.log('Sesión con Google')
       const user = result.user;
       // /* userData //aignar valores *
-      writeUserData(user.uid, user.displayName, user.email, user.photoURL) 
+      writeUserData(user.uid, user.displayName, user.email, user.photoURL)
     })
     .catch((error) => {
       console.log(error.code);
@@ -244,8 +209,18 @@ const googleLoginWithFirebase = () => {
 
 googleButton.addEventListener('click', googleLoginWithFirebase);
 
-//Todo esto de abajo son documentos y colecciones
-//Tareas Laboratoria
-//Tarea: nombre, duración, tipo, dificultad //Colección hecha??
-//Estudiantes: Quién hace la tarea
-//Coach 
+//*********DATA BASE***********
+
+const sendGif = () => {
+  const gifValue = gifArea.value;
+  //ref, carpeta donde guardamos cosas//Cada child es como un archivoSon gifs, deberìan de ser mensaje
+  const newGifKey = firebase.database().ref().child("gifs").push().key;//Cada llame es ùnica y se crea cuando haces clic en un botòn
+  const currentUser = firebase.auth().currentUser; //Obtener usuario y datos, solo funciona si estamos logueados
+  firebase.database().ref(`gifs/${newGifKey}`).set({ //Ruta para llegar a los datos. Gif que es la coleccion, esto despuès se cambia
+    gifURL: gifValue,//
+    creatorName: currentUser.displayName,//Guardar datos, asignando un usuario. Clonamos nombe de usuario
+    creator: currentUser.uid,//id del usuario
+  });//
+}
+
+sendGifButton.addEventListener('click', sendGif);
