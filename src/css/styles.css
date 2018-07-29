@@ -1,4 +1,4 @@
-.container{
+/* .container{
     margin: 100px;
 }
 
@@ -43,8 +43,10 @@
 
     .posts-container {
         height: 70vh;
-    }
+    } */
 
-    #gifContainer {
-        height: 70vh; /*70% altura de pantalla
+    #gif-container {
+        height: 700px; /*70% altura de pantalla*/
+        
+        overflow: scroll;
     }

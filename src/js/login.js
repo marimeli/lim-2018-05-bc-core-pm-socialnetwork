@@ -30,6 +30,8 @@ let errorPassword = document.getElementById('error-password');
 //DATABASE
 const gifArea = document.getElementById('gif-area');
 const sendGifButton = document.getElementById('send-gif');
+const photoSelector = document.getElementById('photo-selector');
+const sendPhotoButton = document.getElementById('send-photo');
 
 //******************FUNCIONES******************
 
@@ -40,9 +42,9 @@ window.onload = () => {
       //También podemos traer los sections directamente pero por orden mejor lo declaramos arriba
       secLoggedIn.style.display = 'block';
       userPhoto.style.display = 'block';
+      secGifContainer.style.display = 'block';
       secLoggedOut.style.display = 'none';
       secRegisterForm.style.display = 'none';
-
       //Imprimiendo nombre de usuario en el pàrrafo
       username.innerText = `Bienvenidx ${user.displayName}`;
       //Imprimiendo imagen de usuario usando dom y settAttribute       
@@ -52,24 +54,76 @@ window.onload = () => {
     } else {//Si NO está logueado, mostramos formulario(OPCION LOGGEDOUT)
       secLoggedIn.style.display = 'none';
       userPhoto.style.display = 'none';
+      secGifContainer.style.display = 'none';
       secLoggedOut.style.display = 'block';
       secRegisterForm.style.display = 'none';
     }
     //Imprimimos datos que Firebase tiene del usuario
     console.log('user > ' + JSON.stringify(user));
   });
+  //DATABASE
+  firebase.database().ref('gifs/-LITKiEKXpCMWfZq_Trl/creator')//Usamos ref para llegar a una ruta,id usuario etc
+    .once('value')
+    .then((gifs) => {
+      console.log('Gifs > ' + JSON.stringify(gifs));
+    })
+    .catch((error) => {
+      console.log('Database error > ' + error);
+    });
+
+  //Extraemos o consultamos datos una vez, como en DataDashboard
+  //firebase.database().ref('gifs')es como un callback
+  firebase.database().ref('gifs')//En la referencia podemos poner un escuchador para un contador
+    // .limitToLast(5) //Filtro de datos, donde limito sólo 2 gifs
+    .once('value') //Para escuchar datos sólo una vez
+    .then((gif) => {
+      console.log('EL GIF > ' + JSON.stringify(gif));
+    })
+    .catch((error) => {
+      console.log('Database error > ' + JSON.stringify(error));
+    });
+
   //Escuchador, se agrega cada que alguien agrega algo nuevo
   firebase.database().ref('gifs')//database de firebase, escucha la referencia gifs
     //Evento para escucha cada hijo que se agrega, cada regalo que se envìa.Permite escuchar cada que alguien agrega un nuevo gif
-    .on('child_added', (newGif) => {
+    .limitToLast(2)//Limitar mensajes 
+    //↓↓newGif es funcion callBack
+    .on('child_added', (newGif) => {//NewGif es un elemento completo en Firebase, para acceder a valores tiene que colocar .val(),sino jalará propiedad:valor
       secGifContainer.innerHTML += `
-      <p>${newGif.creatorName}</p>
-      <img style = 'width: 200px' src = '${newGif.gifURL}'>
-      </img>
+          <p>${newGif.val().creatorName}</p>
+          <img style = 'width:200px' src='${newGif.val().gifURL}'>
+          </img>
       `;
 
     })
 };
+
+//ESCRIBIR DB
+const writeUserData = (userId, name, email, imageUrl)=> {
+  firebase.database().ref('users/' + userId).set({
+    username: name,
+    email: email,
+    profile_picture : imageUrl
+  });
+}
+
+const writeNewPost = (uid, body) => {
+  //A post entry
+  let postData = {
+    uid: uid,
+    body: body,
+  }
+};
+
+
+
+
+
+
+
+
+
+
 
 //Salir de form de registro y regresar al loggin inicial
 const backToLogin = () => {
@@ -214,13 +268,43 @@ googleButton.addEventListener('click', googleLoginWithFirebase);
 const sendGif = () => {
   const gifValue = gifArea.value;
   //ref, carpeta donde guardamos cosas//Cada child es como un archivoSon gifs, deberìan de ser mensaje
-  const newGifKey = firebase.database().ref().child("gifs").push().key;//Cada llame es ùnica y se crea cuando haces clic en un botòn
+  const newGifKey = firebase.database().ref().child('gifs').push().key;//Cada llame es ùnica y se crea cuando haces clic en un botòn
   const currentUser = firebase.auth().currentUser; //Obtener usuario y datos, solo funciona si estamos logueados
   firebase.database().ref(`gifs/${newGifKey}`).set({ //Ruta para llegar a los datos. Gif que es la coleccion, esto despuès se cambia
     gifURL: gifValue,//
-    creatorName: currentUser.displayName,//Guardar datos, asignando un usuario. Clonamos nombe de usuario
+    creatorName: currentUser.displayName || currentUser.providerData[0].email,//Guardar datos, asignando un usuario. Clonamos nombe de usuario
     creator: currentUser.uid,//id del usuario
-  });//
+  });
 }
 
 sendGifButton.addEventListener('click', sendGif);
+
+//Subir foto
+const sendPhotoToStorage = () => {
+  const photoFile = photoSelector.files[0]; //Los inputs tipo file ingresan sus datos en files, que es el equivalente a value
+  const fileName = photoFile.name; //Nombre del archivo. Arma la ruta
+  const metadata = {//Datos sobr el archivo que estamos subiendo
+    contentType: photoFile.type//Tipo de archivo que sube
+  };
+//Ref nos dirige  a la carpeta imagenes, que es la que se crearà o ingresaremos cuando subamos una foto
+//Task es una promesa pero a la vez un objeto con métodos
+const task = firebase.storage().ref('images')
+    .child(fileName)
+    .put(photoFile, metadata);
+
+    
+    task.then(snapshot => snapshot.ref.getDownloadURL())//Obtenemos la url de la imagen
+    .then(url => {
+      console.log('URL del archivo > ' + url) //Ya subimos el archivo a Firebase, nos da un archivo
+    
+    
+    });
+    
+    
+    
+  }
+
+
+
+  sendPhotoButton.addEventListener('click', sendPhotoToStorage);
+
