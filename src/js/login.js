@@ -35,6 +35,7 @@ const sendPhotoButton = document.getElementById('send-photo');
 const secGifContainer = document.getElementById('gif-container');
 const secInput = document.getElementById('sec-input');
 
+
 //******************FUNCIONES******************
 
 window.onload = () => {
@@ -98,14 +99,33 @@ window.onload = () => {
       // }
       // else 
       secGifContainer.innerHTML += `
+         <div id="contentPost">
           <p>${newGif.val().creatorName}</p>
           <p>${newGif.val().gifURL}</p>
-          <button>Delete</button>
-          <button>Erase</button>
+          <button id="edit-btn">Editar</button>
+          <button id="erase-btn">Borrar</button>
+        <div>
       `;
+      document.getElementById('erase-btn').addEventListener('click', () => {
+        const newPost = writeNewPost(userId, post.value);
+        while (contentPost.firstChild) contentPost.removeChild(contentPost.firstChild);
+   alert('El usuario elimino su post');      
+   
+      })
 
     })
 };
+
+// btnDelete.addEventListener('click', () => {
+
+//    firebase.database().ref().child('/user-posts/' + userId + '/' + newPost).remove();
+//    firebase.database().ref().child('posts/' + newPost).remove();
+//    //la siguiente linea es manipulacion del dom
+//    while (contPost.firstChild) contPost.removeChild(contPost.firstChild);
+//    alert('El usuario elimino su post');
+//   /*  reload_page(); */
+//  });
+
 
 
 // //ESCRIBIR DB
