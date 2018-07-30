@@ -15,7 +15,7 @@ const backButton = document.getElementById('back-button');
 const secLoggedIn = document.getElementById('logged-in');
 const secLoggedOut = document.getElementById('logged-out');
 const secRegisterForm = document.getElementById('sec-register');
-const secGifContainer = document.getElementById('gif-container')
+
 //Logueo con redes
 const facebookButton = document.getElementById('facebook-button');
 const googleButton = document.getElementById('google-button')
@@ -32,6 +32,8 @@ const gifArea = document.getElementById('gif-area');
 const sendGifButton = document.getElementById('send-gif');
 const photoSelector = document.getElementById('photo-selector');
 const sendPhotoButton = document.getElementById('send-photo');
+const secGifContainer = document.getElementById('gif-container');
+const secInput = document.getElementById('sec-input');
 
 //******************FUNCIONES******************
 
@@ -45,6 +47,7 @@ window.onload = () => {
       secGifContainer.style.display = 'block';
       secLoggedOut.style.display = 'none';
       secRegisterForm.style.display = 'none';
+      secInput.style.display = 'block';
       //Imprimiendo nombre de usuario en el pàrrafo
       username.innerText = `Bienvenidx ${user.displayName}`;
       //Imprimiendo imagen de usuario usando dom y settAttribute       
@@ -57,6 +60,7 @@ window.onload = () => {
       secGifContainer.style.display = 'none';
       secLoggedOut.style.display = 'block';
       secRegisterForm.style.display = 'none';
+      secInput.style.display = 'none';
     }
     //Imprimimos datos que Firebase tiene del usuario
     console.log('user > ' + JSON.stringify(user));
@@ -74,7 +78,7 @@ window.onload = () => {
   //Extraemos o consultamos datos una vez, como en DataDashboard
   //firebase.database().ref('gifs')es como un callback
   firebase.database().ref('gifs')//En la referencia podemos poner un escuchador para un contador
-    // .limitToLast(5) //Filtro de datos, donde limito sólo 2 gifs
+    .limitToLast(3) //Filtro de datos, donde limito sólo 2 gifs
     .once('value') //Para escuchar datos sólo una vez
     .then((gif) => {
       console.log('EL GIF > ' + JSON.stringify(gif));
@@ -86,38 +90,112 @@ window.onload = () => {
   //Escuchador, se agrega cada que alguien agrega algo nuevo
   firebase.database().ref('gifs')//database de firebase, escucha la referencia gifs
     //Evento para escucha cada hijo que se agrega, cada regalo que se envìa.Permite escuchar cada que alguien agrega un nuevo gif
-    .limitToLast(2)//Limitar mensajes 
+    .limitToLast(3)//Limitar mensajes 
     //↓↓newGif es funcion callBack
     .on('child_added', (newGif) => {//NewGif es un elemento completo en Firebase, para acceder a valores tiene que colocar .val(),sino jalará propiedad:valor
+      // if(gifArea.value === ''){
+      //   alert('Coloca algo antes de enviar');
+      // }
+      // else 
       secGifContainer.innerHTML += `
           <p>${newGif.val().creatorName}</p>
-          <img style = 'width:200px' src='${newGif.val().gifURL}'>
-          </img>
+          <p>${newGif.val().gifURL}</p>
+          <button>Delete</button>
+          <button>Erase</button>
       `;
 
     })
 };
 
-//ESCRIBIR DB
-const writeUserData = (userId, name, email, imageUrl)=> {
+
+// //ESCRIBIR DB
+const writeUserData = (userId, name, email, imageUrl) => {
   firebase.database().ref('users/' + userId).set({
     username: name,
     email: email,
-    profile_picture : imageUrl
-  });
-}
+    profile_picture: imageUrl
+  }).then(result => {
+    console.log(result);
 
-const writeNewPost = (uid, body) => {
-  //A post entry
-  let postData = {
-    uid: uid,
-    body: body,
-  }
+  })
+    .catch(error => {
+      console.log(error);
+    });
 };
 
 
 
+// function writeNewPost(uid, body) {
+//   // A post entry.
+//   let postData = {
+//     uid: uid,
+//     body: body,
+//   };
 
+//   // Get a key for a new Post.
+//   var newPostKey = firebase.database().ref().child('posts').push().key;
+
+//   // Write the new post's data simultaneously in the posts list and the user's post list.
+//   var updates = {};
+//   updates['/posts/' + newPostKey] = postData;
+//   updates['/user-posts/' + uid + '/' + newPostKey] = postData;
+
+//   firebase.database().ref().update(updates);
+//   return newPostKey;
+// }
+
+// sendGifButton.addEventListener('click', () => {
+//   let userId = firebase.auth().currentUser.uid;
+//   const newPost = writeNewPost(userId, gifArea.value);
+
+
+//   var btnUpdate = document.createElement("input");
+//   btnUpdate.setAttribute("value", "Editar");
+//   btnUpdate.setAttribute("type", "button");
+//   var btnDelete = document.createElement("input");
+//   btnDelete.setAttribute("value", "Borrar");
+//   btnDelete.setAttribute("type", "button");
+//   var contPost = document.createElement('div');
+//   var textPost = document.createElement('textarea')
+//   textPost.setAttribute("id", newPost);
+
+//   textPost.innerHTML = gifArea.value;
+
+//   btnDelete.addEventListener('click', () => {
+
+//     firebase.database().ref().child('/user-posts/' + userId + '/' + newPost).remove();
+//     firebase.database().ref().child('posts/' + newPost).remove();
+
+//    while (contPost.firstChild) contPost.removeChild(contPost.firstChild);
+//    alert('El usuario elimino su post');
+
+
+
+
+//   });
+
+//   btnUpdate.addEventListener('click', () => {
+//     const newUpdate = document.getElementById(newPost);
+//     const nuevoPost = {
+//       body: newUpdate.value,
+//     };
+
+//     var updatesUser = {};
+//     var updatesPost = {};
+
+//     updatesUser['/user-posts/' + userId + '/' + newPost] = nuevoPost;
+//     updatesPost['/posts/' + newPost] = nuevoPost;
+
+//     firebase.database().ref().update(updatesUser);
+//     firebase.database().ref().update(updatesPost);
+
+//   });
+
+//   contPost.appendChild(textPost);
+//   contPost.appendChild(btnUpdate);
+//   contPost.appendChild(btnDelete);
+//   secGifContainer.appendChild(contPost);
+// })
 
 
 
@@ -136,19 +214,19 @@ const backToLogin = () => {
 backButton.addEventListener('click', backToLogin)
 
 //  Función para escribir dato de usuario en Firebase, cuando está logeado 
-writeUserData = (userId, name, email, imageUrl) => {
-  firebase.database().ref('users/' + userId).set({
-    username: name,
-    email: email,
-    profile_picture: imageUrl
-  }).then(result => {
-    console.log(result);
+// const writeUserData = (userId, name, email, imageUrl) => {
+//   firebase.database().ref('users/' + userId).set({
+//     username: name,
+//     email: email,
+//     profile_picture: imageUrl
+//   }).then(result => {
+//     console.log(result);
 
-  })
-    .catch(error => {
-      console.log(error);
-    });
-};
+//   })
+//     .catch(error => {
+//       console.log(error);
+//     });
+// };
 
 //*********REGISTRO***********
 const registerWithFirebase = () => {
@@ -265,6 +343,8 @@ googleButton.addEventListener('click', googleLoginWithFirebase);
 
 //*********DATA BASE***********
 
+
+
 const sendGif = () => {
   const gifValue = gifArea.value;
   //ref, carpeta donde guardamos cosas//Cada child es como un archivoSon gifs, deberìan de ser mensaje
@@ -277,34 +357,41 @@ const sendGif = () => {
   });
 }
 
-sendGifButton.addEventListener('click', sendGif);
+sendGifButton.addEventListener('click', () => {
+  if(gifArea.value === ''){
+    alert('Coloca algo antes de enviar');
+  }
+  else
+  sendGif();
+});
 
-//Subir foto
+
+//STORAGE
 const sendPhotoToStorage = () => {
   const photoFile = photoSelector.files[0]; //Los inputs tipo file ingresan sus datos en files, que es el equivalente a value
   const fileName = photoFile.name; //Nombre del archivo. Arma la ruta
   const metadata = {//Datos sobr el archivo que estamos subiendo
     contentType: photoFile.type//Tipo de archivo que sube
   };
-//Ref nos dirige  a la carpeta imagenes, que es la que se crearà o ingresaremos cuando subamos una foto
-//Task es una promesa pero a la vez un objeto con métodos
-const task = firebase.storage().ref('images')
+  //Ref nos dirige  a la carpeta imagenes, que es la que se crearà o ingresaremos cuando subamos una foto
+  //Task es una promesa pero a la vez un objeto con métodos
+  const task = firebase.storage().ref('images')
     .child(fileName)
     .put(photoFile, metadata);
 
-    
-    task.then(snapshot => snapshot.ref.getDownloadURL())//Obtenemos la url de la imagen
+
+  task.then(snapshot => snapshot.ref.getDownloadURL())//Obtenemos la url de la imagen
     .then(url => {
       console.log('URL del archivo > ' + url) //Ya subimos el archivo a Firebase, nos da un archivo
-    
-    
+
+
     });
-    
-    
-    
-  }
 
 
 
-  sendPhotoButton.addEventListener('click', sendPhotoToStorage);
+}
+
+
+
+sendPhotoButton.addEventListener('click', sendPhotoToStorage);
 
