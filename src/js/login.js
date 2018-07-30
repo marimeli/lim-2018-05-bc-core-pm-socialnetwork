@@ -414,4 +414,3 @@ const sendPhotoToStorage = () => {
 
 
 sendPhotoButton.addEventListener('click', sendPhotoToStorage);
-
