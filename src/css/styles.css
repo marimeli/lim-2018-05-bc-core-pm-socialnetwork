@@ -1,3 +1,12 @@
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+
 /* .container{
     margin: 100px;
 }
@@ -43,10 +52,5 @@
 
     .posts-container {
         height: 70vh;
-    } */
-
-    #gif-container {
-        height: 700px; /*70% altura de pantalla*/
-        
-        overflow: scroll;
     }
+ */

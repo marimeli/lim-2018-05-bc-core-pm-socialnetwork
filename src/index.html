@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/styles.css">
@@ -8,86 +7,29 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Cooltural</title>
 </head>
-
 <body>
-
     <!-- LOGIN -->
     <section id="logged-in">
         <!--En el tutorial esto aparece como div, pero en htm5 se usa section-->
-        <input id="logout" type="button" value="LOGOUT">
+        <button id="logout">Salir</button>
     </section>
-
     <h3 class="panel-title">Cooltura</h3>
-
-
     <p id="user-name"></p>
     <img id="user-image" alt="user photo" height="80" width="80">
-    <!-- BASE DE DATOS -->
-
-
-    <section id="sec-register">
-
-        <input id="name-register" class="form-control" placeholder="Your Name" name="name" type="email">
-
-
-        <input id="email-register" class="form-control" placeholder="yourmail@example.com" name="email" type="email">
-        <p id="advice-emailRegister" style="color: red"></p>
-
-        <input id="password-register" class="form-control" placeholder="Your Password" name="password" type="password">
-
-        <input id="register-button" class="btn btn-lg btn-success btn-block" type="button" value="Registrarse">
-        <input id="back-button" class="btn btn-lg btn-back btn-block" type="submit" value="Regresar">
-    </section>
-    <!-- LOGOUT -->
-    <section id="logged-out">
-
-
-        <input id="email" class="form-control" placeholder="yourmail@example.com" name="email" type="email">
-        <p id="error-email" style="color: red"></p>
-
-        <input id="password" class="form-control" placeholder="Password" name="password" type="password">
-        <p id="error-password" style="color: red"></p>
-
-        <input id="login-button" class="btn btn-lg btn-success btn-block" type="button" value="Acceder">
-        <input id="create-user" class="btn btn-lg btn-success btn-block" type="button" value="Crear una cuenta">
-
-        <hr>
-
-        <h4>También puedes:</h4>
-
-        <input id="facebook-button" class="btn btn-lg btn-facebook btn-block" type="submit" value="Acceder con Facebook">
-        <input id="google-button" class="btn btn-lg btn-google btn-block" type="submit" value="Acceder con Google">
-
-    </section>
+   
+<!-- TEXTO DE USUARIO -->
     <section id="sec-input">
-        <textarea name = "Publication" id="post-textrea"></textarea>
+        <textarea name="" id="post-textrea" ></textarea>
         <button id="send-post">Enviar</button>
-        
         <input id="photo-selector" type="file">
         <button id="send-photo">Sube tu FOTO</button>
-        
     </section>
-
-
+<!-- POSTS -->
     <section id="post-container">
     </section>
-
-
-
     <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
-    <script>
-        // Initialize Firebase
-        var config = {
-            apiKey: "AIzaSyA1P7aSi0ajFxT5IMoklK5f-rs_9RA10ew",
-            authDomain: "fir-2-edfab.firebaseapp.com",
-            databaseURL: "https://fir-2-edfab.firebaseio.com",
-            projectId: "fir-2-edfab",
-            storageBucket: "fir-2-edfab.appspot.com",
-            messagingSenderId: "453287184771"
-        };
-        firebase.initializeApp(config);
-    </script>
-    <script src="js/login.js"></script>
+    <script src="/src/js/firebase.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/login.js"></script>   
 </body>
-
 </html>
