@@ -39,8 +39,9 @@ createUser.addEventListener('click', showRegisterForm);
 backButton.addEventListener('click', backToLogin);
 //REGISTRO POR CORREO
 registerButton.addEventListener('click', registerWithFirebase);
+
 // //LOGOUT
-// logoutButton.addEventListener('click', logoutWithFirebase);
+logoutButton.addEventListener('click', logoutWithFirebase);
 //LOGIN POR CORREO
 loginButton.addEventListener('click', loginWithFirebase);
 //LOGIN POR FACEBOOK

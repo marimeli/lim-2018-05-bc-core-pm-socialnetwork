@@ -80,18 +80,18 @@ const loginWithFirebase = () => {
         });
 }
 
-// //*********LOGOUT***********
-// const logoutWithFirebase = () => {
-//     firebase.auth().signOut()
-//         .then((result) => {
-//             console.log('Usuario finalizo su sesion');
-//             location.assign('index.html');
-//         })
-//         .catch((error) => {
-//             console.log('Error de firebase > Codigo >' + error.code);
-//             console.log('Error de firebase > Mensaje >' + error.message);
-//         })
-// };
+//*********LOGOUT***********
+const logoutWithFirebase = () => {
+    firebase.auth().signOut()
+        .then((result) => {
+            console.log('Usuario finalizo su sesion');
+            location.assign('index.html');
+        })
+        .catch((error) => {
+            console.log('Error de firebase > Codigo >' + error.code);
+            console.log('Error de firebase > Mensaje >' + error.message);
+        })
+};
 
 
 
