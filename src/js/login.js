@@ -98,6 +98,7 @@ window.onload = () => {
       //   alert('Coloca algo antes de enviar');
       // }
       // else 
+
       secGifContainer.innerHTML += `
          <div id="contentPost">
           <p>${newGif.val().creatorName}</p>
@@ -109,8 +110,8 @@ window.onload = () => {
       document.getElementById('erase-btn').addEventListener('click', () => {
         const newPost = writeNewPost(userId, post.value);
         while (contentPost.firstChild) contentPost.removeChild(contentPost.firstChild);
-   alert('El usuario elimino su post');      
-   
+        alert('El usuario elimino su post');
+
       })
 
     })
@@ -362,6 +363,7 @@ const googleLoginWithFirebase = () => {
 googleButton.addEventListener('click', googleLoginWithFirebase);
 
 //*********DATA BASE***********
+const keyPost = firebase.database().ref().child('gifs').push().key;
 
 
 
@@ -378,11 +380,11 @@ const sendGif = () => {
 }
 
 sendGifButton.addEventListener('click', () => {
-  if(gifArea.value === ''){
+  if (gifArea.value === '') {
     alert('Coloca algo antes de enviar');
   }
   else
-  sendGif();
+    sendGif();
 });
 
 
