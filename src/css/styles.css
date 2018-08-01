@@ -1,4 +1,13 @@
-.container{
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+
+/* .container{
     margin: 100px;
 }
 
@@ -44,4 +53,4 @@
     .posts-container {
         height: 70vh;
     }
-
+ */
