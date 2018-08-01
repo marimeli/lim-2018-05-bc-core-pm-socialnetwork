@@ -23,231 +23,27 @@ let username = document.getElementById('user-name');
 let userPhoto = document.getElementById('user-image');
 //Errores registro y logueo
 let adviceEmailRegister = document.getElementById('advice-emailRegister');
+let advicePasswordRegister = document.getElementById('advice-passwordRegister');
 let errorEmail = document.getElementById('error-email');
 let errorPassword = document.getElementById('error-password');
-//Espacio Post
-const bd = document.getElementById('bd'); //contendor de base de datos
-const posts = document.getElementById('posts'); //div que guardara todos los posts
-const post = document.getElementById('post'); //espacio para hacer una publicacion
-const btnSave = document.getElementById('btn-save');//boton para publicar
-
-//******************FUNCIONES******************
-
-window.onload = () => {
-  //Listener en tiempo real EL CHISMOSO
-  firebase.auth().onAuthStateChanged((user) => {
-    if (user) {//Si está logeado mostramos la opcion de logout y nombre de usuario
-      //También podemos traer los sections directamente pero por orden mejor lo declaramos arriba
-      console.log('user is signed in');
-      secLoggedIn.style.display = 'block';
-      userPhoto.style.display = 'block';
-      bd.classList.remove('hidden');
-      posts.classList.remove('hidden');
-      secLoggedOut.style.display = 'none';
-      secRegisterForm.style.display = 'none';
-      //Imprimiendo nombre de usuario en el pàrrafo
-      username.innerText = `Bienvenidx ${user.displayName}`;
-      //Imprimiendo imagen de usuario usando dom y settAttribute       
-      let userPhotoURL = user.photoURL
-      userPhoto.setAttribute('src', userPhotoURL);
-
-    } else {//Si NO está logueado, mostramos formulario(OPCION LOGGEDOUT)
-      console.log('no user is signed in');
-      secLoggedIn.style.display = 'none';
-      userPhoto.style.display = 'none';
-      posts.classList.add('hidden');
-      bd.classList.add('hidden');
-      secLoggedOut.style.display = 'block';
-      secRegisterForm.style.display = 'none';
-    }
-    //Imprimimos datos que Firebase tiene del usuario
-    console.log('user > ' + JSON.stringify(user));
-  });
-}
-
-//Salir de form de registro y regresar al loggin inicial
-const backToLogin = () => {
-  secLoggedIn.style.display = 'none';
-  userPhoto.style.display = 'none';
-  secLoggedOut.style.display = 'block';
-  secRegisterForm.style.display = 'none';
-}
-
-backButton.addEventListener('click', backToLogin)
-
-//  Función para guardar dato de usuario en Firebase, cuando está logeado con gmail. 
-writeUserData = (userId, name, email, imageUrl) => {
-  firebase.database().ref('users/' + userId).set({
-    username: name,
-    email: email,
-    profile_picture : imageUrl
-  }).then(result => {
-    console.log(result);
-    
-  })
-  .catch(error => {
- console.log(error);
-  });
- };
-
-//  Función para escribir un post
-function writeNewPost(uid, body) {
-  // A post entry.
-  var postData = {
-    uid: uid,
-    body: body
-  };
-
-  // Get a key for a new Post. 
-  var newPostKey = firebase.database().ref().child('posts').push().key;
-
-  // Write the new post's data simultaneously in the posts list and the user's post list.
-  var updates = {};
-  updates['/posts/' + newPostKey] = postData;
-  updates['/user-posts/' + uid + '/' + newPostKey] = postData;
-
-  firebase.database().ref().update(updates);
-  return newPostKey;
-}
-
-btnSave.addEventListener('click', () => {
-  var userId = firebase.auth().currentUser.uid;
-  const newPost = writeNewPost(userId, post.value);
-
-  var btnUpdate = document.createElement('input');
-  btnUpdate.setAttribute('value','Editar')
-  btnUpdate.setAttribute('type','button')
- /*  btnUpdate.setAttribute('class','btn btn-lg btn-success btn-block') */
-  var btnDelete = document.createElement('input');
-  btnDelete.setAttribute('value','Eliminar')
-  btnDelete.setAttribute('type','button')
-/*   btnDelete.setAttribute('class','btn btn-lg btn-success btn-block') */
-  var contPost = document.createElement('div');
-  var textPost = document.createElement('textarea');
-  textPost.setAttribute('id', newPost);
-  textPost.innerHTML = post.value;
-
-  contPost.appendChild(textPost);
-  contPost.appendChild(btnUpdate);
-  contPost.appendChild(btnDelete);
-  posts.appendChild(contPost);
-});
-
-
-//*********REGISTRO***********
-const registerWithFirebase = () => {
-  //Crea usuario con email y password
-  firebase.auth().createUserWithEmailAndPassword(emailRegister.value, passwordRegister.value)
-    .then(() => {
-      console.log('usuario creado con èxito');
-    })
-    .catch((error) => {
-      if (error.code === 'auth/email-already-in-use') {
-        adviceEmailRegister.innerText = 'Ya existe un usuario con este correo. Por favor, ingrese otro';
-      }
-      else if (error.code === 'auth/invalid-email') {
-        adviceEmailRegister.innerText = 'Por favor, agregue un correo válido';
-      }
-      console.log('Error Firebase > còdigo > ' + error.code); //Contraseña o correo no valido
-      console.log('Error Firebase > Mensaje > ' + error.messaje); //
-    })
-}
-
-const showRegisterForm = () => {
-  secLoggedIn.style.display = 'none';
-  userPhoto.style.display = 'none';
-  secLoggedOut.style.display = 'none';
-  secRegisterForm.style.display = 'block';
-}
-
+//DATABASE
+const postArea = document.getElementById('post-textrea');
+const sendPostButton = document.getElementById('send-post');
+const photoSelector = document.getElementById('photo-selector');
+const sendPhotoButton = document.getElementById('send-photo');
+const secPostContainer = document.getElementById('post-container');
+const secInput = document.getElementById('sec-input');
+// MOSTRAR  FORM REGISTRO
 createUser.addEventListener('click', showRegisterForm);
+// REGRESAR A LOGIN DESDE REGISTRO
+backButton.addEventListener('click', backToLogin);
+//REGISTRO POR CORREO
 registerButton.addEventListener('click', registerWithFirebase);
-
-//*********LOGIN***********
-const loginWithFirebase = () => {
-  firebase.auth().signInWithEmailAndPassword(email.value, password.value)
-    .then(() => {
-      console.log('usuario inició sesiòn con èxito');
-    })
-
-    .catch((error) => {
-      //Aquì podemos colocar mensaje de error en HTML
-      if (error.code === 'auth/wrong-password') {
-        errorPassword.innerText = 'Su contraseña es incorrecta';
-      }
-      else if (error.code === 'auth/invalid-email') {
-        errorEmail.innerText = 'Por favor, agregue un correo válido';
-      }
-      else if (error.code === 'auth/user-not-found') {
-        errorEmail.innerText = 'No existe un usuario con este correo. Por favor, regístrese';
-      }
-      console.log('Error Firebase > código > ' + error.code); //Contraseña o correo no valido
-      console.log('Error Firebase > Mensaje > ' + error.messaje); //
-    });
-}
-
+// //LOGOUT
+// logoutButton.addEventListener('click', logoutWithFirebase);
+//LOGIN POR CORREO
 loginButton.addEventListener('click', loginWithFirebase);
-
-//*********LOGOUT***********
-const logoutWithFirebase = () => {
-  firebase.auth().signOut()
-    .then(() => {
-      console.log('Usuario finalizó su sesión');
-    })
-    .catch((error) => {
-      console.log('Error Firebase > código > ' + error.code); //Contraseña o correo no valido
-      console.log('Error Firebase > Mensaje > ' + error.messaje); //
-    });
-}
-
-logoutButton.addEventListener('click', logoutWithFirebase);
-
-
-//*********LOGIN FACEBOOK***********
-
-const facebookLoginWithFirebase = () => {
-  const provider = new firebase.auth.FacebookAuthProvider(); //Nuevo objeto con el proveedor
-  provider.setCustomParameters({ //Crea un login con facebook y enlace un popup
-    'display': 'popup'
-  });
-
-  firebase.auth().signInWithPopup(provider)
-    .then(() => {
-      console.log('Login con Facebook exitoso');
-
-    })
-    .catch((error) => {
-      console.log('Error Firebase > còdigo > ' + error.code); //Contraseña o correo no valido
-      console.log('Error Firebase > Mensaje > ' + error.messaje); //
-    });
-}
-
+//LOGIN POR FACEBOOK
 facebookButton.addEventListener('click', facebookLoginWithFirebase);
-
-//*********LOGIN GOOGLE***********
-
-
-const googleLoginWithFirebase = () => {
-  const provider = new firebase.auth.GoogleAuthProvider();
-  firebase.auth().signInWithPopup(provider)
-    .then(function (result) {
-      console.log('Sesión con Google')
-      const user = result.user;
-      // /* userData //aignar valores *
-      writeUserData(user.uid, user.displayName, user.email, user.photoURL) 
-    })
-    .catch((error) => {
-      console.log(error.code);
-      console.log(error.message);;
-      console.log(error.email);
-      console.log(error.credential);
-    });
-}
-
+//LOGIN POR GOOGLE
 googleButton.addEventListener('click', googleLoginWithFirebase);
-
-//Todo esto de abajo son documentos y colecciones
-//Tareas Laboratoria
-//Tarea: nombre, duración, tipo, dificultad //Colección hecha??
-//Estudiantes: Quién hace la tarea
-//Coach 

@@ -72,7 +72,7 @@ En el Perú y en Latinoamérica hay una gran cantidad de artistas y personas int
 
 ### Entrevista 1 :Usuarios
 
-###Guía de preguntas
+### Guía de preguntas
 ![](https://user-images.githubusercontent.com/39272944/43245203-17c007a6-9073-11e8-8370-062082df3d18.jpg)
 
 ### Conclusiones
