@@ -36,8 +36,8 @@ const registerWithFirebase = () => {
     //Crea usuario con email y password
     firebase.auth().createUserWithEmailAndPassword(emailRegister.value, passwordRegister.value)
         .then(() => {
-            console.log('usuario creado con èxito');
-            alert('Tu usuario ha sido creado con èxito')
+            console.log('usuario creado con éxito');
+            alert('Tu usuario ha sido creado con éxito')
             backToLogin();
         })
         .catch((error) => {
@@ -48,7 +48,7 @@ const registerWithFirebase = () => {
                 adviceEmailRegister.innerText = 'Por favor, agregue un correo válido';
             }
             else if (error.code === 'auth/weak-password') {
-                advicePasswordRegister.innerText = 'Ingresa una contraseña con màs de 6 caracteres';
+                advicePasswordRegister.innerText = 'Ingresa una contraseña con más de 6 caracteres';
             }
             console.log('Error Firebase > còdigo > ' + error.code); //Contraseña o correo no valido
             console.log('Error Firebase > Mensaje > ' + error.messaje); //
@@ -60,7 +60,7 @@ const registerWithFirebase = () => {
 const loginWithFirebase = () => {
     firebase.auth().signInWithEmailAndPassword(email.value, password.value)
         .then(() => {
-            console.log('usuario inició sesiòn con èxito');
+            console.log('usuario inició sesión con éxito');
             location.assign('index.html');
         })
 
@@ -105,12 +105,12 @@ const facebookLoginWithFirebase = () => {
 
     firebase.auth().signInWithPopup(provider)
         .then(() => {
-            console.log('Inicia sesiòn con Facebook');
+            console.log('Inicia sesión con Facebook');
             location.assign('index.html');
 
         })
         .catch((error) => {
-            console.log('Error Firebase > còdigo > ' + error.code);
+            console.log('Error Firebase > código > ' + error.code);
             console.log('Error Firebase > Mensaje > ' + error.messaje); //
         });
 }
@@ -123,7 +123,7 @@ const googleLoginWithFirebase = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(provider)
         .then(() => {
-            console.log('Inicia sesiòn con Google')
+            console.log('Inicia sesión con Google')
             const user = result.user;
             location.assign('index.html');
             // /* userData //aignar valores *
