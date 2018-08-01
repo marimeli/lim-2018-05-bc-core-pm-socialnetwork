@@ -15,7 +15,6 @@ const backButton = document.getElementById('back-button');
 const secLoggedIn = document.getElementById('logged-in');
 const secLoggedOut = document.getElementById('logged-out');
 const secRegisterForm = document.getElementById('sec-register');
-
 //Logueo con redes
 const facebookButton = document.getElementById('facebook-button');
 const googleButton = document.getElementById('google-button')
@@ -27,7 +26,6 @@ let adviceEmailRegister = document.getElementById('advice-emailRegister');
 let advicePasswordRegister = document.getElementById('advice-passwordRegister');
 let errorEmail = document.getElementById('error-email');
 let errorPassword = document.getElementById('error-password');
-
 //DATABASE
 const postArea = document.getElementById('post-textrea');
 const sendPostButton = document.getElementById('send-post');
@@ -35,26 +33,17 @@ const photoSelector = document.getElementById('photo-selector');
 const sendPhotoButton = document.getElementById('send-photo');
 const secPostContainer = document.getElementById('post-container');
 const secInput = document.getElementById('sec-input');
-
 // MOSTRAR  FORM REGISTRO
 createUser.addEventListener('click', showRegisterForm);
-
 // REGRESAR A LOGIN DESDE REGISTRO
 backButton.addEventListener('click', backToLogin);
-
 //REGISTRO POR CORREO
 registerButton.addEventListener('click', registerWithFirebase);
-
 // //LOGOUT
-
 // logoutButton.addEventListener('click', logoutWithFirebase);
-
 //LOGIN POR CORREO
 loginButton.addEventListener('click', loginWithFirebase);
-
 //LOGIN POR FACEBOOK
 facebookButton.addEventListener('click', facebookLoginWithFirebase);
-
 //LOGIN POR GOOGLE
 googleButton.addEventListener('click', googleLoginWithFirebase);
-
