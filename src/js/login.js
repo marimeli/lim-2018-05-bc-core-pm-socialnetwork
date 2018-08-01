@@ -28,11 +28,11 @@ let errorEmail = document.getElementById('error-email');
 let errorPassword = document.getElementById('error-password');
 
 //DATABASE
-const gifArea = document.getElementById('gif-area');
-const sendGifButton = document.getElementById('send-gif');
+const postArea = document.getElementById('post-textrea');
+const sendPostButton = document.getElementById('send-post');
 const photoSelector = document.getElementById('photo-selector');
 const sendPhotoButton = document.getElementById('send-photo');
-const secGifContainer = document.getElementById('gif-container');
+const secPostContainer = document.getElementById('post-container');
 const secInput = document.getElementById('sec-input');
 
 
@@ -43,9 +43,10 @@ window.onload = () => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {//Si está logeado mostramos la opcion de logout y nombre de usuario
       //También podemos traer los sections directamente pero por orden mejor lo declaramos arriba
+      // firebase.database().ref(`users`).remove()
       secLoggedIn.style.display = 'block';
       userPhoto.style.display = 'block';
-      secGifContainer.style.display = 'block';
+      secPostContainer.style.display = 'block';
       secLoggedOut.style.display = 'none';
       secRegisterForm.style.display = 'none';
       secInput.style.display = 'block';
@@ -58,7 +59,7 @@ window.onload = () => {
     } else {//Si NO está logueado, mostramos formulario(OPCION LOGGEDOUT)
       secLoggedIn.style.display = 'none';
       userPhoto.style.display = 'none';
-      secGifContainer.style.display = 'none';
+      secPostContainer.style.display = 'none';
       secLoggedOut.style.display = 'block';
       secRegisterForm.style.display = 'none';
       secInput.style.display = 'none';
@@ -67,10 +68,10 @@ window.onload = () => {
     console.log('user > ' + JSON.stringify(user));
   });
   //DATABASE
-  firebase.database().ref('gifs/-LITKiEKXpCMWfZq_Trl/creator')//Usamos ref para llegar a una ruta,id usuario etc
+  firebase.database().ref('posts/-LITKiEKXpCMWfZq_Trl/creator')//Usamos ref para llegar a una ruta,id usuario etc
     .once('value')
-    .then((gifs) => {
-      console.log('Gifs > ' + JSON.stringify(gifs));
+    .then((posts) => {
+      console.log('Posts> ' + JSON.stringify(posts));
     })
     .catch((error) => {
       console.log('Database error > ' + error);
@@ -78,43 +79,59 @@ window.onload = () => {
 
   //Extraemos o consultamos datos una vez, como en DataDashboard
   //firebase.database().ref('gifs')es como un callback
-  firebase.database().ref('gifs')//En la referencia podemos poner un escuchador para un contador
+  firebase.database().ref('posts')//En la referencia podemos poner un escuchador para un contador
     .limitToLast(3) //Filtro de datos, donde limito sólo 2 gifs
     .once('value') //Para escuchar datos sólo una vez
-    .then((gif) => {
-      console.log('EL GIF > ' + JSON.stringify(gif));
+    .then((post) => {
+      console.log('EL POST > ' + JSON.stringify(post));
     })
     .catch((error) => {
       console.log('Database error > ' + JSON.stringify(error));
     });
 
   //Escuchador, se agrega cada que alguien agrega algo nuevo
-  firebase.database().ref('gifs')//database de firebase, escucha la referencia gifs
+  firebase.database().ref('posts')//database de firebase, escucha la referencia gifs
     //Evento para escucha cada hijo que se agrega, cada regalo que se envìa.Permite escuchar cada que alguien agrega un nuevo gif
     .limitToLast(3)//Limitar mensajes 
     //↓↓newGif es funcion callBack
-    .on('child_added', (newGif) => {//NewGif es un elemento completo en Firebase, para acceder a valores tiene que colocar .val(),sino jalará propiedad:valor
+    .on('child_added', (newPost) => {//NewGif es un elemento completo en Firebase, para acceder a valores tiene que colocar .val(),sino jalará propiedad:valor
       // if(gifArea.value === ''){
       //   alert('Coloca algo antes de enviar');
       // }
       // else 
-      secGifContainer.innerHTML += `
-         <div id="contentPost">
-          <p>${newGif.val().creatorName}</p>
-          <p>${newGif.val().gifURL}</p>
-          <button id="edit-btn">Editar</button>
-          <button id="erase-btn">Borrar</button>
+      secPostContainer.innerHTML += `
+        <div id="${newPost.val().id}" >
+          <p>${newPost.val().creatorName}</p>
+          <textarea>${newPost.val().textPost}</textarea>
+          <button class="edit-btn">Editar</button>
+          <button class="erase-btn">Borrar</button>
         <div>
       `;
-      document.getElementById('erase-btn').addEventListener('click', () => {
-        const newPost = writeNewPost(userId, post.value);
-        while (contentPost.firstChild) contentPost.removeChild(contentPost.firstChild);
-   alert('El usuario elimino su post');      
-   
+
+      const contentPost = document.querySelector('#' + newPost.val().id + ' .edit-btn');
+      const eraseBtn = document.querySelector('#' + newPost.val().id + ' .erase-btn');
+      eraseBtn.addEventListener('click', () => {
+        firebase.database().ref('/posts/' + newPost.val().id).remove()
+        
       })
 
     })
 };
+
+
+// btnDelete.addEventListener('click', () => {
+
+//   firebase.database().ref().child('/user-posts/' + userId + '/' + newPost).remove();
+//   firebase.database().ref().child('posts/' + newPost).remove();
+//   //la siguiente linea es manipulacion del dom
+//   while (contPost.firstChild) contPost.removeChild(contPost.firstChild);
+//   alert('El usuario elimino su post');
+//  /*  reload_page(); */
+// });
+
+
+
+
 
 // btnDelete.addEventListener('click', () => {
 
@@ -365,24 +382,24 @@ googleButton.addEventListener('click', googleLoginWithFirebase);
 
 
 
-const sendGif = () => {
-  const gifValue = gifArea.value;
+const sendPost = () => {
+  const postValue = postArea.value;
   //ref, carpeta donde guardamos cosas//Cada child es como un archivoSon gifs, deberìan de ser mensaje
-  const newGifKey = firebase.database().ref().child('gifs').push().key;//Cada llame es ùnica y se crea cuando haces clic en un botòn
+  const newPostKey = firebase.database().ref().child('posts').push().key;//Cada llame es ùnica y se crea cuando haces clic en un botòn
   const currentUser = firebase.auth().currentUser; //Obtener usuario y datos, solo funciona si estamos logueados
-  firebase.database().ref(`gifs/${newGifKey}`).set({ //Ruta para llegar a los datos. Gif que es la coleccion, esto despuès se cambia
-    gifURL: gifValue,//
+  firebase.database().ref(`posts/${newPostKey}`).set({ //Ruta para llegar a los datos. Gif que es la coleccion, esto despuès se cambia
+    textPost: postValue,//
     creatorName: currentUser.displayName || currentUser.providerData[0].email,//Guardar datos, asignando un usuario. Clonamos nombe de usuario
     creator: currentUser.uid,//id del usuario
   });
 }
 
-sendGifButton.addEventListener('click', () => {
-  if(gifArea.value === ''){
+sendPostButton.addEventListener('click', () => {
+  if (postArea.value === '') {
     alert('Coloca algo antes de enviar');
   }
   else
-  sendGif();
+    sendPost();
 });
 
 
@@ -406,9 +423,6 @@ const sendPhotoToStorage = () => {
 
 
     });
-
-
-
 }
 
 
