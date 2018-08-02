@@ -19,19 +19,19 @@ window.onload = () => {
     firebase.auth().onAuthStateChanged(() => {
         const user = firebase.auth().currentUser;
         if (user !== null) {
-            console.log('Datos de usuario> ', user);
-            console.log('existe usuario activo');
+            //console.log('Datos de usuario> ', user);
+            //console.log('existe usuario activo');
 
         } else {
-            console.log('no existe usuario activo');
+            //console.log('no existe usuario activo');
         }
         //Imprimimos datos que Firebase tiene del usuario
-        console.log('user > ' + JSON.stringify(user));
+        //console.log('user > ' + JSON.stringify(user));
     });
     writeNewPost();
 };
 //*********DATA BASE***********
-window.sendPost = () => {
+const sendPost = () => {
     const postValue = textComposerArea.value;
      //ref, carpeta donde guardamos cosas//Cada child es como un archivoSon gifs, deberìan de ser mensaje
      const newPostKey = firebase.database().ref('posts').push().key;//Cada llame es ùnica y se crea cuando haces clic en un botòn
@@ -41,7 +41,6 @@ window.sendPost = () => {
          post: postValue,//
          creatorName: currentUser.displayName || currentUser.providerData[0].email,//Guardar datos, asignando un usuario. Clonamos nombe de usuario
          creator: currentUser.uid,//id del usuario
-         
      }); 
     const newPost = writeNewPost();
 };
@@ -55,41 +54,23 @@ sendPostButton.addEventListener('click', () => {
 });
 
 window.writeNewPost = (/* uid, body */) => {
-    var s = firebase.database().ref().child('posts').push().key;
-    firebase.database().ref(`posts/-LIv-_aNIE-4s40oQI5H/creator`)//Usamos ref para llegar a una ruta,id usuario etc
-    .once('value')
-    .then((posts) => {
-        console.log('Posts > ' + JSON.stringify(posts));
-    })
-    .catch((error) => {
-        console.log('Database error > ' + error);
-    });
-
-firebase.database().ref('posts')//En la referencia podemos poner un escuchador para un contador
-    .limitToLast(3) //Filtro de datos, donde limito sólo 2 posts
-    .once('value') //Para escuchar datos sólo una vez
-    .then((post) => {
-        console.log('EL POST > ' + JSON.stringify(post));
-    })
-    .catch((error) => {
-        console.log('Database error > ' + JSON.stringify(error));
-    });
-
-
 //Escuchador, se agrega cada que alguien agrega algo nuevo
-firebase.database().ref('posts')//database de firebase, escucha la referencia posts
+firebase.database().ref().child('posts')//database de firebase, escucha la referencia posts
     //Evento para escucha cada hijo que se agrega, cada regalo que se envìa.Permite escuchar cada que alguien agrega un nuevo post
-    .limitToLast(3)//Limitar mensajes 
+    //.limitToLast(3)//Limitar mensajes 
     //↓↓newGif es funcion callBack
     .on('child_added', (newPost) => {//NewGif es un elemento completo en Firebase, para acceder a valores tiene que colocar .val(),sino jalará propiedad:valor
-        console.log(newPost);
+        console.log('newPost >',newPost.val());
         const postsContainer = document.getElementById('posts-container');
         postsContainer.innerHTML += `
-   <p>${newPost.val().creatorName}</p>
-   <p>${newPost.val().post}</p>
-   <button>Editar</button>
-   <button>Borrar</button>
-`;
+            <p>key:${newPost.key}</p>
+            <p>uid:${newPost.val().uid}</p>
+            <p>body:${newPost.val().body}</p>
+            <p>creator:${newPost.val().creator}</p>
+            <p>creatorName:${newPost.val().creatorName}</p>
+            <button>Editar</button>
+            <button>Borrar</button>
+            `;          
     });
   /*   // A post entry.
     var postData = {
