@@ -27,6 +27,7 @@ let adviceEmailRegister = document.getElementById('advice-emailRegister');
 let errorEmail = document.getElementById('error-email');
 let errorPassword = document.getElementById('error-password');
 
+
 //DATABASE
 const gifArea = document.getElementById('gif-area');
 const sendGifButton = document.getElementById('send-gif');
