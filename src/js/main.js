@@ -31,7 +31,7 @@ window.onload = () => {
     writeNewPost();
 };
 //*********DATA BASE***********
-const sendPost = () => {
+window.sendPost = () => {
     const postValue = textComposerArea.value;
      //ref, carpeta donde guardamos cosas//Cada child es como un archivoSon gifs, deberìan de ser mensaje
      const newPostKey = firebase.database().ref('posts').push().key;//Cada llame es ùnica y se crea cuando haces clic en un botòn
@@ -41,6 +41,7 @@ const sendPost = () => {
          post: postValue,//
          creatorName: currentUser.displayName || currentUser.providerData[0].email,//Guardar datos, asignando un usuario. Clonamos nombe de usuario
          creator: currentUser.uid,//id del usuario
+         
      }); 
     const newPost = writeNewPost();
 };
