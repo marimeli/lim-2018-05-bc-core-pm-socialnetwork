@@ -12,53 +12,43 @@
 </head>
 <body>
     <!-- LOGIN -->
-    <div id="logged-in">
+    <section id="logged-in">
         <!--En el tutorial esto aparece como div, pero en htm5 se usa section-->
         <input id="logout" type="button" value="LOGOUT">
-    </div>
+    </section>
     <h3 class="panel-title">Cooltura</h3>
     <p id="user-name"></p>
-    <img id="user-image" src="http://username:password@server/Path" alt="user photo" height="80" width="80">
+    <img id="user-image" alt="user photo" height="80" width="80">
     <!-- BASE DE DATOS -->
-    <div id="bd" class="hidden">
-        <textarea name="Publicación" id="post"></textarea>
-        <input type="button" class="btn btn-lg btn-success btn-block" value="Publicar" id="btn-save">
-    </div>
-    <div id="posts" class="hidden">
-        <h3>Inicio</h3>
-    </div>
-     <!-- REGISTER -->
-    <div id="sec-register">
+    <section id="sec-register">
         <input id="name-register" class="form-control" placeholder="Your Name" name="name" type="email">
         <input id="email-register" class="form-control" placeholder="yourmail@example.com" name="email" type="email">
         <p id="advice-emailRegister" style="color: red"></p>
         <input id="password-register" class="form-control" placeholder="Your Password" name="password" type="password">
         <input id="register-button" class="btn btn-lg btn-success btn-block" type="button" value="Registrarse">
         <input id="back-button" class="btn btn-lg btn-back btn-block" type="submit" value="Regresar">
-    </div>
+    </section>
     <!-- LOGOUT -->
-    <div id="logged-out">
+    <section id="logged-out">
         <input id="email" class="form-control" placeholder="yourmail@example.com" name="email" type="email">
         <p id="error-email" style="color: red"></p>
-
         <input id="password" class="form-control" placeholder="Password" name="password" type="password">
         <p id="error-password" style="color: red"></p>
-
         <input id="login-button" class="btn btn-lg btn-success btn-block" type="button" value="Acceder">
         <input id="create-user" class="btn btn-lg btn-success btn-block" type="button" value="Crear una cuenta">
         <hr>
         <h4>También puedes:</h4>
         <input id="facebook-button" class="btn btn-lg btn-facebook btn-block" type="submit" value="Acceder con Facebook">
         <input id="google-button" class="btn btn-lg btn-google btn-block" type="submit" value="Acceder con Google">
-    </div>
-    <div id="sec-input">
+    </section>
+    <section id="sec-input">
         <input id="gif-area" type="text">
         <input id="send-gif" type="button" value="Enviar">
         <input id="photo-selector" type="file">
         <input id="send-photo" type="button" value="Sube tu FOTO">
-    </div>
-    <div id="gif-container">
-    </div>
+    </section>
+    <section id="gif-container">
+    </section>
     <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
     <script>
         // Initialize Firebase
