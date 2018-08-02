@@ -35,7 +35,6 @@ const sendPhotoButton = document.getElementById('send-photo');
 const secGifContainer = document.getElementById('gif-container');
 const secInput = document.getElementById('sec-input');
 
-
 //******************FUNCIONES******************
 
 window.onload = () => {
@@ -66,23 +65,25 @@ window.onload = () => {
     //Imprimimos datos que Firebase tiene del usuario
     console.log('user > ' + JSON.stringify(user));
   });
+
   //DATABASE
-  firebase.database().ref('gifs/-LITKiEKXpCMWfZq_Trl/creator')//Usamos ref para llegar a una ruta,id usuario etc
-    .once('value')
-    .then((gifs) => {
-      console.log('Gifs > ' + JSON.stringify(gifs));
+  firebase.database().ref('gifs/-LITKiEKXpCMWfZq_Trl/postId')//Usamos ref para llegar a una ruta,id usuario etc
+  
+  .once('value')
+    .then((gif) => {
+      console.log('El GIF > ' + JSON.stringify(gif));
     })
     .catch((error) => {
       console.log('Database error > ' + error);
     });
-
+    
   //Extraemos o consultamos datos una vez, como en DataDashboard
   //firebase.database().ref('gifs')es como un callback
   firebase.database().ref('gifs')//En la referencia podemos poner un escuchador para un contador
     .limitToLast(3) //Filtro de datos, donde limito sólo 2 gifs
     .once('value') //Para escuchar datos sólo una vez
-    .then((gif) => {
-      console.log('EL GIF > ' + JSON.stringify(gif));
+    .then((gifs) => {
+      console.log('EL GIF > ' + JSON.stringify(gifs));
     })
     .catch((error) => {
       console.log('Database error > ' + JSON.stringify(error));
@@ -99,33 +100,14 @@ window.onload = () => {
       // }
       // else 
       secGifContainer.innerHTML += `
-         <div id="contentPost">
           <p>${newGif.val().creatorName}</p>
-          <p>${newGif.val().gifURL}</p>
-          <button id="edit-btn">Editar</button>
-          <button id="erase-btn">Borrar</button>
-        <div>
+          <p>${newGif.val().gifURL}</p> 
+          <button>Delete</button>
+          <button>Erase</button>
       `;
-      document.getElementById('erase-btn').addEventListener('click', () => {
-        const newPost = writeNewPost(userId, post.value);
-        while (contentPost.firstChild) contentPost.removeChild(contentPost.firstChild);
-   alert('El usuario elimino su post');      
-   
-      })
 
     })
 };
-
-// btnDelete.addEventListener('click', () => {
-
-//    firebase.database().ref().child('/user-posts/' + userId + '/' + newPost).remove();
-//    firebase.database().ref().child('posts/' + newPost).remove();
-//    //la siguiente linea es manipulacion del dom
-//    while (contPost.firstChild) contPost.removeChild(contPost.firstChild);
-//    alert('El usuario elimino su post');
-//   /*  reload_page(); */
-//  });
-
 
 
 // //ESCRIBIR DB
@@ -369,11 +351,14 @@ const sendGif = () => {
   const gifValue = gifArea.value;
   //ref, carpeta donde guardamos cosas//Cada child es como un archivoSon gifs, deberìan de ser mensaje
   const newGifKey = firebase.database().ref().child('gifs').push().key;//Cada llame es ùnica y se crea cuando haces clic en un botòn
+  console.log(newGifKey)
   const currentUser = firebase.auth().currentUser; //Obtener usuario y datos, solo funciona si estamos logueados
-  firebase.database().ref(`gifs/${newGifKey}`).set({ //Ruta para llegar a los datos. Gif que es la coleccion, esto despuès se cambia
-    gifURL: gifValue,//
+  firebase.database().ref(`gifs/${newGifKey}`).set({ 
+    //Ruta para llegar a los datos. Gif que es la coleccion, esto despuès se cambia
+    gifURL: gifValue,//Gif Url es contenido del post
     creatorName: currentUser.displayName || currentUser.providerData[0].email,//Guardar datos, asignando un usuario. Clonamos nombe de usuario
     creator: currentUser.uid,//id del usuario
+    postId: firebase.database().ref('gifs/newGifKey/').key
   });
 }
 
@@ -414,3 +399,4 @@ const sendPhotoToStorage = () => {
 
 
 sendPhotoButton.addEventListener('click', sendPhotoToStorage);
+
