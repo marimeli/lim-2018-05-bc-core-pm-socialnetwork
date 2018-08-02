@@ -21,7 +21,7 @@
     "mocha": "^5.1.1",
     "nyc": "^11.7.1",
     "opener": "^1.4.3"
-  },  
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/elment9/lim-2018-05-bc-core-pm-socialnetwork.git"
