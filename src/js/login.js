@@ -51,6 +51,21 @@ window.onload = () => {
       let userPhotoURL = user.photoURL
       userPhoto.setAttribute('src', userPhotoURL);
 
+      /* ESTO HACE QUE CUANDO EL USUARIO ESTÉ LOGUEADO, 
+      TRAE LOS DATOS DE FIREBASE. NUESTRO ERROR ERA QUE PINTABAMOS DIRECTO, Y NO TRAIAMOS LA DATA */
+      
+      firebase.database().ref('posts').once('value', (postsSnap) => {
+        const posts1 = postsSnap.val()
+        Object.keys(posts1).forEach(pid => {
+          const p = posts1[pid]
+          const elem = document.createElement('div')
+          console.log(p)
+          elem.innerHTML = p.body
+          posts.appendChild(elem)
+        })
+      })
+//AQUI TERMINA EL SALVADOR T.T
+
     } else {//Si NO está logueado, mostramos formulario(OPCION LOGGEDOUT)
       console.log('no user is signed in');
       secLoggedIn.style.display = 'none';
