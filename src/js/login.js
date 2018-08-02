@@ -83,7 +83,7 @@ window.onload = () => {
     .limitToLast(3) //Filtro de datos, donde limito sólo 2 gifs
     .once('value') //Para escuchar datos sólo una vez
     .then((gifs) => {
-      console.log('EL GIF > ' + JSON.stringify(gifs));
+      console.log('LOS GIFTS > ' + JSON.stringify(gifs));
     })
     .catch((error) => {
       console.log('Database error > ' + JSON.stringify(error));
@@ -351,14 +351,14 @@ const sendGif = () => {
   const gifValue = gifArea.value;
   //ref, carpeta donde guardamos cosas//Cada child es como un archivoSon gifs, deberìan de ser mensaje
   const newGifKey = firebase.database().ref().child('gifs').push().key;//Cada llame es ùnica y se crea cuando haces clic en un botòn
-  console.log(newGifKey)
+  console.log('El bendito id que queremos >>> ' + newGifKey);
   const currentUser = firebase.auth().currentUser; //Obtener usuario y datos, solo funciona si estamos logueados
   firebase.database().ref(`gifs/${newGifKey}`).set({ 
     //Ruta para llegar a los datos. Gif que es la coleccion, esto despuès se cambia
     gifURL: gifValue,//Gif Url es contenido del post
     creatorName: currentUser.displayName || currentUser.providerData[0].email,//Guardar datos, asignando un usuario. Clonamos nombe de usuario
     creator: currentUser.uid,//id del usuario
-    postId: firebase.database().ref('gifs/newGifKey/').key
+    postId: firebase.database().ref('gifs/-LITKiEKXpCMWfZq_Trl/').key
   });
 }
 
