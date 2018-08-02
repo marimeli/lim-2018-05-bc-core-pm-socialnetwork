@@ -1,11 +1,9 @@
 /* //Usuario Facebook Gmail
 let userName = document.getElementById('user-name');
 let userPhoto = document.getElementById('user-image');
-
 //CERRAR SESION
 const userOptions = document.getElementById('user-options'); //Contenedor de opciones para el usuario ejm boton para salir
 const logoutButton = document.getElementById('logout'); //boton para salir
-
 //DATABASE
 const textComposerArea = document.getElementById('text-composer-area'); //area donde se escribe un post
 const postsContainer = document.getElementById('posts-container');//div que contiene los post que se crean
@@ -30,14 +28,11 @@ const sendPhotoButton = document.getElementById('send-photo'); */
         $li.setAttribute("child-key", newPostKey.key); 
         $li.addEventListener("click", userClicked)
         userListUI.append($li);
-
-
      }); */
 
     /*  const postsRef = firebase.database().ref();
      const unpostRef = postsRef.child('post');
      const postsContainer = document.getElementById('posts-container');
-
 postsRef.on("child_added", newPostKey => {
    let user = newPostKey.val();
    let $divPost = document.createElement("div");
@@ -46,7 +41,6 @@ postsRef.on("child_added", newPostKey => {
    $divPost.addEventListener("click", userClicked)
    postsContainer.append($divPost);
 });
-
 function userClicked(e) {
     var userID = e.target.getAttribute("child-key");
     const userRef = dbRef.child('users/' + userID);
@@ -59,7 +53,6 @@ function userClicked(e) {
     });
   };
     
-
     //ref, carpeta donde guardamos cosas//Cada child es como un archivoSon gifs, deberìan de ser mensaje
     const newPostKey = firebase.database().ref('posts').push().key;//Cada llame es ùnica y se crea cuando haces clic en un botòn
     const currentUser = firebase.auth().currentUser; //Obtener usuario y datos, solo funciona si estamos logueados
@@ -82,14 +75,9 @@ const sendPhotoToStorage = () => {
     const task = firebase.storage().ref('images')
         .child(fileName)
         .put(photoFile, metadata);
-
-
     task.then(snapshot => snapshot.ref.getDownloadURL())//Obtenemos la url de la imagen
         .then(url => {
             console.log('URL del archivo > ' + url) //Ya subimos el archivo a Firebase, nos da un archivo
-
-
         });
 };
-
 sendPhotoButton.addEventListener('click', sendPhotoToStorage); */
