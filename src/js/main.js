@@ -1,3 +1,16 @@
+//Usuario Facebook Gmail
+let userName = document.getElementById('user-name');
+let userPhoto = document.getElementById('user-image');
+
+//CERRAR SESION
+const userOptions = document.getElementById('user-options'); //Contenedor de opciones para el usuario ejm boton para salir
+const logoutButton = document.getElementById('logout'); //boton para salir
+
+//DATABASE
+const textComposerArea = document.getElementById('text-composer-area'); //area donde se escribe un post
+const postsContainer = document.getElementById('posts-container');//div que contiene los post que se crean
+const postComposerContainer = document.getElementById('post-composer-container'); //contenedor div donde escribe post
+const sendPostButton = document.getElementById('send-post'); //boton de publicar post
 // //******************FUNCIONES******************
 
 //*********ONLOAD***********
@@ -6,14 +19,74 @@ window.onload = () => {
     firebase.auth().onAuthStateChanged(() => {
         const user = firebase.auth().currentUser;
         if (user !== null) {
-            console.log('Datos de usuario> ', user);
-            console.log('existe usuario activo');
+            //console.log('Datos de usuario> ', user);
+            //console.log('existe usuario activo');
 
         } else {
-            console.log('no existe usuario activo');
+            //console.log('no existe usuario activo');
         }
+        //Imprimimos datos que Firebase tiene del usuario
+        //console.log('user > ' + JSON.stringify(user));
     });
+    writeNewPost();
 };
+//*********DATA BASE***********
+const sendPost = () => {
+    const postValue = textComposerArea.value;
+     //ref, carpeta donde guardamos cosas//Cada child es como un archivoSon gifs, deberìan de ser mensaje
+     const newPostKey = firebase.database().ref('posts').push().key;//Cada llame es ùnica y se crea cuando haces clic en un botòn
+     const currentUser = firebase.auth().currentUser; //Obtener usuario y datos, solo funciona si estamos logueados
+     firebase.database().ref(`posts/${newPostKey}`).set({
+         //Ruta para llegar a los datos. Gif que es la coleccion, esto despuès se cambia
+         post: postValue,//
+         creatorName: currentUser.displayName || currentUser.providerData[0].email,//Guardar datos, asignando un usuario. Clonamos nombe de usuario
+         creator: currentUser.uid,//id del usuario
+     }); 
+    const newPost = writeNewPost();
+};
+
+sendPostButton.addEventListener('click', () => {
+    if (textComposerArea.value === '') {
+        alert('Coloca algo antes de enviar');
+    }
+    else
+        sendPost();
+});
+
+window.writeNewPost = (/* uid, body */) => {
+//Escuchador, se agrega cada que alguien agrega algo nuevo
+firebase.database().ref().child('posts')//database de firebase, escucha la referencia posts
+    //Evento para escucha cada hijo que se agrega, cada regalo que se envìa.Permite escuchar cada que alguien agrega un nuevo post
+    //.limitToLast(3)//Limitar mensajes 
+    //↓↓newGif es funcion callBack
+    .on('child_added', (newPost) => {//NewGif es un elemento completo en Firebase, para acceder a valores tiene que colocar .val(),sino jalará propiedad:valor
+        console.log('newPost >',newPost.val());
+        const postsContainer = document.getElementById('posts-container');
+        postsContainer.innerHTML += `
+            <p>key:${newPost.key}</p>
+            <p>uid:${newPost.val().uid}</p>
+            <p>body:${newPost.val().body}</p>
+            <p>creator:${newPost.val().creator}</p>
+            <p>creatorName:${newPost.val().creatorName}</p>
+            <button>Editar</button>
+            <button>Borrar</button>
+            `;          
+    });
+  /*   // A post entry.
+    var postData = {
+      uid: uid,
+      body: body
+    };
+    // Get a key for a new Post. 
+    const newPostKey = firebase.database().ref().child('posts').push().key;
+    const currentUser = firebase.auth().currentUser;
+    // Write the new post's data simultaneously in the posts list and the user's post list.
+    var updates = {};
+    updates['/posts/' + newPostKey] = postData;
+    updates['/user-posts/' + uid + '/' + newPostKey] = postData;
+    firebase.database().ref().update(updates);
+    return newPostKey; */
+  };
 
 //MOSTRAR  FORM REGISTRO
 const showRegisterForm = () => {
