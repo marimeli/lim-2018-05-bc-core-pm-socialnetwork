@@ -36,7 +36,7 @@
             <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4">
                 <i class="fa fa-home w3-margin-right"></i>Cooltural</a>
             <!-- Opciones de menu del navbar -->
-          <!--   <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="News">
+            <!--   <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="News">
                 <i class="fa fa-globe"></i>
             </a>
             <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Account Settings">
@@ -192,7 +192,7 @@
                                 <p contenteditable="true" id="text-composer-area" class="w3-border w3-padding">Status: ...</p>
                                 <!-- Botón publicar -->
                                 <button type="button" id="send-post" class="w3-button w3-theme">
-                                    <i class="fa fa-pencil"></i>  Publicar</button>
+                                    <i class="fa fa-pencil"></i> Publicar</button>
                                 <!--    <input id="photo-selector" type="file"> -->
                                 <!-- Botón subir foto -->
                                 <!-- <button type="button" id="send-photo" class="w3-button w3-theme">
@@ -222,11 +222,11 @@
                             </div>
                         </div>
                         <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom">
-                            <i class="fa fa-thumbs-up"></i>  Me gusta</button>
+                            <i class="fa fa-thumbs-up"></i> Me gusta</button>
                         <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom">
-                            <i class="fa fa-comment"></i>  Comentar</button>
+                            <i class="fa fa-comment"></i> Comentar</button>
                     </div>
-                     <!-- Finaliza post ejemplo -->
+                    <!-- Finaliza post ejemplo -->
                     <div class="w3-container w3-card w3-white w3-round w3-margin">
                         <br>
                         <img src="user.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
@@ -248,9 +248,9 @@
                             vez, hacia su ciudad natal Letralandia, el encabezamiento del pueblo Alfabeto y el subtítulo
                             de su</p>
                         <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom">
-                            <i class="fa fa-thumbs-up"></i>  Me gusta</button>
+                            <i class="fa fa-thumbs-up"></i> Me gusta</button>
                         <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom">
-                            <i class="fa fa-comment"></i>  Comentar</button>
+                            <i class="fa fa-comment"></i> Comentar</button>
                     </div>
                 </div>
 
@@ -323,6 +323,19 @@
     <footer class="w3-container w3-theme-d5">
         <!-- <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p> -->
     </footer>
+    <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+        <script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyA1P7aSi0ajFxT5IMoklK5f-rs_9RA10ew",
+                authDomain: "fir-2-edfab.firebaseapp.com",
+                databaseURL: "https://fir-2-edfab.firebaseio.com",
+                projectId: "fir-2-edfab",
+                storageBucket: "fir-2-edfab.appspot.com",
+                messagingSenderId: "453287184771"
+            };
+            firebase.initializeApp(config);
+        </script>
 
     <script>
         // Accordion
@@ -347,8 +360,9 @@
             }
         }
     </script>
-    <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
-    <script src="/src/js/firebase.js"></script>
+
+    
+    <script src="js/firebase.js"></script>
     <script src="js/main.js"></script>
     <script src="js/index.js"></script>
 </body>
