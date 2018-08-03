@@ -39,3 +39,4 @@ loginButton.addEventListener('click', loginWithFirebase);
 facebookButton.addEventListener('click', facebookLoginWithFirebase);
 //LOGIN POR GOOGLE
 googleButton.addEventListener('click', googleLoginWithFirebase);
+

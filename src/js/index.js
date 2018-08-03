@@ -13,3 +13,7 @@ const photoSelector = document.getElementById('photo-selector');
 const sendPhotoButton = document.getElementById('send-photo'); */
 const postsContainer = document.getElementById('posts-container');
 const postComposerContainer = document.getElementById('post-composer-container');
+
+let loginModalButton = document.getElementById('login-modal');
+
+loginModalButton.addEventListener('click', showModal);

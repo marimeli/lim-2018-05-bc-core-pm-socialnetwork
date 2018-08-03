@@ -1,5 +1,26 @@
 // //******************FUNCIONES******************
 
+let showModal = () => {
+    document.getElementById('loginModal').style.display = 'block';
+   
+}
+let dontShowModal = () => {
+    alert('funciono');
+    document.getElementById('loginModal').style.display = 'none';
+    
+}
+let xButtonClose = () => {
+    document.getElementById('loginModal').style.display = 'none';
+}
+
+
+
+let cancelButton = document.getElementById('cancel-button');
+cancelButton.addEventListener('click', dontShowModal);
+
+let xButton = document.getElementById('x-button');
+xButton.addEventListener('click', xButtonClose);
+
 //*********ONLOAD***********
 
 window.onload = () => {
