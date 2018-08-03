@@ -158,7 +158,17 @@ const googleLoginWithFirebase = () => {
         });
 }
 
-
+  const sendPost = () => {
+    const postValue = postArea.value;
+    //ref, carpeta donde guardamos cosas//Cada child es como un archivoSon gifs, deberìan de ser mensaje
+    const newPostKey = firebase.database().ref().child('posts').push().key;//Cada llame es ùnica y se crea cuando haces clic en un botòn
+    const currentUser = firebase.auth().currentUser; //Obtener usuario y datos, solo funciona si estamos logueados
+    firebase.database().ref(`posts/${newPostKey}`).set({ //Ruta para llegar a los datos. Gif que es la coleccion, esto despuès se cambia
+      textPost: postValue,//
+      creatorName: currentUser.displayName || currentUser.providerData[0].email,//Guardar datos, asignando un usuario. Clonamos nombe de usuario
+      creator: currentUser.uid,//id del usuario
+    });
+  }
 
 
 
