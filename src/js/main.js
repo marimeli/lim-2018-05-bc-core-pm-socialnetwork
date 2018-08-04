@@ -7,16 +7,24 @@ const cancelButton = document.getElementById('cancel-button');
 const xButton = document.getElementById('x-button');
 
 const mail = document.getElementById('email');
+const errorEmail = document.getElementById('error-email')
 const password = document.getElementById('password');
+const errorPassword = document.getElementById('error-password');
 const loginButton = document.getElementById('login-btn');
 
 //Register modal botones
 const cancelRegButton = document.getElementById('register-cancel-button');
 const xRegButton = document.getElementById('x-register-button');
 
-const registerEmail = document.getElementById('email-register');
+const emailRegister = document.getElementById('email-register');
+const adviceEmailRegister = document.getElementById('advice-emailRegister');
 const passwordRegister= document.getElementById('password-register');
+const advicePasswordRegister = document.getElementById('advice-passwordRegister');
+
+
 const registerButton= document.getElementById('register-button');
+
+
 
 // FUNCIONES MODALES
 //Login
@@ -53,7 +61,11 @@ callModalRegister.addEventListener('click', showModalRegister);
 cancelRegButton.addEventListener('click', dontShowModalRegister);
 xRegButton.addEventListener('click', xButtonCloseRegister);
 
+//Registro
+registerButton.addEventListener('click', registerWithFirebase);
 
+//Login con Email
+loginButton.addEventListener('click', loginWithFirebase);
 
 
 
