@@ -62,54 +62,9 @@
                 </div>
             </div> -->
                 <!--  Opciones para logeo -->
-                ​
-                <!-- modal login -->
-                <!-- 
                 <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
-                        <button class="w3-bar-item w3-button w3-padding-large w3-theme-d4">Registrarse</button>
-                        <button class="w3-bar-item w3-button w3-padding-large w3-theme-d4">Iniciar Sesión</button>
-                         -->
-                <div class="w3-container w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white">
-
-                    <button onclick="document.getElementById('id01').style.display='block'" class="w3-bar-item w3-button w3-padding-large w3-theme-d4">Iniciar sesión</button>
-                    <button onclick="document.getElementById('id01').style.display='block'" class="w3-bar-item w3-button w3-padding-large w3-theme-d4">Iniciar sesión</button>
-                    ​
-                    <div id="id01" class="w3-modal">
-                        <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
-                            ​
-                            <div class="w3-center">
-                                <br>
-                                <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright"
-                                    title="Close Modal">×</span>
-                                <img src="img_avatar4.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
-                            </div>
-                            ​
-                            <form class="w3-container" action="/action_page.php">
-                                <div class="w3-section">
-                                    <label>
-                                        <b>Username</b>
-                                    </label>
-                                    <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Username" name="usrname" required>
-                                    <label>
-                                        <b>Password</b>
-                                    </label>
-                                    <input class="w3-input w3-border" type="text" placeholder="Enter Password" name="psw" required>
-                                    <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Login</button>
-                                    <input class="w3-check w3-margin-top" type="checkbox" checked="checked"> Remember me
-                                </div>
-                            </form>
-                            ​
-                            <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
-                                <button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
-                                <span class="w3-right w3-padding w3-hide-small">Forgot
-                                    <a href="#">password?</a>
-                                </span>
-                            </div>
-                            ​
-                        </div>
-                    </div>
-                </div>
-
+                    <button class="w3-bar-item w3-button w3-padding-large w3-theme-d4" id="call-modal-register">Registrarse</button>
+                    <button class="w3-bar-item w3-button w3-padding-large w3-theme-d4" id="call-modal-login">Iniciar Sesión</button>
 
                 </a>
             </div>
@@ -143,7 +98,8 @@
                             <!-- <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> April 1, 1988</p> -->
                         </div>
                     </div>
-                    <br> ​
+                    <br>
+
                     <!-- Accordion -->
                     <div class="w3-card w3-round">
                         <div class="w3-white">
@@ -181,7 +137,8 @@
                             </div>
                         </div>
                     </div>
-                    <br> ​
+                    <br>
+
                     <!-- Interests -->
                     <div class="w3-card w3-round w3-white w3-hide-small">
                         <div class="w3-container">
@@ -201,7 +158,8 @@
                             </p>
                         </div>
                     </div>
-                    <br> ​
+                    <br>
+
                     <!-- Alert Box -->
                     <div class="w3-container w3-display-container w3-round w3-theme-l4 w3-border w3-theme-border w3-margin-bottom w3-hide-small">
                         <span onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-l3 w3-display-topright">
@@ -212,13 +170,13 @@
                         </p>
                         <p>People are looking at your profile. Find out who.</p>
                     </div>
-                    ​
+
                     <!-- End Left Column -->
                 </div>
-                ​
+
                 <!-- Middle Column -->
                 <div class="w3-col m7">
-                    ​
+
                     <div class="w3-row-padding">
                         <div class="w3-col m12">
                             <div class="w3-card w3-round w3-white">
@@ -299,10 +257,10 @@
                                 <i class="fa fa-comment"></i> Comentar</button>
                         </div>
                     </div>
-                    ​
+
                     <!-- End Middle Column -->
                 </div>
-                ​
+
                 <!-- Right Column -->
                 <div class="w3-col m2">
                     <div class="w3-card w3-round w3-white w3-center">
@@ -318,7 +276,8 @@
                             </p>
                         </div>
                     </div>
-                    <br> ​
+                    <br>
+
                     <div class="w3-card w3-round w3-white w3-center">
                         <div class="w3-container">
                             <p>Solicitud de amistad</p>
@@ -339,23 +298,25 @@
                             </div>
                         </div>
                     </div>
-                    <br> ​
+                    <br>
+
                     <div class="w3-card w3-round w3-white w3-padding-16 w3-center">
                         <p>ADS</p>
                     </div>
-                    <br> ​
+                    <br>
+
                     <div class="w3-card w3-round w3-white w3-padding-32 w3-center">
                         <p>
                             <i class="fa fa-bug w3-xxlarge"></i>
                         </p>
                     </div>
-                    ​
+
                     <!-- End Right Column -->
                 </div>
-                ​
+
                 <!-- End Grid -->
             </div>
-            ​
+
             <!-- End Page Container -->
         </div>
         <br>
@@ -364,10 +325,87 @@
             <h5>Footer</h5>
         </footer>
         <footer class="w3-container w3-theme-d5">
-            <!-- <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p> -->
         </footer>
     </main>
-    ​
+
+    <!-- MODAL LOGIN -->
+    <div id="loginModal" class="w3-modal">
+        <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+
+            <div class="w3-center">
+                <br>
+                <span id="x-button" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
+                <!-- <img src="img_avatar4.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top"> -->
+            </div>
+            <!-- LOGIN -->
+            <form class="w3-container">
+
+
+                <input id="email" class="w3-input w3-border w3-margin-bottom" placeholder="yourmail@example.com" name="email" type="email">
+                <p id="error-email" style="color: red"></p>
+
+                <input id="password" class="w3-input w3-border" placeholder="Password" name="password" type="password">
+                <p id="error-password" style="color: red"></p>
+                <input class="w3-check w3-margin-top" type="checkbox" checked="checked"> Recordarme
+
+                <button id="login-btn" class="w3-button w3-block w3-green w3-section w3-padding">Iniciar sesión</button>
+                <h4>También puedes:</h4>
+                <input id="facebook-button" class="btn btn-lg btn-facebook btn-block" type="submit" value="Acceder con Facebook">
+                <input id="google-button" class="btn btn-lg btn-google btn-block" type="submit" value="Acceder con Google">
+                <!-- FIN LO VIEJO -->
+                <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+                    <input id="cancel-button" class="w3-button w3-red" type="button" value="Cancel">
+                    <span class="w3-right w3-padding w3-hide-small">¿Olvidaste
+                        <a href="#">tu contraseña?</a>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Modal Registro -->
+            <!-- MODAL REGISTRO -->
+            <div id="registerModal" class="w3-modal">
+                    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+        
+                        <div class="w3-center">
+                            <br>
+                            <span id="x-register-button" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
+                            <!-- <img src="img_avatar4.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top"> -->
+                        </div>
+                        <!-- REGISTRO -->
+                        <form class="w3-container">
+        
+                            <div class="w3-section">
+                                <b>Correo electrónico</b>
+                                </label>
+                                <input class="w3-input w3-border w3-margin-bottom" id="email-register" class="form-control" placeholder="yourmail@example.com"
+                                    name="email" type="email" required>
+                                <p id="advice-emailRegister" style="color: red"></p>
+        
+                                <label>
+                                    <b>Contraseña</b>
+                                </label>
+                                <input id="password-register" class="w3-input w3-border" placeholder="Your Password" name="password" type="password" required>
+                                <p id="advice-passwordRegister" style="color: red"></p>
+        
+        
+        
+                                <input id="register-button" class="w3-button w3-block w3-green w3-section w3-padding" type="button" value="Registrarse">
+                            </div>
+        
+                            <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+                                    <input id="register-cancel-button" class="w3-button w3-red" type="button" value="Cancel">
+                                    <span class="w3-right w3-padding w3-hide-small">¿Olvidaste
+                                        <a href="#">tu contraseña?</a>
+                                    </span>
+                                </div>
+        
+                        </form>
+        
+                    </div>
+                </div>
+
+    <!-- Fin -->
     <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
     <script>
         // Accordion
@@ -393,8 +431,8 @@
         }
     </script>
     <script src="js/firebase.js"></script>
+    <script src="js/data.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/index.js"></script>
 </body>
 ​
 
