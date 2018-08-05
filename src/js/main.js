@@ -11,6 +11,8 @@ const errorEmail = document.getElementById('error-email')
 const password = document.getElementById('password');
 const errorPassword = document.getElementById('error-password');
 const loginButton = document.getElementById('login-btn');
+const FacebookButton = document.getElementById('login-btn');
+const GoogleButton = document.getElementById('login-btn');
 
 //Register modal botones
 const cancelRegButton = document.getElementById('register-cancel-button');
@@ -24,7 +26,7 @@ const advicePasswordRegister = document.getElementById('advice-passwordRegister'
 
 const registerButton= document.getElementById('register-button');
 
-
+loginButton.addEventListener('click', loginWithFirebase);
 
 // FUNCIONES MODALES
 //Login
@@ -65,19 +67,3 @@ xRegButton.addEventListener('click', xButtonCloseRegister);
 registerButton.addEventListener('click', registerWithFirebase);
 
 //Login con Email
-loginButton.addEventListener('click', loginWithFirebase);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
