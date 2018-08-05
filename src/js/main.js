@@ -11,6 +11,8 @@ const errorEmail = document.getElementById('error-email')
 const password = document.getElementById('password');
 const errorPassword = document.getElementById('error-password');
 const loginButton = document.getElementById('login-btn');
+const FacebookButton = document.getElementById('login-btn');
+const GoogleButton = document.getElementById('login-btn');
 
 //Register modal botones
 const cancelRegButton = document.getElementById('register-cancel-button');
