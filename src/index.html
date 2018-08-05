@@ -337,16 +337,24 @@
             </div>
             <!-- LOGIN -->
             <form class="w3-container">
-
-
-                <input id="email" class="w3-input w3-border w3-margin-bottom" placeholder="yourmail@example.com" name="email" type="email">
+                <label>
+                    <b>Correo electrónico</b>
+                </label>
+                <input class="w3-input w3-border w3-margin-bottom" id="email" class="form-control" placeholder="yourmail@example.com"
+                name="email" type="email" required>
+                <!-- <input id="email" class="w3-input w3-border w3-margin-bottom" placeholder="yourmail@example.com" class="form-control" name="email" type="email" required> -->
                 <p id="error-email" style="color: red"></p>
+                <label>
+                    <b>Password</b>
+                </label>
+                <input id="password" class="w3-input w3-border" placeholder="Your Password" name="password" type="password" required>
 
-                <input id="password" class="w3-input w3-border" placeholder="Password" name="password" type="password">
+                <!-- <input id="password" class="w3-input w3-border" placeholder="Password" name="password" type="password"> -->
                 <p id="error-password" style="color: red"></p>
-                <input class="w3-check w3-margin-top" type="checkbox" checked="checked"> Recordarme
+                <!-- <input class="w3-check w3-margin-top" type="checkbox" checked="checked"> Recordarme -->
 
-                <button id="login-btn" class="w3-button w3-block w3-green w3-section w3-padding">Iniciar sesión</button>
+                <!-- <button id="login-btn" class="w3-button w3-block w3-green w3-section w3-padding">Iniciar sesión</button> -->
+                <input id="login-btn" class="w3-button w3-block w3-green w3-section w3-padding" type="button" value="Iniciar sesión">
                 <h4>También puedes:</h4>
                 <input id="facebook-button" class="btn btn-lg btn-facebook btn-block" type="submit" value="Acceder con Facebook">
                 <input id="google-button" class="btn btn-lg btn-google btn-block" type="submit" value="Acceder con Google">
@@ -361,47 +369,48 @@
         </div>
     </div>
     <!-- Modal Registro -->
-            <!-- MODAL REGISTRO -->
-            <div id="registerModal" class="w3-modal">
-                    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
-        
-                        <div class="w3-center">
-                            <br>
-                            <span id="x-register-button" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
-                            <!-- <img src="img_avatar4.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top"> -->
-                        </div>
-                        <!-- REGISTRO -->
-                        <form class="w3-container">
-        
-                            <div class="w3-section">
-                                <b>Correo electrónico</b>
-                                </label>
-                                <input class="w3-input w3-border w3-margin-bottom" id="email-register" class="form-control" placeholder="yourmail@example.com"
-                                    name="email" type="email" required>
-                                <p id="advice-emailRegister" style="color: red"></p>
-        
-                                <label>
-                                    <b>Contraseña</b>
-                                </label>
-                                <input id="password-register" class="w3-input w3-border" placeholder="Your Password" name="password" type="password" required>
-                                <p id="advice-passwordRegister" style="color: red"></p>
-        
-        
-        
-                                <input id="register-button" class="w3-button w3-block w3-green w3-section w3-padding" type="button" value="Registrarse">
-                            </div>
-        
-                            <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
-                                    <input id="register-cancel-button" class="w3-button w3-red" type="button" value="Cancel">
-                                    <span class="w3-right w3-padding w3-hide-small">¿Olvidaste
-                                        <a href="#">tu contraseña?</a>
-                                    </span>
-                                </div>
-        
-                        </form>
-        
-                    </div>
+    <!-- MODAL REGISTRO -->
+    <div id="registerModal" class="w3-modal">
+        <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+
+            <div class="w3-center">
+                <br>
+                <span id="x-register-button" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
+                <!-- <img src="img_avatar4.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top"> -->
+            </div>
+            <!-- REGISTRO -->
+            <form class="w3-container">
+
+                <div class="w3-section">
+                    <label>
+                        <b>Correo electrónico</b>
+                    </label>
+                    <input class="w3-input w3-border w3-margin-bottom" id="email-register" class="form-control" placeholder="yourmail@example.com"
+                        name="email" type="email" required>
+                    <p id="advice-emailRegister" style="color: red"></p>
+
+                    <label>
+                        <b>Contraseña</b>
+                    </label>
+                    <input id="password-register" class="w3-input w3-border" placeholder="Your Password" name="password" type="password" required>
+                    <p id="advice-passwordRegister" style="color: red"></p>
+
+
+
+                    <input id="register-button" class="w3-button w3-block w3-green w3-section w3-padding" type="button" value="Registrarse">
                 </div>
+
+                <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+                    <input id="register-cancel-button" class="w3-button w3-red" type="button" value="Cancel">
+                    <span class="w3-right w3-padding w3-hide-small">¿Olvidaste
+                        <a href="#">tu contraseña?</a>
+                    </span>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
 
     <!-- Fin -->
     <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>

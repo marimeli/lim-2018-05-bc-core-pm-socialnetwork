@@ -24,7 +24,7 @@ const advicePasswordRegister = document.getElementById('advice-passwordRegister'
 
 const registerButton= document.getElementById('register-button');
 
-
+loginButton.addEventListener('click', loginWithFirebase);
 
 // FUNCIONES MODALES
 //Login
@@ -65,19 +65,3 @@ xRegButton.addEventListener('click', xButtonCloseRegister);
 registerButton.addEventListener('click', registerWithFirebase);
 
 //Login con Email
-loginButton.addEventListener('click', loginWithFirebase);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
