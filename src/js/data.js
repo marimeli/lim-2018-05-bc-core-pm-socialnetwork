@@ -73,6 +73,31 @@ window.onload = () => {
       //Muestra perfil y container para publicar
       hideContainers();
 
+      /* ESTO HACE QUE CUANDO EL USUARIO ESTÉ LOGUEADO, 
+   TRAE LOS DATOS DE FIREBASE.*/
+
+      firebase.database().ref('posts').once('value', (postsSnap) => {
+        console.log(postsSnap);
+        const posts1 = postsSnap.val()
+        Object.keys(posts1).forEach(pid => {
+          const postInfo = posts1[pid]
+          const contPost = document.createElement('div')
+          console.log(postInfo)
+          contPost.innerHTML = postInfo.body
+          postsContainer.appendChild(contPost)
+
+          /*  var contPost = document.createElement('div');
+              var textPost = document.createElement('textarea')
+              textPost.setAttribute("id", newPost);
+              textPost.innerHTML = textComposerArea.value; 
+              
+      contPost.appendChild(textPost);
+      postsContainer.appendChild(contPost);
+      */
+        });
+
+
+      });
 
     } else {//Si NO está logueado, mostramos formulario(OPCION LOGGEDOUT)
       console.log('Usuario NO logueado');
@@ -105,7 +130,7 @@ const loginWithFirebase = () => {
     });
 };
 
-//LOGIN CON GOOGLE
+//LOGIN CON FACEBOOK
 const facebookLoginWithFirebase = () => {
   const provider = new firebase.auth.FacebookAuthProvider(); //Nuevo objeto con el proveedor
   provider.setCustomParameters({ //Crea un login con facebook y enlace un popup
@@ -130,8 +155,7 @@ const googleLoginWithFirebase = () => {
     .then((result) => {
       console.log('Sesión con Google')
       const user = result.user;
-      // /* userData //aignar valores *
-      // writeUserData(user.uid, user.displayName, user.email, user.photoURL)
+      writeUserData(user.uid, user.displayName, user.email, user.photoURL);
     })
     .catch((error) => {
       console.log(error.code);
@@ -153,5 +177,38 @@ const logoutWithFirebase = () => {
     });
 };
 
+//  Función para guardar dato de usuario en Firebase, cuando está logeado con gmail. 
+window.writeUserData = (userId, name, email, imageUrl) => {
+  firebase.database().ref('users/' + userId).set({
+    username: name,
+    email: email,
+    profile_picture: imageUrl
+  }).then(result => {
+    console.log(result);
+  })
+    .catch(error => {
+      console.log(error);
+    });
+};
 
+//  Función para escribir un post
+window.writeNewPost = (uid, body) => {
+  // A post entry.
+  var postData = {
+    uid: uid,
+    body: body
+  };
+  // Get a key for a new Post. 
+  const newPostKey = firebase.database().ref().child('posts').push().key;
+  const currentUser = firebase.auth().currentUser;
+  // Write the new post's data simultaneously in the posts list and the user's post list.
+  var updates = {};
+  updates['/posts/' + newPostKey] = postData;
+  updates['/user-posts/' + uid + '/' + newPostKey] = postData;
+  firebase.database().ref().update(updates);
+  return newPostKey;
+};
 
+window.reload_page = () => {
+  window.location.reload();
+};

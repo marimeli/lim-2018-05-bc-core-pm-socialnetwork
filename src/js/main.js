@@ -20,10 +20,10 @@ const xRegButton = document.getElementById('x-register-button');
 
 const emailRegister = document.getElementById('email-register');
 const adviceEmailRegister = document.getElementById('advice-emailRegister');
-const passwordRegister= document.getElementById('password-register');
+const passwordRegister = document.getElementById('password-register');
 const advicePasswordRegister = document.getElementById('advice-passwordRegister');
 
-const registerButton= document.getElementById('register-button');
+const registerButton = document.getElementById('register-button');
 
 /* MURO */
 
@@ -35,7 +35,6 @@ const profileContainer = document.getElementById('profile-container');
 const userName = document.getElementById('userName');
 const userImage = document.getElementById('user-image');
 
-/* 
 //TIMELINE
 const textComposerArea = document.getElementById('text-composer-area'); //área para hacer una publicación
 const sendPostButton = document.getElementById('send-post'); //botón para publicar
@@ -95,4 +94,17 @@ googleButton.addEventListener('click', googleLoginWithFirebase);
 logoutButton.addEventListener('click', logoutWithFirebase);
 
 /* MURO */
+sendPostButton.addEventListener('click', () => {
+  if (textComposerArea.value === '') {
+    alert('Escribe un texto antes de enviar');
+  } else {
+    let userId = firebase.auth().currentUser.uid;
+    /*  console.log(userId); // 7GHfigb3TQcPYgJKrlLMPaLtgFF2 retorna id de usuario logueado */
+     
+     let newPost = writeNewPost(userId, textComposerArea.value);
+    console.log(newPost); //-LJ8PQnldQ3j6sLDZKN7 retorna id del post del usuario */
+    reload_page();
+  }
+});
+
 
