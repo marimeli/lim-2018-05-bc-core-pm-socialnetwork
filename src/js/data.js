@@ -44,28 +44,6 @@ const showContainers = () => {
 
 
 //*********WINDOWS ONLOAD***********
-window.callback = () => {
-  firebase.database().ref('posts').once('value', (postsSnap) => {
-    console.log(postsSnap);
-    const posts1 = postsSnap.val()
-    Object.keys(posts1).forEach(pid => {
-      const postInfo = posts1[pid]
-      const contPost = document.createElement('div')
-      console.log(postInfo)
-      contPost.innerHTML = postInfo.body
-      postsContainer.appendChild(contPost)
-   })
-      /*  var contPost = document.createElement('div');
-          var textPost = document.createElement('textarea')
-          textPost.setAttribute("id", newPost);
-          textPost.innerHTML = textComposerArea.value; 
-          
-  contPost.appendChild(textPost);
-  postsContainer.appendChild(contPost);
-  */
-  });
-};
-
 window.onload = () => {
   //Listener en tiempo real EL CHISMOSO
   firebase.auth().onAuthStateChanged((user) => {
@@ -82,7 +60,6 @@ window.onload = () => {
       }
       else {
         userName.innerHTML = user.displayName;
-
       }
       //Imprime foto en perfil
       if (user.photoURL == null) {
@@ -94,10 +71,6 @@ window.onload = () => {
       //Muestra perfil y container para publicar
       hideContainers();
 
-      /* CUANDO EL USUARIO ESTÉ LOGUEADO, LLAMO A LA FUNCION
-      QUE TRAE LOS DATOS DE FIREBASE.*/
-   callback();
-
     } else {//Si NO está logueado, mostramos formulario(OPCION LOGGEDOUT)
       console.log('Usuario NO logueado');
       showContainers();
@@ -105,7 +78,27 @@ window.onload = () => {
     //Imprimimos datos que Firebase tiene del usuario
     console.log('User > ' + JSON.stringify(user));
   });
+
+   /* CUANDO EL USUARIO ESTÉ LOGUEADO, LLAMO A LA FUNCION
+      QUE TRAE LOS DATOS DE FIREBASE.*/
+      firebase.database().ref('posts').once('value', (postsSnap) => {
+        console.log(postsSnap);
+        const posts1 = postsSnap.val()
+        Object.keys(posts1).forEach(pid => {
+          const postInfo = posts1[pid]
+          console.log(postInfo)
+          const contPost = document.createElement('div');
+          const userNameLoggued = document.createElement('h4');
+          contPost.setAttribute("class","w3-container w3-card w3-white w3-round w3-margin")
+          contPost.innerHTML = postInfo.body
+          contPost.appendChild(userNameLoggued);
+          postsContainer.appendChild(contPost);
+
+          })
+        })
 };
+
+
 
 
 //*********LOGIN EMAIL***********
@@ -113,6 +106,8 @@ const loginWithFirebase = () => {
   firebase.auth().signInWithEmailAndPassword(email.value, password.value)
     .then((result) => {
       console.log('usuario inició sesiòn con éxito');
+      console.log(result);
+      
       const user = result.user;
       writeUserData(user.uid, user.displayName, user.email, user.photoURL);
     })
@@ -141,6 +136,7 @@ const facebookLoginWithFirebase = () => {
   firebase.auth().signInWithPopup(provider)
     .then((result) => {
       console.log('Login con Facebook exitoso');
+      console.log(result);
       const user = result.user;
       writeUserData(user.uid, user.displayName, user.email, user.photoURL);
     })
@@ -156,6 +152,7 @@ const googleLoginWithFirebase = () => {
   firebase.auth().signInWithPopup(provider)
     .then((result) => {
       console.log('Sesión con Google')
+      console.log(result);
       const user = result.user;
       writeUserData(user.uid, user.displayName, user.email, user.photoURL);
     })

@@ -100,11 +100,19 @@ sendPostButton.addEventListener('click', () => {
   } else {
     let userId = firebase.auth().currentUser.uid;
     /*  console.log(userId); // 7GHfigb3TQcPYgJKrlLMPaLtgFF2 retorna id de usuario logueado */
-     
-     let newPost = writeNewPost(userId, textComposerArea.value);
+
+    let newPost = writeNewPost(userId, textComposerArea.value);
     console.log(newPost); //-LJ8PQnldQ3j6sLDZKN7 retorna id del post del usuario */
-    callback();    
+
     reload_page();
+
+    /* const contPost = document.createElement('div');
+    const userNameLoggued = document.createElement('h4');
+    contPost.setAttribute("class", "w3-container w3-card w3-white w3-round w3-margin")
+
+    contPost.appendChild(userNameLoggued);
+    postsContainer.appendChild(contPost); */
+
   }
 });
 
