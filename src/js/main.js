@@ -23,10 +23,15 @@ const adviceEmailRegister = document.getElementById('advice-emailRegister');
 const passwordRegister= document.getElementById('password-register');
 const advicePasswordRegister = document.getElementById('advice-passwordRegister');
 
-
 const registerButton= document.getElementById('register-button');
 
 loginButton.addEventListener('click', loginWithFirebase);
+
+//Agregando evento: Botón iniciar
+buttonStart.addEventListener('click', () => { //Al escuchar el click del botón, ejecutar la función botón
+  document.getElementById('hidden').style.display = 'block';
+  document.getElementById('home').style.display = 'none';
+});
 
 // FUNCIONES MODALES
 //Login

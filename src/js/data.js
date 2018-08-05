@@ -25,6 +25,7 @@ window.registerWithFirebase = () => {
 };
 
 
+
 //*********LOGIN***********
 const loginWithFirebase = () => {
   firebase.auth().signInWithEmailAndPassword(email.value, password.value)
