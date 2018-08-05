@@ -6,5 +6,5 @@ var config = {
     projectId: "fir-2-edfab",
     storageBucket: "fir-2-edfab.appspot.com",
     messagingSenderId: "453287184771"
-};
-firebase.initializeApp(config);
+ };
+ firebase.initializeApp(config);
