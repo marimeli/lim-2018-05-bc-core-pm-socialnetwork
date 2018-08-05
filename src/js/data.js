@@ -32,13 +32,33 @@ window.onload = () => {
     if (user) {//Si está logeado mostramos la opcion de logout y nombre de usuario
       //También podemos traer los sections directamente pero por orden mejor lo declaramos arriba
       console.log('Usuario logueado');
+      //Ocultar botones que abren modales de registro y login
       dontShowModalRegister();
       dontShowModal();
+      //Imprime nombre de usuario
+      if(user.displayName == null){
+         userName.innerHTML = user.email;
+      }
+      else {
+        userName.innerHTML = user.displayName;
+        
+      }      
+      //Imprime foto en perfil
+      if(user.photoURL == null){
+        userImage.setAttribute('src', "/src/user.png");
+     }
+     else {
+      userImage.setAttribute('src', user.photoURL);
+    } 
+      // let userPhotoURL = user.photoURL;
+
+      //Muestra perfil y container para publicar
       postComposerContainer.style.display = 'block';
       profileContainer.style.display = 'block';
       logoutButton.style.display = 'block';
       callModalRegister.style.display = 'none';
       callModalLogin.style.display = 'none';
+      
 
     } else {//Si NO está logueado, mostramos formulario(OPCION LOGGEDOUT)
       console.log('Usuario NO logueado');
@@ -121,4 +141,6 @@ const logoutWithFirebase = () => {
       console.log('Error Firebase > Mensaje > ' + error.messaje); //
     });
 };
+
+
 

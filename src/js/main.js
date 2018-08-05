@@ -31,6 +31,8 @@ const logoutButton = document.getElementById('logout');
 //Contenedores
 const profileContainer = document.getElementById('profile-container');
 const postComposerContainer = document.getElementById('post-composer-container');
+const userName = document.getElementById('userName');
+const userImage = document.getElementById('user-image');
 
 // FUNCIONES MODALES
 //Login
