@@ -32,6 +32,9 @@ const hideContainers = () => {
   logoutButton.style.display = 'block';
   callModalRegister.style.display = 'none';
   callModalLogin.style.display = 'none';
+  postsContainer.style.display = 'block';
+  feedButton.style.display = 'block';
+  profileButton.style.display = 'block';
 };
 
 const showContainers = () => {
@@ -40,8 +43,19 @@ const showContainers = () => {
   logoutButton.style.display = 'none';
   callModalRegister.style.display = 'block';
   callModalLogin.style.display = 'block';
+  postsContainer.style.display = 'block';
+  feedButton.style.display = 'none';
+  profileButton.style.display = 'none';
 };
 
+const showFeed = () => {
+  postComposerContainer.style.display = 'none';
+  profileContainer.style.display = 'none';
+  logoutButton.style.display = 'block';
+  callModalRegister.style.display = 'none';
+  callModalLogin.style.display = 'none';
+  postsContainer.style.display = 'block';
+}
 
 
 //*********WINDOWS ONLOAD***********
@@ -243,8 +257,8 @@ const printPublicPost = (newPublicPosts) => {
   /* <button id="${newPostsUser.val().key}" type="button" class="w3-button w3-theme-d1 w3-margin-bottom "><i class="fa fa-thumbs-up"></i> EcoLike</button>  */
   const br = document.createElement('br');
   const btnLike = document.createElement('input');
-  
-  btnLike.setAttribute('value', 'Like ♥');
+
+  btnLike.setAttribute('value', 'Me gusta');
   btnLike.setAttribute('type', 'button')
   btnLike.setAttribute('id', postskey);
   // btnLike.setAttribute('style', "background-color: orange;");
@@ -380,7 +394,6 @@ const writtingPost = () => {
     }
   }
 }
-
 
 
 

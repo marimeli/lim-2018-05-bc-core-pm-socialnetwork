@@ -42,6 +42,8 @@ const postsContainer = document.getElementById('posts-container'); //contenedor 
 const postComposerContainer = document.getElementById('post-composer-container'); //contenedor de base de datos
 const statusOfPrivacy = document.getElementById('status-of-privacy');
 
+const feedButton = document.getElementById('feed-button');
+const profileButton = document.getElementById('profileButton');
 
 // FUNCIONES MODALES
 //Login
@@ -99,3 +101,5 @@ sendPostButton.addEventListener('click', writtingPost);
 
 //
 
+feedButton.addEventListener('click', showFeed);
+profileButton.addEventListener('click', hideContainers);
