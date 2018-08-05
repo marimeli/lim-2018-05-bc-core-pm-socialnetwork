@@ -103,6 +103,7 @@ sendPostButton.addEventListener('click', () => {
      
      let newPost = writeNewPost(userId, textComposerArea.value);
     console.log(newPost); //-LJ8PQnldQ3j6sLDZKN7 retorna id del post del usuario */
+    callback();    
     reload_page();
   }
 });

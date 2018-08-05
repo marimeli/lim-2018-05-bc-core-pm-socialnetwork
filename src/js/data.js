@@ -44,6 +44,27 @@ const showContainers = () => {
 
 
 //*********WINDOWS ONLOAD***********
+window.callback = () => {
+  firebase.database().ref('posts').once('value', (postsSnap) => {
+    console.log(postsSnap);
+    const posts1 = postsSnap.val()
+    Object.keys(posts1).forEach(pid => {
+      const postInfo = posts1[pid]
+      const contPost = document.createElement('div')
+      console.log(postInfo)
+      contPost.innerHTML = postInfo.body
+      postsContainer.appendChild(contPost)
+   })
+      /*  var contPost = document.createElement('div');
+          var textPost = document.createElement('textarea')
+          textPost.setAttribute("id", newPost);
+          textPost.innerHTML = textComposerArea.value; 
+          
+  contPost.appendChild(textPost);
+  postsContainer.appendChild(contPost);
+  */
+  });
+};
 
 window.onload = () => {
   //Listener en tiempo real EL CHISMOSO
@@ -73,31 +94,9 @@ window.onload = () => {
       //Muestra perfil y container para publicar
       hideContainers();
 
-      /* ESTO HACE QUE CUANDO EL USUARIO ESTÉ LOGUEADO, 
-   TRAE LOS DATOS DE FIREBASE.*/
-
-      firebase.database().ref('posts').once('value', (postsSnap) => {
-        console.log(postsSnap);
-        const posts1 = postsSnap.val()
-        Object.keys(posts1).forEach(pid => {
-          const postInfo = posts1[pid]
-          const contPost = document.createElement('div')
-          console.log(postInfo)
-          contPost.innerHTML = postInfo.body
-          postsContainer.appendChild(contPost)
-
-          /*  var contPost = document.createElement('div');
-              var textPost = document.createElement('textarea')
-              textPost.setAttribute("id", newPost);
-              textPost.innerHTML = textComposerArea.value; 
-              
-      contPost.appendChild(textPost);
-      postsContainer.appendChild(contPost);
-      */
-        });
-
-
-      });
+      /* CUANDO EL USUARIO ESTÉ LOGUEADO, LLAMO A LA FUNCION
+      QUE TRAE LOS DATOS DE FIREBASE.*/
+   callback();
 
     } else {//Si NO está logueado, mostramos formulario(OPCION LOGGEDOUT)
       console.log('Usuario NO logueado');
@@ -109,11 +108,13 @@ window.onload = () => {
 };
 
 
-//*********LOGIN***********
+//*********LOGIN EMAIL***********
 const loginWithFirebase = () => {
   firebase.auth().signInWithEmailAndPassword(email.value, password.value)
-    .then(() => {
+    .then((result) => {
       console.log('usuario inició sesiòn con éxito');
+      const user = result.user;
+      writeUserData(user.uid, user.displayName, user.email, user.photoURL);
     })
     .catch((error) => {
       if (error.code === 'auth/wrong-password') {
@@ -138,9 +139,10 @@ const facebookLoginWithFirebase = () => {
   });
 
   firebase.auth().signInWithPopup(provider)
-    .then(() => {
+    .then((result) => {
       console.log('Login con Facebook exitoso');
-
+      const user = result.user;
+      writeUserData(user.uid, user.displayName, user.email, user.photoURL);
     })
     .catch((error) => {
       console.log('Error Firebase > código > ' + error.code); //Contraseña o correo no valido
