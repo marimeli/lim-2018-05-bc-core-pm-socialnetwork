@@ -3,7 +3,7 @@ window.registerWithFirebase = () => {
   //Crea usuario con email y password
   firebase.auth().createUserWithEmailAndPassword(emailRegister.value, passwordRegister.value)
     .then(() => {
-      console.log('usuario creado con èxito');
+      console.log('usuario creado con éxito');
       alert('Su usuario fue creado con éxito')
 
     })
@@ -25,6 +25,7 @@ window.registerWithFirebase = () => {
     });
 };
 
+//Oculta y muestra bloque de perfil de acuerdo al estado del usuario
 const hideContainers = () => {
   postComposerContainer.style.display = 'block';
   profileContainer.style.display = 'block';
@@ -71,6 +72,8 @@ window.onload = () => {
       //Muestra perfil y container para publicar
       hideContainers();
 
+      writeUserData(user.uid, user.displayName, user.email, user.photoURL);
+      getAllPostsbyFirebase(user.uid)
     } else {//Si NO está logueado, mostramos formulario(OPCION LOGGEDOUT)
       console.log('Usuario NO logueado');
       showContainers();
@@ -78,66 +81,34 @@ window.onload = () => {
     //Imprimimos datos que Firebase tiene del usuario
     console.log('User > ' + JSON.stringify(user));
   });
+};
+/* CUANDO EL USUARIO ESTÉ LOGUEADO, LLAMO A LA FUNCION
+   QUE TRAE LOS DATOS DE FIREBASE.*/
+/* firebase.database().ref('posts').once('value', (postsSnap) => {
 
-  /* CUANDO EL USUARIO ESTÉ LOGUEADO, LLAMO A LA FUNCION
-     QUE TRAE LOS DATOS DE FIREBASE.*/
-  firebase.database().ref('posts').once('value', (postsSnap) => {
-
-
-    console.log(postsSnap);
-    const posts1 = postsSnap.val()
-    let postContent = ''
-    Object.keys(posts1).forEach(pid => {
-      const postInfo = posts1[pid]
-      console.log(postInfo);
-
-      const btnUpdate = document.createElement("input");
-      btnUpdate.setAttribute("value", "Editar");
-      btnUpdate.setAttribute("type", "button");
-      btnUpdate.setAttribute("class", "w3-button w3-theme-d1 w3-margin-bottom")
-
-      const btnDelete = document.createElement("input");
-      btnDelete.setAttribute("value", "Borrar");
-      btnDelete.setAttribute("type", "button");
-      btnDelete.setAttribute("class", "w3-button w3-theme-d1 w3-margin-bottom")
-
-
-      const btnLike = document.createElement("input");
-      btnLike.setAttribute("value", "Me gusta");
-      btnLike.setAttribute("type", "button");
-      btnLike.setAttribute("class", "w3-button w3-theme-d1 w3-margin-bottom")
-
-      const contPost = document.createElement('div');
-      const userNameLoggued = document.createElement('h4');
-      contPost.setAttribute("class", "w3-container w3-card w3-white w3-round w3-margin")
-      contPost.innerHTML = postInfo.body
-      contPost.appendChild(userNameLoggued);
-      contPost.appendChild(btnUpdate);
-      contPost.appendChild(btnDelete);
-      contPost.appendChild(btnLike);
-      postsContainer.appendChild(contPost);
-
+  console.log(postsSnap);
+  const posts1 = postsSnap.val()
+  let postContent = ''
+  Object.keys(posts1).forEach(pid => {
+    const postInfo = posts1[pid]
+    console.log(postInfo); */
+/* 
       btnDelete.addEventListener('click', () => {
         let userId = firebase.auth().currentUser.uid;
         let newPost = writeNewPost(userId, textComposerArea.value);
-        
+
         firebase.database().ref().child('/user-posts/' + userId + '/' + newPost).remove();
         firebase.database().ref().child('posts/' + newPost).remove();
     
         while(contPost.firstChild) contPost.removeChild(contPost.firstChild);
     
         alert('El post fue borrado exitosamente');
-       /*  reload_page(); */
+       reload_page();
     
-      });
-      
-    })
-  })
-};
+      }); */
 
 /* 
   
-
   var contPost = document.createElement('div');
 
   var textPost = document.createElement('textarea')
@@ -226,18 +197,34 @@ const logoutWithFirebase = () => {
     });
 };
 
-//  Función para guardar dato de usuario en Firebase, cuando está logeado con gmail. 
+//TIMELINE
+//  Función para guardar dato de usuario en Firebase cuando está logeado. 
 window.writeUserData = (userId, name, email, imageUrl) => {
   firebase.database().ref('users/' + userId).set({
     username: name,
     email: email,
     profile_picture: imageUrl
-  }).then(result => {
-    console.log(result);
   })
+    .then(result => {
+      console.log(result);
+    })
     .catch(error => {
       console.log(error);
     });
+};
+
+//  Función para traer todos los posts almacenados en Firebase. 
+const getAllPostsbyFirebase = (uid) => {
+  //Trae solo los posts del usuario (Personales)
+  const userPosts = firebase.database().ref('user-posts').child(uid);
+  userPosts.on("child_added", newUserPosts => {
+    // showPostsUserProfile(newUserPosts);
+  });
+  //Trae los posts de todos los usuarios (Públicos)
+  const allUsersPosts = firebase.database().ref('posts');
+  allUsersPosts.on("child_added", newPosts => {
+    // showallPostsWall(newPosts);
+  });
 };
 
 //  Función para escribir un post
@@ -258,6 +245,10 @@ window.writeNewPost = (uid, body) => {
   return newPostKey;
 };
 
-window.reload_page = () => {
+
+
+
+
+/* window.reload_page = () => {
   window.location.reload();
-};
+}; */
