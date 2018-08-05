@@ -106,6 +106,8 @@ sendPostButton.addEventListener('click', () => {
 
     reload_page();
 
+  
+
     /* const contPost = document.createElement('div');
     const userNameLoggued = document.createElement('h4');
     contPost.setAttribute("class", "w3-container w3-card w3-white w3-round w3-margin")

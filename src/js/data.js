@@ -79,26 +79,76 @@ window.onload = () => {
     console.log('User > ' + JSON.stringify(user));
   });
 
-   /* CUANDO EL USUARIO ESTÉ LOGUEADO, LLAMO A LA FUNCION
-      QUE TRAE LOS DATOS DE FIREBASE.*/
-      firebase.database().ref('posts').once('value', (postsSnap) => {
-        console.log(postsSnap);
-        const posts1 = postsSnap.val()
-        Object.keys(posts1).forEach(pid => {
-          const postInfo = posts1[pid]
-          console.log(postInfo)
-          const contPost = document.createElement('div');
-          const userNameLoggued = document.createElement('h4');
-          contPost.setAttribute("class","w3-container w3-card w3-white w3-round w3-margin")
-          contPost.innerHTML = postInfo.body
-          contPost.appendChild(userNameLoggued);
-          postsContainer.appendChild(contPost);
+  /* CUANDO EL USUARIO ESTÉ LOGUEADO, LLAMO A LA FUNCION
+     QUE TRAE LOS DATOS DE FIREBASE.*/
+  firebase.database().ref('posts').once('value', (postsSnap) => {
 
-          })
-        })
+
+    console.log(postsSnap);
+    const posts1 = postsSnap.val()
+    let postContent = ''
+    Object.keys(posts1).forEach(pid => {
+      const postInfo = posts1[pid]
+      console.log(postInfo);
+
+      const btnUpdate = document.createElement("input");
+      btnUpdate.setAttribute("value", "Editar");
+      btnUpdate.setAttribute("type", "button");
+      btnUpdate.setAttribute("class", "w3-button w3-theme-d1 w3-margin-bottom")
+
+      const btnDelete = document.createElement("input");
+      btnDelete.setAttribute("value", "Borrar");
+      btnDelete.setAttribute("type", "button");
+      btnDelete.setAttribute("class", "w3-button w3-theme-d1 w3-margin-bottom")
+
+
+      const btnLike = document.createElement("input");
+      btnLike.setAttribute("value", "Me gusta");
+      btnLike.setAttribute("type", "button");
+      btnLike.setAttribute("class", "w3-button w3-theme-d1 w3-margin-bottom")
+
+      const contPost = document.createElement('div');
+      const userNameLoggued = document.createElement('h4');
+      contPost.setAttribute("class", "w3-container w3-card w3-white w3-round w3-margin")
+      contPost.innerHTML = postInfo.body
+      contPost.appendChild(userNameLoggued);
+      contPost.appendChild(btnUpdate);
+      contPost.appendChild(btnDelete);
+      contPost.appendChild(btnLike);
+      postsContainer.appendChild(contPost);
+
+      btnDelete.addEventListener('click', () => {
+        let userId = firebase.auth().currentUser.uid;
+        let newPost = writeNewPost(userId, textComposerArea.value);
+        
+        firebase.database().ref().child('/user-posts/' + userId + '/' + newPost).remove();
+        firebase.database().ref().child('posts/' + newPost).remove();
+    
+        while(contPost.firstChild) contPost.removeChild(contPost.firstChild);
+    
+        alert('El post fue borrado exitosamente');
+       /*  reload_page(); */
+    
+      });
+      
+    })
+  })
 };
 
+/* 
+  
 
+  var contPost = document.createElement('div');
+
+  var textPost = document.createElement('textarea')
+  textPost.setAttribute("id", newPost);
+  textPost.innerHTML = post.value;
+
+  contPost.appendChild(textPost);
+
+  contPost.appendChild(btnUpdate );
+  contPost.appendChild(btnDelete);
+  posts.appendChild(contPost); */
 
 
 //*********LOGIN EMAIL***********
@@ -107,7 +157,7 @@ const loginWithFirebase = () => {
     .then((result) => {
       console.log('usuario inició sesiòn con éxito');
       console.log(result);
-      
+
       const user = result.user;
       writeUserData(user.uid, user.displayName, user.email, user.photoURL);
     })
