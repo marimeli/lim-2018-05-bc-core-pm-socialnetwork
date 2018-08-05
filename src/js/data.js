@@ -228,22 +228,66 @@ const getAllPostsbyFirebase = (uid) => {
 };
 
 //  Función para escribir un post
-window.writeNewPost = (uid, body) => {
-  // A post entry.
-  var postData = {
-    uid: uid,
-    body: body
-  };
-  // Get a key for a new Post. 
-  const newPostKey = firebase.database().ref().child('posts').push().key;
+
+const writeNewPost = () => {
   const currentUser = firebase.auth().currentUser;
-  // Write the new post's data simultaneously in the posts list and the user's post list.
-  var updates = {};
+  const messageAreaText = textComposerArea.value;
+  const newPostKey = firebase.database().ref().child('posts').push().key;
+  const postData = {
+    image: currentUser.photoURL,
+    author: currentUser.displayName,
+    uid: currentUser.uid,
+    body: messageAreaText,
+    key: newPostKey,
+    likeCount: 0,
+    email: currentUser.email
+  };
+  const updates = {};
   updates['/posts/' + newPostKey] = postData;
-  updates['/user-posts/' + uid + '/' + newPostKey] = postData;
-  firebase.database().ref().update(updates);
-  return newPostKey;
+  updates['/user-posts/' + currentUser.uid + '/' + newPostKey] = postData;
+  return firebase.database().ref().update(updates);
 };
+
+//  Función para escribir un post privado
+const writePrivateUserPost = () => {
+  const currentUser = firebase.auth().currentUser;
+  const messageAreaText = textComposerArea.value;
+  const newPostKey = firebase.database().ref().child('posts').push().key;
+  const postData = {
+    image: currentUser.photoURL,
+    author: currentUser.displayName,
+    uid: currentUser.uid,
+    body: messageAreaText,
+    key: newPostKey,
+    likeCount: 0,
+    email: currentUser.email
+
+  };
+  const updates = {};
+  updates['/user-posts/' + currentUser.uid + '/' + newPostKey] = postData;
+  return firebase.database().ref().update(updates);
+}
+
+const writtingPost = () => {
+  const composerAreaValue = textComposerArea.value;
+  const privacyValue = statusOfPrivacy.value;
+  /* const select = selectPublicPrivate.value; */
+  if (composerAreaValue.length === 0 && composerAreaValue === '') {
+    alert('Escribe un texto antes de enviar');
+
+  } else {
+    if (privacyValue == 'public') {
+      console.log('publico')
+      writeNewPost();
+    } else if (privacyValue == 'private') {
+      console.log('privado')
+      writePrivateUserPost();
+    } else {
+      console.log('publico')
+      writeNewPost();
+    }
+  }
+}
 
 
 

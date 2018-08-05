@@ -40,7 +40,7 @@ const textComposerArea = document.getElementById('text-composer-area'); //área 
 const sendPostButton = document.getElementById('send-post'); //botón para publicar
 const postsContainer = document.getElementById('posts-container'); //contenedor que guardará todos los posts que se creen dinámicamente  */
 const postComposerContainer = document.getElementById('post-composer-container'); //contenedor de base de datos
-
+const statusOfPrivacy = document.getElementById('status-of-privacy');
 
 
 // FUNCIONES MODALES
@@ -95,20 +95,7 @@ logoutButton.addEventListener('click', logoutWithFirebase);
 
 /* MURO */
 
-sendPostButton.addEventListener('click', () => {
-  const composerAreaValue = textComposerArea.value;
-  /* const select = selectPublicPrivate.value; */
-  if (composerAreaValue.length === 0 && composerAreaValue === '') {
-    alert('Escribe un texto antes de enviar');
-    /*     
-      } else {
-   if (select == 'publico') {
-          writeNewPostFirebase();
-        } else if (select == 'privado') {
-          writePrivateUserPosts();
-        } else {
-          writeNewPostFirebase();
-        } */
-  }
-});
+sendPostButton.addEventListener('click', writtingPost);
+
+//
 
