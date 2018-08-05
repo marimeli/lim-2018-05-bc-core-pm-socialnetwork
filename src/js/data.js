@@ -198,6 +198,7 @@ const logoutWithFirebase = () => {
 };
 
 //TIMELINE
+
 //  Función para guardar dato de usuario en Firebase cuando está logeado. 
 window.writeUserData = (userId, name, email, imageUrl) => {
   firebase.database().ref('users/' + userId).set({
@@ -213,6 +214,96 @@ window.writeUserData = (userId, name, email, imageUrl) => {
     });
 };
 
+
+//Imprimir post PÚBLICOS
+const printPublicPost = (newPublicPosts) => {
+
+  const postskey = newPublicPosts.key;
+  const contPost = document.createElement('div');
+  contPost.setAttribute('class', "w3-container w3-card w3-white w3-round w3-margin")
+
+  const image = document.createElement('img');
+  image.setAttribute('class', "w3-left w3-circle w3-margin-top")
+  image.setAttribute('style', "width:60px")
+  image.setAttribute('alt', "Avatar")
+
+  const espacaio = document.createElement('hr');
+  espacaio.setAttribute('class', "w3-clear")
+
+  const author = document.createElement('h4');
+  author.setAttribute('style', "margin-top: 22px,");
+  author.setAttribute('class', "author");
+  // author.setAttribute('class',  )
+
+  const textPost = document.createElement('p');
+  textPost.setAttribute('class', 'w3-left w3-circle w3-margin-right');
+  textPost.setAttribute('id', postskey);
+  textPost.innerHTML = `${newPublicPosts.val().body}`;
+
+  /* <button id="${newPostsUser.val().key}" type="button" class="w3-button w3-theme-d1 w3-margin-bottom "><i class="fa fa-thumbs-up"></i> EcoLike</button>  */
+  const br = document.createElement('br');
+  const btnLike = document.createElement('input');
+  
+  btnLike.setAttribute('value', 'Like ♥');
+  btnLike.setAttribute('type', 'button')
+  btnLike.setAttribute('id', postskey);
+  // btnLike.setAttribute('style', "background-color: orange;");
+  btnLike.setAttribute('class', "w3-button w3-theme-d1 w3-margin-bottom");
+  // btnLike.setAttribute('style','margin: 2px')
+  // const icolike = document.createElement('i');
+
+  // icolike.setAttribute('class', 'fas fa-thumbs-up');
+  const contadorlike = document.createElement('a');
+  contadorlike.setAttribute('class', 'w3-button w3-margin-bottom ')
+  contadorlike.setAttribute('id', postskey);
+  contadorlike.innerHTML = `${newPublicPosts.val().likeCount}`;
+  var clicks = 0;
+  btnLike.addEventListener('click', () => {
+    clicks += 1;
+    contadorlike.innerHTML = clicks;
+
+    const newUpdate = textPost.innerText
+    const newPostvalue = newUpdate
+    const nuevoPost = {
+      body: newPostvalue,
+      image: `${newPublicPosts.val().image}`,
+      author: `${newPublicPosts.val().author}`,
+      uid: `${newPublicPosts.val().uid}`,
+      key: postskey,
+      likeCount: clicks,
+    };
+    const updatesUser = {};
+    const updatesPost = {};
+
+    updatesPost[`/posts/${newPublicPosts.key}`] = nuevoPost;
+    firebase.database().ref().update(updatesUser);
+    firebase.database().ref().update(updatesPost);
+
+  })
+
+
+  postsContainer.appendChild(contPost);
+  contPost.appendChild(image);
+  contPost.appendChild(author);
+  contPost.appendChild(espacaio);
+  contPost.appendChild(textPost);
+  contPost.appendChild(br);
+  contPost.appendChild(espacaio);
+  contPost.appendChild(contadorlike);
+  contPost.appendChild(btnLike);
+  // btnLike.appendChild(icolike);
+  if (`${newPublicPosts.val().author}` == 'undefined') {
+    author.innerHTML = `${newPublicPosts.val().email}`
+    image.setAttribute('src', 'https://cdn.icon-icons.com/icons2/1540/PNG/128/cinterior150_107120.png')
+  }
+  else {
+    author.innerHTML = `${newPublicPosts.val().author}`
+    image.setAttribute('src', `${newPublicPosts.val().image}`)
+  }
+
+}
+
+
 //  Función para traer todos los posts almacenados en Firebase. 
 const getAllPostsbyFirebase = (uid) => {
   //Trae solo los posts del usuario (Personales)
@@ -222,8 +313,8 @@ const getAllPostsbyFirebase = (uid) => {
   });
   //Trae los posts de todos los usuarios (Públicos)
   const allUsersPosts = firebase.database().ref('posts');
-  allUsersPosts.on("child_added", newPosts => {
-    // showallPostsWall(newPosts);
+  allUsersPosts.on("child_added", newPublicPosts => {
+    printPublicPost(newPublicPosts);
   });
 };
 
@@ -268,6 +359,7 @@ const writePrivateUserPost = () => {
   return firebase.database().ref().update(updates);
 }
 
+//Función condicional para verificar que escriba algo, y que sea público o privado
 const writtingPost = () => {
   const composerAreaValue = textComposerArea.value;
   const privacyValue = statusOfPrivacy.value;
