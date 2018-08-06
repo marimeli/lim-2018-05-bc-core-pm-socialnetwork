@@ -1,4 +1,4 @@
-// DOM
+/// DOM
 //Llamando modal
 const callModalRegister = document.getElementById('call-modal-register');
 const callModalLogin = document.getElementById('call-modal-login');

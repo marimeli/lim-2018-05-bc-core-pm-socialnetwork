@@ -218,7 +218,7 @@ const printPublicPost = (newPublicPosts) => {
   btnLike.setAttribute('id', postskey);
 
   btnLike.setAttribute('class', "w3-button w3-theme-d1 w3-margin-bottom");
-
+  // btnLike.setAttribute('style','margin: 2px')
   
   const contadorlike = document.createElement('a');
   contadorlike.setAttribute('class', 'w3-button w3-margin-bottom ')
@@ -287,7 +287,11 @@ const showPostsUserProfile = (newPostsUser) => {
   const author = document.createElement('h4');
   author.setAttribute('class', "author");
   author.setAttribute('style', "margin-top: 22px");
+  // author.setAttribute('class',  )
 
+  /* const author = document.createElement('h4');
+  author.setAttribute('style', "margin-top: 22px");
+  author.setAttribute('class', "author"); */
 
   const textPost = document.createElement('p');
   textPost.setAttribute('class', "w3-left w3-circle w3-margin-right");
@@ -358,7 +362,8 @@ const showPostsUserProfile = (newPostsUser) => {
               firebase.database().ref().update(updatesPost);
               reloadPage();
           }
-
+         /*  btnSave.style.display = 'none';
+          btnEdit.style.display = 'block'; */
           textPost.contentEditable = "false";
       })
       contPost.appendChild(btnSave);
