@@ -28,6 +28,10 @@ const registerButton= document.getElementById('register-button');
 
 loginButton.addEventListener('click', loginWithFirebase);
 
+//LLAMADOS TIMELINE DISPLAY
+const timeLine = document.getElementsByClassName('w3-theme-15');
+
+
 // FUNCIONES MODALES
 //Login
 const showModal = () => {
@@ -67,3 +71,11 @@ xRegButton.addEventListener('click', xButtonCloseRegister);
 registerButton.addEventListener('click', registerWithFirebase);
 
 //Login con Email
+
+//FUNCIONES DISPLAY
+// const dontShowTimeLine = () => {
+//   let user = firebase.auth().currentUser;
+//   if (user != null) {
+//     document.getElementsByClassName('w3-theme-15').style.display = 'none';
+//   }
+// }
