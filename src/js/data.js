@@ -75,7 +75,7 @@ window.onload = () => {
       }
       //Imprime foto en perfil
       if (user.photoURL == null) {
-        userImage.setAttribute('src', "/src/user.png");
+        userImage.setAttribute('src', "https://png.icons8.com/ios/1600/user-male-circle-filled.png");
       } else {
         userImage.setAttribute('src', user.photoURL);
       }
