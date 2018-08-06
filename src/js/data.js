@@ -20,8 +20,8 @@ window.registerWithFirebase = () => {
       else if (error.code === 'auth/weak-password') {
         advicePasswordRegister.innerText = 'Ingresa una contraseña con más de 6 caracteres';
       }
-      console.log('Error Firebase > código > ' + error.code); //Contraseña o correo no valido
-      console.log('Error Firebase > Mensaje > ' + error.messaje); //
+      console.log('Error Firebase > código > ' + error.code); 
+      console.log('Error Firebase > Mensaje > ' + error.messaje); 
     });
 };
 
@@ -63,8 +63,6 @@ window.onload = () => {
   //Listener en tiempo real EL CHISMOSO
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {//Si está logeado mostramos la opcion de logout y nombre de usuario
-
-      //También podemos traer los sections directamente pero por orden mejor lo declaramos arriba
       console.log('Usuario logueado');
       //Ocultar botones que abren modales de registro y login
       dontShowModalRegister();
@@ -72,15 +70,13 @@ window.onload = () => {
       //Imprime nombre de usuario
       if (user.displayName == null) {
         userName.innerHTML = user.email;
-      }
-      else {
+      } else {
         userName.innerHTML = user.displayName;
       }
       //Imprime foto en perfil
       if (user.photoURL == null) {
         userImage.setAttribute('src', "/src/user.png");
-      }
-      else {
+      } else {
         userImage.setAttribute('src', user.photoURL);
       }
       //Muestra perfil y container para publicar
@@ -96,45 +92,6 @@ window.onload = () => {
     console.log('User > ' + JSON.stringify(user));
   });
 };
-/* CUANDO EL USUARIO ESTÉ LOGUEADO, LLAMO A LA FUNCION
-   QUE TRAE LOS DATOS DE FIREBASE.*/
-/* firebase.database().ref('posts').once('value', (postsSnap) => {
-
-  console.log(postsSnap);
-  const posts1 = postsSnap.val()
-  let postContent = ''
-  Object.keys(posts1).forEach(pid => {
-    const postInfo = posts1[pid]
-    console.log(postInfo); */
-/* 
-      btnDelete.addEventListener('click', () => {
-        let userId = firebase.auth().currentUser.uid;
-        let newPost = writeNewPost(userId, textComposerArea.value);
-
-        firebase.database().ref().child('/user-posts/' + userId + '/' + newPost).remove();
-        firebase.database().ref().child('posts/' + newPost).remove();
-    
-        while(contPost.firstChild) contPost.removeChild(contPost.firstChild);
-    
-        alert('El post fue borrado exitosamente');
-       reload_page();
-    
-      }); */
-
-/* 
-  
-  var contPost = document.createElement('div');
-
-  var textPost = document.createElement('textarea')
-  textPost.setAttribute("id", newPost);
-  textPost.innerHTML = post.value;
-
-  contPost.appendChild(textPost);
-
-  contPost.appendChild(btnUpdate );
-  contPost.appendChild(btnDelete);
-  posts.appendChild(contPost); */
-
 
 //*********LOGIN EMAIL***********
 const loginWithFirebase = () => {
@@ -157,7 +114,7 @@ const loginWithFirebase = () => {
         errorEmail.innerText = 'No existe un usuario con este correo. Por favor, regístrese';
       }
       console.log('Error Firebase > código > ' + error.code); //Contraseña o correo no valido
-      console.log('Error Firebase > Mensaje > ' + error.message); //
+      console.log('Error Firebase > Mensaje > ' + error.message); 
     });
 };
 
@@ -176,8 +133,8 @@ const facebookLoginWithFirebase = () => {
       writeUserData(user.uid, user.displayName, user.email, user.photoURL);
     })
     .catch((error) => {
-      console.log('Error Firebase > código > ' + error.code); //Contraseña o correo no valido
-      console.log('Error Firebase > Mensaje > ' + error.messaje); //
+      console.log('Error Firebase > código > ' + error.code); 
+      console.log('Error Firebase > Mensaje > ' + error.messaje); 
     });
 };
 
@@ -206,8 +163,8 @@ const logoutWithFirebase = () => {
       console.log('Usuario finalizó su sesión');
     })
     .catch((error) => {
-      console.log('Error Firebase > código > ' + error.code); //Contraseña o correo no valido
-      console.log('Error Firebase > Mensaje > ' + error.messaje); //
+      console.log('Error Firebase > código > ' + error.code); 
+      console.log('Error Firebase > Mensaje > ' + error.message); 
     });
 };
 
@@ -241,8 +198,8 @@ const printPublicPost = (newPublicPosts) => {
   image.setAttribute('style', "width:60px")
   image.setAttribute('alt', "Avatar")
 
-  const espacaio = document.createElement('hr');
-  espacaio.setAttribute('class', "w3-clear")
+  const line = document.createElement('hr');
+  line.setAttribute('class', "w3-clear")
 
   const author = document.createElement('h4');
   author.setAttribute('style', "margin-top: 22px,");
@@ -257,7 +214,6 @@ const printPublicPost = (newPublicPosts) => {
   /* <button id="${newPostsUser.val().key}" type="button" class="w3-button w3-theme-d1 w3-margin-bottom "><i class="fa fa-thumbs-up"></i> EcoLike</button>  */
   const br = document.createElement('br');
   const btnLike = document.createElement('input');
-
   btnLike.setAttribute('value', 'Me gusta');
   btnLike.setAttribute('type', 'button')
   btnLike.setAttribute('id', postskey);
@@ -295,14 +251,13 @@ const printPublicPost = (newPublicPosts) => {
 
   })
 
-
   postsContainer.appendChild(contPost);
   contPost.appendChild(image);
   contPost.appendChild(author);
-  contPost.appendChild(espacaio);
+  contPost.appendChild(line);
   contPost.appendChild(textPost);
   contPost.appendChild(br);
-  contPost.appendChild(espacaio);
+  contPost.appendChild(line);
   contPost.appendChild(contadorlike);
   contPost.appendChild(btnLike);
   // btnLike.appendChild(icolike);
@@ -314,16 +269,137 @@ const printPublicPost = (newPublicPosts) => {
     author.innerHTML = `${newPublicPosts.val().author}`
     image.setAttribute('src', `${newPublicPosts.val().image}`)
   }
+};
 
-}
+// Esta es la función para pintar dinámicamente los post personales(privados)
+const showPostsUserProfile = (newPostsUser) => {
+  const postskey = newPostsUser.key
 
+  const contPost = document.createElement('div');
+  contPost.setAttribute('class', "w3-container w3-card w3-white w3-round w3-margin")
+
+  const image = document.createElement('img');
+  image.setAttribute('class', "w3-left w3-circle w3-margin-top")
+  image.setAttribute('style', "width:60px")
+  image.setAttribute('alt', "Avatar")
+
+  const line = document.createElement('hr');
+  line.setAttribute('class', "w3-clear")
+
+  const author = document.createElement('h4');
+  author.setAttribute('class', "w3-left w3-circle w3-margin-left");
+  author.setAttribute('style', "margin-top: 22px");
+  // author.setAttribute('class',  )
+  const lineBreak = document.createElement('br');
+  lineBreak.setAttribute('class', "w3-clear");
+
+  const textPost = document.createElement('p');
+  textPost.setAttribute('class', "w3-left w3-circle w3-margin-right");
+
+  textPost.setAttribute('id', postskey);
+  textPost.innerHTML = `${newPostsUser.val().body}`;
+
+  const lineBreak2 = document.createElement('br');
+  lineBreak2.setAttribute('class', "w3-clear");
+
+  const btnEdit = document.createElement('input');
+  btnEdit.setAttribute('value', 'Editar');
+  btnEdit.setAttribute('type', 'button');
+  btnEdit.setAttribute('id', postskey);
+  btnEdit.setAttribute('class', "w3-button w3-theme-d1 w3-margin-bottom")
+  btnEdit.setAttribute('style', 'margin: 10px')
+/*   const icoEdit = document.createElement('i');
+  icoEdit.setAttribute('class', 'fas fa-pen'); */
+
+  const btnDelete = document.createElement('input');
+  btnDelete.setAttribute('value', 'Borrar');
+  btnDelete.setAttribute('type', 'button');
+  btnDelete.setAttribute('id', postskey);
+  btnDelete.setAttribute('class', "w3-button w3-theme-d1 w3-margin-bottom");
+  btnDelete.setAttribute('style', 'margin: 10px');
+/*   const icoDelete = document.createElement('i');
+  icoDelete.setAttribute('class', 'fas fa-trash'); */
+
+
+  btnDelete.addEventListener('click', (e) => {
+      if (newPostsUser.key === e.target.id) {
+          const question = confirm('¿Esta seguro que desea eliminar esta publicación?')
+          if (question === true) {
+              firebase.database().ref().child(`/posts/${newPostsUser.key}`).remove();
+              firebase.database().ref().child(`/user-posts/${newPostsUser.val().uid}/${newPostsUser.key}`).remove();
+              contPost.remove();
+              alert('El post fue borrado exitosamente');
+          }
+      }
+  });
+/* 
+  while(contPost.firstChild) contPost.removeChild(contPost.firstChild); */
+    
+
+  btnEdit.addEventListener('click', (e) => {
+      textPost.contentEditable = "true";
+      btnEdit.style.display = 'none';
+      const btnpublish = document.createElement('input');
+      btnpublish.setAttribute('value', 'Guardar');
+      btnpublish.setAttribute('type', 'button');
+      btnpublish.setAttribute('class', "w3-pink w3-button w3-margin-bottom");
+      btnpublish.setAttribute('id', postskey);
+      btnpublish.setAttribute('style', 'margin: 10px');
+      btnpublish.addEventListener('click', (e) => {
+          if (postskey === e.target.id) {
+              const currentUser = firebase.auth().currentUser;
+              const newUpdate = textPost.innerText
+              const newPostvalue = newUpdate
+              const nuevoPost = {
+                  body: newPostvalue,
+                  image: currentUser.photoURL,
+                  author: currentUser.displayName,
+                  uid: currentUser.uid,
+                  key: postskey,
+                  likeCount: 0,
+              };
+              const updatesUser = {};
+              const updatesPost = {};
+              updatesUser[`/user-posts/${newPostsUser.val().uid}/${newPostsUser.key}`] = nuevoPost;
+              updatesPost[`/posts/${newPostsUser.key}`] = nuevoPost;
+              firebase.database().ref().update(updatesUser);
+              firebase.database().ref().update(updatesPost);
+          }
+          btnpublish.style.display = 'none';
+          btnEdit.style.display = 'block';
+          textPost.contentEditable = "false";
+      })
+      contPost.appendChild(btnpublish);
+  });
+
+  postsContainer.appendChild(contPost);
+  contPost.appendChild(image);
+  contPost.appendChild(author);
+  contPost.appendChild(lineBreak);
+  contPost.appendChild(line);
+  contPost.appendChild(textPost);
+  contPost.appendChild(lineBreak2);
+  contPost.appendChild(line);
+  contPost.appendChild(btnEdit);
+/*   btnEdit.appendChild(icoEdit); */
+  contPost.appendChild(btnDelete);
+/*   btnDelete.appendChild(icoDelete); */
+  if (`${newPostsUser.val().author}` == 'undefined') {
+      author.innerHTML = `${newPostsUser.val().email}`
+      image.setAttribute('src', 'https://cdn.icon-icons.com/icons2/1540/PNG/128/cinterior150_107120.png')
+  }
+  else {
+      author.innerHTML = `${newPostsUser.val().author}`
+      image.setAttribute('src', `${newPostsUser.val().image}`)
+  }
+};
 
 //  Función para traer todos los posts almacenados en Firebase. 
 const getAllPostsbyFirebase = (uid) => {
   //Trae solo los posts del usuario (Personales)
   const userPosts = firebase.database().ref('user-posts').child(uid);
   userPosts.on("child_added", newUserPosts => {
-    // showPostsUserProfile(newUserPosts);
+    showPostsUserProfile(newUserPosts);
   });
   //Trae los posts de todos los usuarios (Públicos)
   const allUsersPosts = firebase.database().ref('posts');
@@ -383,13 +459,13 @@ const writtingPost = () => {
 
   } else {
     if (privacyValue == 'public') {
-      console.log('publico')
+      console.log('post publico')
       writeNewPost();
     } else if (privacyValue == 'private') {
-      console.log('privado')
+      console.log('post privado')
       writePrivateUserPost();
     } else {
-      console.log('publico')
+      console.log('post no definido')
       writeNewPost();
     }
   }
