@@ -8,8 +8,16 @@ const logoutButton = document.getElementById('logout'); //boton para salir
 
 //DATABASE
 const textComposerArea = document.getElementById('text-composer-area');
-/* const sendPostButton = document.getElementById('send-post');
-const photoSelector = document.getElementById('photo-selector');
-const sendPhotoButton = document.getElementById('send-photo'); */
+const sendPostButton = document.getElementById('send-post');
+// const photoSelector = document.getElementById('photo-selector');
+// const sendPhotoButton = document.getElementById('send-photo'); 
 const postsContainer = document.getElementById('posts-container');
 const postComposerContainer = document.getElementById('post-composer-container');
+
+let loginModalButton = document.getElementById('login-modal');
+
+loginModalButton.addEventListener('click', showModal);
+
+sendPostButton.addEventListener('click', () => {
+    alert('Hola');
+});

@@ -8,17 +8,6 @@
     <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-        html,
-        body,
-        h1,
-        h2,
-        h3,
-        h4,
-        h5 {
-            font-family: "Open Sans", sans-serif
-        }
-    </style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Cooltural</title>
@@ -35,44 +24,29 @@
                     <i class="fa fa-bars"></i>
                 </a>
                 <!--  Título de la red social -->
-                <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4">
+                <a class="w3-bar-item w3-button w3-padding-large w3-theme-d4 w3-hover-white">
                     <i class="fa fa-home w3-margin-right"></i>Cooltural</a>
                 <!-- Opciones de menu del navbar -->
-                <!--   <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="News">
-                <i class="fa fa-globe"></i>
-            </a>
-            <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Account Settings">
-                <i class="fa fa-user"></i>
-            </a>
-            <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Messages">
-                <i class="fa fa-envelope"></i>
-            </a> -->
-                <!-- Notificaciones
-            <div class="w3-dropdown-hover w3-hide-small">
-                <button class="w3-button w3-padding-large" title="Notifications">
-                    <i class="fa fa-bell"></i>
-                    <span class="w3-badge w3-right w3-small w3-green">3</span>
-                </button>
-                <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
-                    <a href="#" class="w3-bar-item w3-button">Una nueva solicitud de amistad</a>
-                    <a href="#" class="w3-bar-item w3-button">usuarioX publicó en tu muro</a>
-                    <a href="#" class="w3-bar-item w3-button">A usuarioX le gusta tu publicación</a>
-                </div>
-            </div> -->
+                <a id="feed-button" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Inicio">
+                    <i class="fa fa-globe"></i>
+                </a>
+                <a id="profile-button" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Perfil">
+                    <i class="fa fa-user"></i>
+                </a>
                 <!--  Opciones para logeo -->
-                <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
-                    <button class="w3-bar-item w3-button w3-padding-large w3-theme-d4" id="call-modal-register">Registrarse</button>
-                    <button class="w3-bar-item w3-button w3-padding-large w3-theme-d4" id="call-modal-login">Iniciar Sesión</button>
-
+                <a class="w3-bar-item w3-button w3-right w3-hide-small w3-padding-large w3-hover-white" title="Profile Options">
+                    <input type="button" class="w3-bar-item w3-button w3-padding-large" id="call-modal-register" value="Registrarse">
+                    <input type="button" class="w3-bar-item w3-button w3-padding-large" id="call-modal-login" value="Iniciar Sesión">
+                    <input type="button" class="w3-bar-item w3-button w3-padding-large" id="logout" value="Cerrar Sesión">
                 </a>
             </div>
         </div>
         <!-- Navbar on small screens -->
         <div id="logged-in" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
             <a href="#" class="w3-bar-item w3-button w3-padding-large">Mi perfil</a>
-            <a href="login.html" id="logout" class="w3-bar-item w3-button w3-padding-large">Iniciar sesión</a>
+            <a id="login-navbar" class="w3-bar-item w3-button w3-padding-large">Iniciar sesión</a>
             <!--       Aquí el usuario puede cerrar sesión. Debemos ponerlo en botón para que no burle la autentif-->
-            <a href="login.html" id="logout" class="w3-bar-item w3-button w3-padding-large">Cerrar sesión</a>
+            <a href="login.html" id="logout-navbar" class="w3-bar-item w3-button w3-padding-large">Cerrar sesión</a>
         </div>
         <!-- Page Container -->
         <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
@@ -82,15 +56,15 @@
                 <div class="w3-col m3">
                     <!-- Profile -->
                     <div class="w3-card w3-round w3-white">
-                        <div class="w3-container">
-                            <h4 class="w3-center">Mi perfil</h4>
+                        <div id="profile-container" class="w3-container">
+                            <h4 id="userName" class="w3-center"></h4>
                             <p id="user-name" class="w3-center">
-                                <img src="user.png" id="user-image" class="w3-circle" style="height:106px;width:106px" alt="user photo">
+                                <img id="user-image" class="w3-circle" style="height:106px;width:106px" alt="user photo">
                                 <!--  height="80" width="80" -->
                             </p>
                             <hr>
-                            <p>
-                                <i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> Músico</p>
+                            <!-- <p>
+                                <i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> Músico</p> -->
                             <p>
                                 <i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> Lima, Perú</p>
                             <!-- <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> April 1, 1988</p> -->
@@ -101,8 +75,8 @@
                     <!-- Accordion -->
                     <div class="w3-card w3-round">
                         <div class="w3-white">
-                            <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-theme-l1 w3-left-align">
-                                <i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> Grupos</button>
+                            <!-- <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-theme-l1 w3-left-align">
+                                <i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> Grupos</button> -->
                             <div id="Demo1" class="w3-hide w3-container">
                                 <p>Some text..</p>
                             </div>
@@ -138,24 +112,18 @@
                     <br>
 
                     <!-- Interests -->
-                    <div class="w3-card w3-round w3-white w3-hide-small">
+                    <!-- <div class="w3-card w3-round w3-white w3-hide-small">
                         <div class="w3-container">
-                            <p>Interests</p>
+                            <p>Intereses</p>
                             <p>
-                                <span class="w3-tag w3-small w3-theme-d5">News</span>
-                                <span class="w3-tag w3-small w3-theme-d4">W3Schools</span>
-                                <span class="w3-tag w3-small w3-theme-d3">Labels</span>
-                                <span class="w3-tag w3-small w3-theme-d2">Games</span>
-                                <span class="w3-tag w3-small w3-theme-d1">Friends</span>
-                                <span class="w3-tag w3-small w3-theme">Games</span>
-                                <span class="w3-tag w3-small w3-theme-l1">Friends</span>
-                                <span class="w3-tag w3-small w3-theme-l2">Food</span>
-                                <span class="w3-tag w3-small w3-theme-l3">Design</span>
+                                <span class="w3-tag w3-small w3-theme-d5">Music</span>
+                                <span class="w3-tag w3-small w3-theme-d2">Cine</span>
+                                <span class="w3-tag w3-small w3-theme-l1">UX</span>
                                 <span class="w3-tag w3-small w3-theme-l4">Art</span>
-                                <span class="w3-tag w3-small w3-theme-l5">Photos</span>
+                                <span class="w3-tag w3-small w3-theme-l5">Photography</span>
                             </p>
                         </div>
-                    </div>
+                    </div> -->
                     <br>
 
                     <!-- Alert Box -->
@@ -164,9 +132,9 @@
                             <i class="fa fa-remove"></i>
                         </span>
                         <p>
-                            <strong>Hey!</strong>
+                            <strong>Hola!</strong>
                         </p>
-                        <p>People are looking at your profile. Find out who.</p>
+                        <p>¿Todavía no tienes una cuenta? <br> Regístrate aquí. </p>
                     </div>
 
                     <!-- End Left Column -->
@@ -191,10 +159,16 @@
                                 <div id="post-composer-container" class="w3-container w3-padding show">
                                     <h6 class="w3-opacity">¿Qué te gusaría compartir hoy? #ComparteCooltura</h6>
                                     <!-- Este era un textarea -->
-                                    <p contenteditable="true" id="text-composer-area" class="w3-border w3-padding">Status: ...</p>
+                                    <textarea id="text-composer-area" class="w3-border w3-padding textarea"></textarea>
+                                    <br>
                                     <!-- Botón publicar -->
-                                    <button type="button" id="send-post" class="w3-button w3-theme">
-                                        <i class="fa fa-pencil"></i> Publicar</button>
+                                    <input type="button" id="send-post" class="w3-button w3-theme" value="Publicar">
+                                    <!-- <i class="fa fa-pencil"></i> -->
+                                    </input>
+                                    <select name="status" id="status-of-privacy">
+                                        <option value="public">Público</option>
+                                        <option value="private">Privado</option>
+                                    </select>
                                     <!--    <input id="photo-selector" type="file"> -->
                                     <!-- Botón subir foto -->
                                     <!-- <button type="button" id="send-photo" class="w3-button w3-theme">
@@ -208,10 +182,10 @@
                     <div id="posts-container">
                         <!-- Esto es un post ejemplo -->
                         <div class="w3-container w3-card w3-white w3-round w3-margin">
-                            <br>
-                            <img src="user.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-                            <span class="w3-right w3-opacity">1 min</span>
-                            <h4>Nombre del usuario</h4>
+                            <!-- <br>
+                            <img src="user.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px"> -->
+                            <!--  <span class="w3-right w3-opacity">1 min</span> TIEMPO-->
+                            <!--        <h4>Nombre del usuario</h4>
                             <br>
                             <hr class="w3-clear">
                             <p>Aquí va el post que escriba el usuario</p>
@@ -224,38 +198,12 @@
                                 </div>
                             </div>
                             <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom">
-                                <i class="fa fa-thumbs-up"></i> Me gusta</button>
-                            <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom">
-                                <i class="fa fa-comment"></i> Comentar</button>
+                                <i class="fa fa-thumbs-up"></i> Me gusta</button> -->
+                            <!--  <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom">
+                                <i class="fa fa-comment"></i> Comentar</button> -->
                         </div>
                         <!-- Finaliza post ejemplo -->
-                        <div class="w3-container w3-card w3-white w3-round w3-margin">
-                            <br>
-                            <img src="user.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-                            <span class="w3-right w3-opacity">16 min</span>
-                            <h4>usuarioX</h4>
-                            <br>
-                            <hr class="w3-clear">
-                            <p>Muy lejos, más allá de las montañas de palabras, alejados de los países de las vocales y las
-                                consonantes, viven los textos simulados. Viven aislados en casas de letras, en la costa de
-                                la semántica, un gran océano de lenguas. Un riachuelo llamado Pons fluye por su pueblo y
-                                los abastece con las normas necesarias. Hablamos de un país paraisomático en el que a uno
-                                le caen pedazos de frases asadas en la boca. Ni siquiera los todopoderosos signos de puntuación
-                                dominan a los textos simulados; una vida, se puede decir, poco ortográfica. Pero un buen
-                                día, una pequeña línea de texto simulado, llamada Lore, decidió aventurarse y salir al vasto
-                                mundo de la gramática. El gran Oxmox le desanconsejó hacerlo, ya que esas tierras estaban
-                                llenas de comas malvadas, signos de interrogación salvajes y puntos y coma traicioneros,
-                                pero el texto simulado no se dejó atemorizar. Empacó sus siete versales, enfundó su inicial
-                                en el cinturón y se puso en camino. Cuando ya había escalado las primeras colinas de las
-                                montañas cursivas, se dio media vuelta para dirigir su mirada por última vez, hacia su ciudad
-                                natal Letralandia, el encabezamiento del pueblo Alfabeto y el subtítulo de su</p>
-                            <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom">
-                                <i class="fa fa-thumbs-up"></i> Me gusta</button>
-                            <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom">
-                                <i class="fa fa-comment"></i> Comentar</button>
-                        </div>
                     </div>
-
                     <!-- End Middle Column -->
                 </div>
 
@@ -270,13 +218,28 @@
                             </p>
                             <p>14/AGO 15:00</p>
                             <p>
-                                <button class="w3-button w3-block w3-theme-l4">Info</button>
+                                <!-- <button class="w3-button w3-block w3-theme-l4">Info</button> -->
                             </p>
                         </div>
                     </div>
                     <br>
 
                     <div class="w3-card w3-round w3-white w3-center">
+                        <div class="w3-container">
+                            <p>Próximos eventos:</p>
+                            <img src="festival-cine-pupc.jpg" alt="Forest" style="width:100%;">
+                            <p>
+                                <strong>22 Festival de cine de Lima</strong>
+                            </p>
+                            <p>3/AGO - 11/AGO</p>
+                            <p>
+                                <!-- <button class="w3-button w3-block w3-theme-l4">Info</button> -->
+                            </p>
+                        </div>
+                    </div>
+                    <br>
+
+                    <!-- <div class="w3-card w3-round w3-white w3-center">
                         <div class="w3-container">
                             <p>Solicitud de amistad</p>
                             <img src="user.png" alt="Avatar" style="width:50%">
@@ -297,21 +260,8 @@
                         </div>
                     </div>
                     <br>
-
-                    <div class="w3-card w3-round w3-white w3-padding-16 w3-center">
-                        <p>ADS</p>
-                    </div>
-                    <br>
-
-                    <div class="w3-card w3-round w3-white w3-padding-32 w3-center">
-                        <p>
-                            <i class="fa fa-bug w3-xxlarge"></i>
-                        </p>
-                    </div>
-
                     <!-- End Right Column -->
                 </div>
-
                 <!-- End Grid -->
             </div>
 
@@ -320,7 +270,8 @@
         <br>
         <!-- Footer -->
         <footer class="w3-container w3-theme-d3 w3-padding-16">
-            <h5>Footer</h5>
+            <!-- <h5>Footer</h5> -->
+            <p> ™ Created by Melissa Casas, Elizabeth Mendoza, Estefanía Telis ® Cooltural.</p>
         </footer>
         <footer class="w3-container w3-theme-d5">
         </footer>
@@ -328,38 +279,44 @@
 
     <!-- MODAL LOGIN -->
     <div id="loginModal" class="w3-modal">
+        <!-- LOGIN -->
         <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
 
-            <div class="w3-center">
-                <br>
-                <span id="x-button" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
-                <!-- <img src="img_avatar4.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top"> -->
-            </div>
-            <!-- LOGIN -->
             <form class="w3-container">
-                <label>
-                    <b>Correo electrónico</b>
-                </label>
-                <input class="w3-input w3-border w3-margin-bottom" id="email" class="form-control" placeholder="yourmail@example.com"
-                name="email" type="email" required>
-                <!-- <input id="email" class="w3-input w3-border w3-margin-bottom" placeholder="yourmail@example.com" class="form-control" name="email" type="email" required> -->
-                <p id="error-email" style="color: red"></p>
-                <label>
-                    <b>Password</b>
-                </label>
-                <input id="password" class="w3-input w3-border" placeholder="Your Password" name="password" type="password" required>
+                <div class="w3-center">
+                    <br>
+                    <span id="x-button" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
+                    <img src="user.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
+                </div>
+                <div>
+                    <label>
+                        <b>Correo electrónico</b>
+                    </label>
+                    <input class="w3-input w3-border w3-margin-bottom" id="email" class="form-control" placeholder="yourmail@example.com" name="email"
+                        type="email">
+                    <!-- <input id="email" class="w3-input w3-border w3-margin-bottom" placeholder="yourmail@example.com" class="form-control" name="email" type="email" required> -->
+                    <p id="error-email" style="color: red"></p>
+                    <label>
+                        <b>Password</b>
+                    </label>
+                    <input id="password" class="w3-input w3-border" placeholder="Your Password" name="password" type="password">
+                    <!-- <input id="password" class="w3-input w3-border" placeholder="Password" name="password" type="password"> -->
+                    <p id="error-password" style="color: red"></p>
+                    <!-- <input class="w3-check w3-margin-top" type="checkbox" checked="checked"> Recordarme -->
+                    <!-- <button id="login-btn" class="w3-button w3-block w3-green w3-section w3-padding">Iniciar sesión</button> -->
+                    <input id="login-btn" class="w3-button w3-block w3-green w3-section w3-padding" type="button" value="Iniciar sesión">
+                </div>
+                <div class="w3-center">
+                    <h4>También puedes: </h4>
+                    <a id="facebook-button" class="fa fa-facebook"></a>
+                    <a id="google-button" class="fa fa-google"></a>
+                </div>
+                <br>
+                <!--     <button id="facebook-button"> Acceder con Facebook</button>
+                <input id="google-button" class="fa fa-google" type="submit" value="Acceder con Google"> -->
+                <!-- <input  class="btn btn-lg btn-facebook btn-block" tipe="button" value="Acceder con Facebook"> -->
 
-                <!-- <input id="password" class="w3-input w3-border" placeholder="Password" name="password" type="password"> -->
-                <p id="error-password" style="color: red"></p>
-                <!-- <input class="w3-check w3-margin-top" type="checkbox" checked="checked"> Recordarme -->
-
-                <!-- <button id="login-btn" class="w3-button w3-block w3-green w3-section w3-padding">Iniciar sesión</button> -->
-                <input id="login-btn" class="w3-button w3-block w3-green w3-section w3-padding" type="button" value="Iniciar sesión">
-                <h4>También puedes:</h4>
-                <input id="facebook-button" class="btn btn-lg btn-facebook btn-block" type="submit" value="Acceder con Facebook">
-                <input id="google-button" class="btn btn-lg btn-google btn-block" type="submit" value="Acceder con Google">
-                <!-- FIN LO VIEJO -->
-                <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+                <div class="w3-container  w3-padding-16 w3-light-grey">
                     <input id="cancel-button" class="w3-button w3-red" type="button" value="Cancel">
                     <span class="w3-right w3-padding w3-hide-small">¿Olvidaste
                         <a href="#">tu contraseña?</a>
@@ -368,19 +325,15 @@
             </form>
         </div>
     </div>
-    <!-- Modal Registro -->
     <!-- MODAL REGISTRO -->
     <div id="registerModal" class="w3-modal">
         <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
-
             <div class="w3-center">
                 <br>
                 <span id="x-register-button" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span>
-                <!-- <img src="img_avatar4.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top"> -->
             </div>
             <!-- REGISTRO -->
             <form class="w3-container">
-
                 <div class="w3-section">
                     <label>
                         <b>Correo electrónico</b>
@@ -388,32 +341,23 @@
                     <input class="w3-input w3-border w3-margin-bottom" id="email-register" class="form-control" placeholder="yourmail@example.com"
                         name="email" type="email" required>
                     <p id="advice-emailRegister" style="color: red"></p>
-
                     <label>
                         <b>Contraseña</b>
                     </label>
                     <input id="password-register" class="w3-input w3-border" placeholder="Your Password" name="password" type="password" required>
                     <p id="advice-passwordRegister" style="color: red"></p>
-
-
-
                     <input id="register-button" class="w3-button w3-block w3-green w3-section w3-padding" type="button" value="Registrarse">
                 </div>
 
-                <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+                <div class="w3-container  w3-padding-16 w3-light-grey">
                     <input id="register-cancel-button" class="w3-button w3-red" type="button" value="Cancel">
-                    <span class="w3-right w3-padding w3-hide-small">¿Olvidaste
-                        <a href="#">tu contraseña?</a>
-                    </span>
                 </div>
-
             </form>
-
         </div>
     </div>
-
     <!-- Fin -->
     <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+<<<<<<< HEAD
     <script>
         // Accordion
         function myFunction(id) {
@@ -437,6 +381,8 @@
             }
         }
     </script>
+=======
+>>>>>>> e607533498631a7e443cc1a73d7578ea99b66cf0
     <script src="js/firebase.js"></script>
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>
