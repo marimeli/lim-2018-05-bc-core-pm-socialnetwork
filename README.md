@@ -5,8 +5,10 @@
 La cultura y las artes juegan un papel importante en nuestra sociedad,porque promueven experiencias y aprendizajes fundamentales para todos los seres humanos. Nos enseñan a descubrir quienes somos y cómo nos relacionamos con nuestro entorno.
 
 ## ¿Qué es Cooltural?
+Cooltural es una red social que permite conectar a artistas, organizaciones y personas interesadas en actividades culturales y artísticas. 
+
 ## ¿Quiénes son los principales usuarios de Cooltural?
- 
+ Personas interesadas en cultura y arte, y artistas. 
 
 ## Antes de empezar: ¿Cuáles son los elementos de una red social?
 
