@@ -70,6 +70,10 @@ A partir de la encuesta online realizada a 30 usuarios, se llegó a las siguient
 
 En el Perú y en Latinoamérica hay una gran cantidad de artistas y personas interesadas en actividades culturales que carecen de un espacio digital propio en donde- además de compartir su talento y eventos-puedan generar redes de contacto. 
 
+### Persona UX 
+
+![](https://user-images.githubusercontent.com/39272944/43738102-2333928c-9989-11e8-8c4e-4bf26541b885.jpg)
+
 ### Entrevista 1 :Usuarios
 
 ### Guía de preguntas
@@ -85,13 +89,10 @@ Luego de entrevistas a los usuarios llegamos a las siguientes conclusiones:
 * Los usuarios indican que desean un red social que les permita publicar  y compartir al igual que Facebook. Además, indican que quieren encontrar todos los eventos culturales. 
 * El tema visual es importante para ellos. Priorizan las imágenes sobre el texto. Desean información sucinta. Tambièn desean algo colorido.
 
-### Entrevista 1: Artistas
-
-### Guía de preguntas
-
-![](https://user-images.githubusercontent.com/39272944/43245252-3e4d0c8e-9073-11e8-8f81-bb5241b1aabe.jpg)
 
 ##  Benchmark: Antecedentes (Red social para artistas)
+
+![benchmark-01](https://user-images.githubusercontent.com/39272944/43738012-d883a3d0-9988-11e8-8ae7-465a5aa45999.png)
 
 [**_Arte Manifiesto - Perú_**](http://www.artemanifiesto.com/)
 
