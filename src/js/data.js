@@ -218,7 +218,7 @@ const printPublicPost = (newPublicPosts) => {
   btnLike.setAttribute('id', postskey);
 
   btnLike.setAttribute('class', "w3-button w3-theme-d1 w3-margin-bottom");
-  // btnLike.setAttribute('style','margin: 2px')
+
   
   const contadorlike = document.createElement('a');
   contadorlike.setAttribute('class', 'w3-button w3-margin-bottom ')
@@ -270,6 +270,7 @@ const printPublicPost = (newPublicPosts) => {
 
 // Esta es la función para pintar dinámicamente los post personales(privados)
 const showPostsUserProfile = (newPostsUser) => {
+
   const postskey = newPostsUser.key
 
   const contPost = document.createElement('div');
@@ -286,11 +287,7 @@ const showPostsUserProfile = (newPostsUser) => {
   const author = document.createElement('h4');
   author.setAttribute('class', "author");
   author.setAttribute('style', "margin-top: 22px");
-  // author.setAttribute('class',  )
 
-  /* const author = document.createElement('h4');
-  author.setAttribute('style', "margin-top: 22px");
-  author.setAttribute('class', "author"); */
 
   const textPost = document.createElement('p');
   textPost.setAttribute('class', "w3-left w3-circle w3-margin-right");
@@ -306,8 +303,7 @@ const showPostsUserProfile = (newPostsUser) => {
   btnEdit.setAttribute('id', postskey);
   btnEdit.setAttribute('class', "w3-button w3-theme-d1 w3-margin-bottom")
   btnEdit.setAttribute('style', 'margin: 10px')
-/*   const icoEdit = document.createElement('i');
-  icoEdit.setAttribute('class', 'fas fa-pen'); */
+
 
   const btnDelete = document.createElement('input');
   btnDelete.setAttribute('value', 'Borrar');
@@ -315,8 +311,7 @@ const showPostsUserProfile = (newPostsUser) => {
   btnDelete.setAttribute('id', postskey);
   btnDelete.setAttribute('class', "w3-button w3-theme-d1 w3-margin-bottom");
   btnDelete.setAttribute('style', 'margin: 10px');
-/*   const icoDelete = document.createElement('i');
-  icoDelete.setAttribute('class', 'fas fa-trash'); */
+
 
 
   btnDelete.addEventListener('click', (e) => {
@@ -330,8 +325,7 @@ const showPostsUserProfile = (newPostsUser) => {
           }
       }
   });
-/* 
-  while(contPost.firstChild) contPost.removeChild(contPost.firstChild); */
+
     
 
   btnEdit.addEventListener('click', (e) => {
@@ -364,8 +358,7 @@ const showPostsUserProfile = (newPostsUser) => {
               firebase.database().ref().update(updatesPost);
               reloadPage();
           }
-         /*  btnSave.style.display = 'none';
-          btnEdit.style.display = 'block'; */
+
           textPost.contentEditable = "false";
       })
       contPost.appendChild(btnSave);
@@ -422,7 +415,7 @@ const writeNewPost = () => {
   };
   const updates = {};
   updates['/posts/' + newPostKey] = postData;
-  updates['/user-posts/' + currentUser.uid + '/' + newPostKey] = postData;
+  // updates['/user-posts/' + currentUser.uid + '/' + newPostKey] = postData;
   return firebase.database().ref().update(updates);
 };
 
