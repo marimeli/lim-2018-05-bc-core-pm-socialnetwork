@@ -75,7 +75,7 @@ window.onload = () => {
       }
       //Imprime foto en perfil
       if (user.photoURL == null) {
-        userImage.setAttribute('src', "/src/user.png");
+        userImage.setAttribute('src', "https://png.icons8.com/ios/1600/user-male-circle-filled.png");
       } else {
         userImage.setAttribute('src', user.photoURL);
       }
@@ -307,7 +307,8 @@ const showPostsUserProfile = (newPostsUser) => {
   btnEdit.setAttribute('id', postskey);
   btnEdit.setAttribute('class', "w3-button w3-theme-d1 w3-margin-bottom")
   btnEdit.setAttribute('style', 'margin: 10px')
-
+/*   const icoEdit = document.createElement('i');
+  icoEdit.setAttribute('class', 'fas fa-pen'); */
 
   const btnDelete = document.createElement('input');
   btnDelete.setAttribute('value', 'Borrar');
@@ -315,7 +316,8 @@ const showPostsUserProfile = (newPostsUser) => {
   btnDelete.setAttribute('id', postskey);
   btnDelete.setAttribute('class', "w3-button w3-theme-d1 w3-margin-bottom");
   btnDelete.setAttribute('style', 'margin: 10px');
-
+/*   const icoDelete = document.createElement('i');
+  icoDelete.setAttribute('class', 'fas fa-trash'); */
 
 
   btnDelete.addEventListener('click', (e) => {
@@ -329,7 +331,8 @@ const showPostsUserProfile = (newPostsUser) => {
           }
       }
   });
-
+/* 
+  while(contPost.firstChild) contPost.removeChild(contPost.firstChild); */
     
 
   btnEdit.addEventListener('click', (e) => {
@@ -420,7 +423,7 @@ const writeNewPost = () => {
   };
   const updates = {};
   updates['/posts/' + newPostKey] = postData;
-  // updates['/user-posts/' + currentUser.uid + '/' + newPostKey] = postData;
+  updates['/user-posts/' + currentUser.uid + '/' + newPostKey] = postData;
   return firebase.database().ref().update(updates);
 };
 
