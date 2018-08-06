@@ -1,6 +1,6 @@
 # COOLTURAL
 
-Mira nuestro demo → [**_AQUÍ_**](https://elment9.github.io/lim-2018-05-bc-core-pm-socialnetwork/src/)
+[**Mira nuestro demo AQUÍ**](https://elment9.github.io/lim-2018-05-bc-core-pm-socialnetwork/src/)
 
 La cultura y las artes juegan un papel importante en nuestra sociedad,porque promueven experiencias y aprendizajes fundamentales para todos los seres humanos. Nos enseñan a descubrir quienes somos y cómo nos relacionamos con nuestro entorno.
 
