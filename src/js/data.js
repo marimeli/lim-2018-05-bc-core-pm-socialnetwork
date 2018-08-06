@@ -338,13 +338,13 @@ const showPostsUserProfile = (newPostsUser) => {
   btnEdit.addEventListener('click', (e) => {
       textPost.contentEditable = "true";
       btnEdit.style.display = 'none';
-      const btnpublish = document.createElement('input');
-      btnpublish.setAttribute('value', 'Guardar');
-      btnpublish.setAttribute('type', 'button');
-      btnpublish.setAttribute('class', "w3-pink w3-button w3-margin-bottom");
-      btnpublish.setAttribute('id', postskey);
-      btnpublish.setAttribute('style', 'margin: 10px');
-      btnpublish.addEventListener('click', (e) => {
+      const btnSave = document.createElement('input');
+      btnSave.setAttribute('value', 'Guardar');
+      btnSave.setAttribute('type', 'button');
+      btnSave.setAttribute('class', "w3-pink w3-button w3-margin-bottom");
+      btnSave.setAttribute('id', postskey);
+      btnSave.setAttribute('style', 'margin: 10px');
+      btnSave.addEventListener('click', (e) => {
           if (postskey === e.target.id) {
               const currentUser = firebase.auth().currentUser;
               const newUpdate = textPost.innerText
@@ -363,12 +363,13 @@ const showPostsUserProfile = (newPostsUser) => {
               updatesPost[`/posts/${newPostsUser.key}`] = nuevoPost;
               firebase.database().ref().update(updatesUser);
               firebase.database().ref().update(updatesPost);
+              reloadPage();
           }
-          btnpublish.style.display = 'none';
-          btnEdit.style.display = 'block';
+         /*  btnSave.style.display = 'none';
+          btnEdit.style.display = 'block'; */
           textPost.contentEditable = "false";
       })
-      contPost.appendChild(btnpublish);
+      contPost.appendChild(btnSave);
   });
 
   postsContainer.appendChild(contPost);
@@ -468,9 +469,6 @@ const writtingPost = () => {
   }
 }
 
-
-
-
-/* window.reload_page = () => {
+window.reloadPage = () => {
   window.location.reload();
-}; */
+};
