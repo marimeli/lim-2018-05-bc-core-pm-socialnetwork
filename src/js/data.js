@@ -204,25 +204,22 @@ const printPublicPost = (newPublicPosts) => {
   const author = document.createElement('h4');
   author.setAttribute('style', "margin-top: 22px,");
   author.setAttribute('class', "author");
-  // author.setAttribute('class',  )
 
   const textPost = document.createElement('p');
   textPost.setAttribute('class', 'w3-left w3-circle w3-margin-right');
   textPost.setAttribute('id', postskey);
   textPost.innerHTML = `${newPublicPosts.val().body}`;
 
-  /* <button id="${newPostsUser.val().key}" type="button" class="w3-button w3-theme-d1 w3-margin-bottom "><i class="fa fa-thumbs-up"></i> EcoLike</button>  */
-  const br = document.createElement('br');
+  const lineBreak = document.createElement('br');
+
   const btnLike = document.createElement('input');
   btnLike.setAttribute('value', 'Me gusta');
   btnLike.setAttribute('type', 'button')
   btnLike.setAttribute('id', postskey);
-  // btnLike.setAttribute('style', "background-color: orange;");
+
   btnLike.setAttribute('class', "w3-button w3-theme-d1 w3-margin-bottom");
   // btnLike.setAttribute('style','margin: 2px')
-  // const icolike = document.createElement('i');
-
-  // icolike.setAttribute('class', 'fas fa-thumbs-up');
+  
   const contadorlike = document.createElement('a');
   contadorlike.setAttribute('class', 'w3-button w3-margin-bottom ')
   contadorlike.setAttribute('id', postskey);
@@ -256,7 +253,7 @@ const printPublicPost = (newPublicPosts) => {
   contPost.appendChild(author);
   contPost.appendChild(line);
   contPost.appendChild(textPost);
-  contPost.appendChild(br);
+  contPost.appendChild(lineBreak);
   contPost.appendChild(line);
   contPost.appendChild(contadorlike);
   contPost.appendChild(btnLike);
@@ -287,20 +284,21 @@ const showPostsUserProfile = (newPostsUser) => {
   line.setAttribute('class', "w3-clear")
 
   const author = document.createElement('h4');
-  author.setAttribute('class', "w3-left w3-circle w3-margin-left");
+  author.setAttribute('class', "author");
   author.setAttribute('style', "margin-top: 22px");
   // author.setAttribute('class',  )
-  const lineBreak = document.createElement('br');
-  lineBreak.setAttribute('class', "w3-clear");
+
+  /* const author = document.createElement('h4');
+  author.setAttribute('style', "margin-top: 22px");
+  author.setAttribute('class', "author"); */
 
   const textPost = document.createElement('p');
   textPost.setAttribute('class', "w3-left w3-circle w3-margin-right");
-
   textPost.setAttribute('id', postskey);
   textPost.innerHTML = `${newPostsUser.val().body}`;
 
-  const lineBreak2 = document.createElement('br');
-  lineBreak2.setAttribute('class', "w3-clear");
+  const lineBreak = document.createElement('br');
+  lineBreak.setAttribute('class', "w3-clear");
 
   const btnEdit = document.createElement('input');
   btnEdit.setAttribute('value', 'Editar');
@@ -339,13 +337,13 @@ const showPostsUserProfile = (newPostsUser) => {
   btnEdit.addEventListener('click', (e) => {
       textPost.contentEditable = "true";
       btnEdit.style.display = 'none';
-      const btnpublish = document.createElement('input');
-      btnpublish.setAttribute('value', 'Guardar');
-      btnpublish.setAttribute('type', 'button');
-      btnpublish.setAttribute('class', "w3-pink w3-button w3-margin-bottom");
-      btnpublish.setAttribute('id', postskey);
-      btnpublish.setAttribute('style', 'margin: 10px');
-      btnpublish.addEventListener('click', (e) => {
+      const btnSave = document.createElement('input');
+      btnSave.setAttribute('value', 'Guardar');
+      btnSave.setAttribute('type', 'button');
+      btnSave.setAttribute('class', "w3-pink w3-button w3-margin-bottom");
+      btnSave.setAttribute('id', postskey);
+      btnSave.setAttribute('style', 'margin: 10px');
+      btnSave.addEventListener('click', (e) => {
           if (postskey === e.target.id) {
               const currentUser = firebase.auth().currentUser;
               const newUpdate = textPost.innerText
@@ -364,26 +362,25 @@ const showPostsUserProfile = (newPostsUser) => {
               updatesPost[`/posts/${newPostsUser.key}`] = nuevoPost;
               firebase.database().ref().update(updatesUser);
               firebase.database().ref().update(updatesPost);
+              reloadPage();
           }
-          btnpublish.style.display = 'none';
-          btnEdit.style.display = 'block';
+         /*  btnSave.style.display = 'none';
+          btnEdit.style.display = 'block'; */
           textPost.contentEditable = "false";
       })
-      contPost.appendChild(btnpublish);
+      contPost.appendChild(btnSave);
   });
 
   postsContainer.appendChild(contPost);
   contPost.appendChild(image);
   contPost.appendChild(author);
-  contPost.appendChild(lineBreak);
   contPost.appendChild(line);
   contPost.appendChild(textPost);
-  contPost.appendChild(lineBreak2);
+  contPost.appendChild(lineBreak);
   contPost.appendChild(line);
   contPost.appendChild(btnEdit);
-/*   btnEdit.appendChild(icoEdit); */
   contPost.appendChild(btnDelete);
-/*   btnDelete.appendChild(icoDelete); */
+
   if (`${newPostsUser.val().author}` == 'undefined') {
       author.innerHTML = `${newPostsUser.val().email}`
       image.setAttribute('src', 'https://cdn.icon-icons.com/icons2/1540/PNG/128/cinterior150_107120.png')
@@ -471,9 +468,6 @@ const writtingPost = () => {
   }
 }
 
-
-
-
-/* window.reload_page = () => {
+window.reloadPage = () => {
   window.location.reload();
-}; */
+};
