@@ -57,14 +57,17 @@ const showFeed = () => {
   callModalRegister.style.display = 'none';
   callModalLogin.style.display = 'none';
   postsContainer.style.display = 'block';
+  getPublicPostByFirebase();
 };
 
 
 window.myProfile = () => {
+  postComposerContainer.style.display = 'block';
     /* allPostsWall.style.display = 'none';  */
     postsContainer.style.display = 'block'; //postcontainer
     profileContainer.style.display = 'block'; //profileContainer
     /* titlePublicaciones.style.display = 'block'; //solo es el titulo */
+    getPrivatePostbyFirebase();
 };
 
 
@@ -90,11 +93,15 @@ window.onload = () => {
       } else {
         userImage.setAttribute('src', user.photoURL);
       }
+
       //Muestra perfil y container para publicar
       hideContainers();
 
       writeUserData(user.uid, user.displayName, user.email, user.photoURL);
-      getAllPostsbyFirebase(user.uid)
+      // getAllPostsbyFirebase(user.uid)
+
+
+      
     } else {//Si NO está logueado, mostramos formulario(OPCION LOGGEDOUT)
       console.log('Usuario NO logueado');
       showContainers();
@@ -102,6 +109,8 @@ window.onload = () => {
     //Imprimimos datos que Firebase tiene del usuario
     console.log('User > ' + JSON.stringify(user));
   });
+  getPrivatePostbyFirebase(user.uid);
+  getPublicPostByFirebase(user.uid);
 };
 
 //*********LOGIN EMAIL***********
@@ -229,7 +238,7 @@ const printPublicPost = (newPublicPosts) => {
   btnLike.setAttribute('id', postskey);
 
   btnLike.setAttribute('class', "w3-button w3-theme-d1 w3-margin-bottom");
-  // btnLike.setAttribute('style','margin: 2px')
+
   
   const contadorlike = document.createElement('a');
   contadorlike.setAttribute('class', 'w3-button w3-margin-bottom ')
@@ -268,7 +277,7 @@ const printPublicPost = (newPublicPosts) => {
   contPost.appendChild(line);
   contPost.appendChild(contadorlike);
   contPost.appendChild(btnLike);
-  // btnLike.appendChild(icolike);
+  
   if (`${newPublicPosts.val().author}` == 'undefined') {
     author.innerHTML = `${newPublicPosts.val().email}`
     image.setAttribute('src', 'https://cdn.icon-icons.com/icons2/1540/PNG/128/cinterior150_107120.png')
@@ -298,11 +307,7 @@ const showPostsUserProfile = (newPostsUser) => {
   const author = document.createElement('h4');
   author.setAttribute('class', "author");
   author.setAttribute('style', "margin-top: 22px");
-  // author.setAttribute('class',  )
 
-  /* const author = document.createElement('h4');
-  author.setAttribute('style', "margin-top: 22px");
-  author.setAttribute('class', "author"); */
 
   const textPost = document.createElement('p');
   textPost.setAttribute('class', "w3-left w3-circle w3-margin-right");
@@ -318,8 +323,7 @@ const showPostsUserProfile = (newPostsUser) => {
   btnEdit.setAttribute('id', postskey);
   btnEdit.setAttribute('class', "w3-button w3-theme-d1 w3-margin-bottom")
   btnEdit.setAttribute('style', 'margin: 10px')
-/*   const icoEdit = document.createElement('i');
-  icoEdit.setAttribute('class', 'fas fa-pen'); */
+
 
   const btnDelete = document.createElement('input');
   btnDelete.setAttribute('value', 'Borrar');
@@ -327,8 +331,6 @@ const showPostsUserProfile = (newPostsUser) => {
   btnDelete.setAttribute('id', postskey);
   btnDelete.setAttribute('class', "w3-button w3-theme-d1 w3-margin-bottom");
   btnDelete.setAttribute('style', 'margin: 10px');
-/*   const icoDelete = document.createElement('i');
-  icoDelete.setAttribute('class', 'fas fa-trash'); */
 
 
   btnDelete.addEventListener('click', (e) => {
@@ -342,8 +344,7 @@ const showPostsUserProfile = (newPostsUser) => {
           }
       }
   });
-/* 
-  while(contPost.firstChild) contPost.removeChild(contPost.firstChild); */
+
     
 
   btnEdit.addEventListener('click', (e) => {
@@ -376,8 +377,7 @@ const showPostsUserProfile = (newPostsUser) => {
               firebase.database().ref().update(updatesPost);
               reloadPage();
           }
-         /*  btnSave.style.display = 'none';
-          btnEdit.style.display = 'block'; */
+
           textPost.contentEditable = "false";
       })
       contPost.appendChild(btnSave);
@@ -404,18 +404,26 @@ const showPostsUserProfile = (newPostsUser) => {
 };
 
 //  Función para traer todos los posts almacenados en Firebase. 
-const getAllPostsbyFirebase = (uid) => {
-  //Trae solo los posts del usuario (Personales)
-  const userPosts = firebase.database().ref('user-posts').child(uid);
-  userPosts.on("child_added", newUserPosts => {
-    showPostsUserProfile(newUserPosts);
-  });
-  //Trae los posts de todos los usuarios (Públicos)
+
+const getPublicPostByFirebase = (uid) => {
+  // Trae los posts de todos los usuarios (Públicos)
   const allUsersPosts = firebase.database().ref('posts');
   allUsersPosts.on("child_added", newPublicPosts => {
     printPublicPost(newPublicPosts);
   });
 };
+
+
+const getPrivatePostbyFirebase = (uid) => {
+  //Trae solo los posts del usuario (Personales)
+
+  const userPosts = firebase.database().ref('user-posts').child(uid);
+  userPosts.on("child_added", newUserPosts => {
+    showPostsUserProfile(newUserPosts);
+  });
+};
+
+
 
 //  Función para escribir un post
 
@@ -464,7 +472,7 @@ const writtingPost = () => {
   const privacyValue = statusOfPrivacy.value;
   /* const select = selectPublicPrivate.value; */
   if (composerAreaValue.length === 0 && composerAreaValue === '') {
-    alert('Escribe un texto antes de enviar');
+    alert('Escribe un texto antes de publicar');
 
   } else {
     if (privacyValue == 'public') {
