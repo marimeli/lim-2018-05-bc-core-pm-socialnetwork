@@ -9,17 +9,26 @@ const userName = document.getElementById('userName');
 const userImage = document.getElementById('user-image');
 
 //TIMELINE
-const textComposerArea = document.getElementById('text-composer-area'); //área para hacer una publicación
-const sendPostButton = document.getElementById('send-post'); //botón para publicar
+
+const sectionPosts = document.getElementById('section-posts');
+const postsAreaContainer= document.getElementById('posts-area');
+
+
 const postsContainer = document.getElementById('posts-container'); //contenedor que guardará todos los posts que se creen dinámicamente  */
 const postComposerContainer = document.getElementById('post-composer-container'); //contenedor de base de datos
-const statusOfPrivacy = document.getElementById('status-of-privacy');
+const textComposerArea = document.getElementById('text-composer-area'); //área para hacer una publicación
+const sendPostButton = document.getElementById('send-post'); //botón para publicar
 
+const privateWallContainer = document.getElementById('private-wall'); //contenedor de post privados
+const myPersonalPosts = document.getElementById('personal-posts'); //titulo de la seccion privada
+const publicWallContainer= document.getElementById('public-wall'); //contenedor de post publicos
+const thePublicPosts= document.getElementById('public-posts'); //titulo de la seccion publica
+
+const statusOfPrivacy = document.getElementById('status-of-privacy');
 const feedButton = document.getElementById('feed-button');
 const profileButton = document.getElementById('profile-button');
 
 
-/* FUNCIONES MURO */
 
 // Accordion
 const myFunction = (id) => {
@@ -52,6 +61,5 @@ sendPostButton.addEventListener('click', writtingPost);
 
 feedButton.addEventListener('click', showFeed);
 
-profileButton.addEventListener('click', hideContainers);
-
+profileButton.addEventListener('click', myProfile);
 
