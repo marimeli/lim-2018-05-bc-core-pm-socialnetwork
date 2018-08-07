@@ -36,7 +36,7 @@ const hideContainers = () => {
   feedButton.style.display = 'block';
   profileButton.style.display = 'block';
   alertBox.style.display = 'none';
-  addBanner.style.display = 'none';
+  // addBanner.style.display = 'none';
 };
 
 const showContainers = () => {
@@ -56,18 +56,20 @@ const showFeed = () => {
   logoutButton.style.display = 'block';
   callModalRegister.style.display = 'none';
   callModalLogin.style.display = 'none';
-  postsContainer.style.display = 'block';
-  getPublicPostByFirebase();
+  publicContainer.style.display = 'block';
+  privateContainer.style.display = 'none';
+  
 };
 
 
 window.myProfile = () => {
   postComposerContainer.style.display = 'block';
-    /* allPostsWall.style.display = 'none';  */
-    postsContainer.style.display = 'block'; //postcontainer
+
     profileContainer.style.display = 'block'; //profileContainer
-    /* titlePublicaciones.style.display = 'block'; //solo es el titulo */
-    getPrivatePostbyFirebase();
+
+    publicContainer.style.display = 'none';
+    privateContainer.style.display = 'block';
+    
 };
 
 
@@ -108,9 +110,10 @@ window.onload = () => {
     }
     //Imprimimos datos que Firebase tiene del usuario
     console.log('User > ' + JSON.stringify(user));
+    getPrivatePostbyFirebase(user.uid);
+    getPublicPostByFirebase(user.uid);
   });
-  getPrivatePostbyFirebase(user.uid);
-  getPublicPostByFirebase(user.uid);
+
 };
 
 //*********LOGIN EMAIL***********
@@ -268,7 +271,7 @@ const printPublicPost = (newPublicPosts) => {
 
   })
 
-  postsContainer.appendChild(contPost);
+  publicContainer.appendChild(contPost);
   contPost.appendChild(image);
   contPost.appendChild(author);
   contPost.appendChild(line);
@@ -383,7 +386,7 @@ const showPostsUserProfile = (newPostsUser) => {
       contPost.appendChild(btnSave);
   });
 
-  postsContainer.appendChild(contPost);
+  privateContainer.appendChild(contPost);
   contPost.appendChild(image);
   contPost.appendChild(author);
   contPost.appendChild(line);
@@ -416,7 +419,6 @@ const getPublicPostByFirebase = (uid) => {
 
 const getPrivatePostbyFirebase = (uid) => {
   //Trae solo los posts del usuario (Personales)
-
   const userPosts = firebase.database().ref('user-posts').child(uid);
   userPosts.on("child_added", newUserPosts => {
     showPostsUserProfile(newUserPosts);

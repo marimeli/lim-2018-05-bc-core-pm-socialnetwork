@@ -9,21 +9,18 @@ const userName = document.getElementById('userName');
 const userImage = document.getElementById('user-image');
 const alertBox = document.getElementById('alert-box');
 //TIMELINE
-const addBanner = document.getElementById('add-banner');
-
-const sectionPosts = document.getElementById('section-posts');
-const postsAreaContainer= document.getElementById('posts-area');
-
-
+// const addBanner = document.getElementById('add-banner');
 const postsContainer = document.getElementById('posts-container'); //contenedor que guardará todos los posts que se creen dinámicamente  */
+const privateContainer = document.getElementById('private-container'); //contenedor de post privados
+const publicContainer= document.getElementById('public-container'); //contenedor de post publicos
+
+
 const postComposerContainer = document.getElementById('post-composer-container'); //contenedor de base de datos
 const textComposerArea = document.getElementById('text-composer-area'); //área para hacer una publicación
 const sendPostButton = document.getElementById('send-post'); //botón para publicar
 
-const privateWallContainer = document.getElementById('private-wall'); //contenedor de post privados
-const myPersonalPosts = document.getElementById('personal-posts'); //titulo de la seccion privada
-const publicWallContainer= document.getElementById('public-wall'); //contenedor de post publicos
-const thePublicPosts= document.getElementById('public-posts'); //titulo de la seccion publica
+
+
 
 const statusOfPrivacy = document.getElementById('status-of-privacy');
 const feedButton = document.getElementById('feed-button');
