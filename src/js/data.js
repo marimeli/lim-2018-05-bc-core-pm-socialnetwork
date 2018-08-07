@@ -229,7 +229,7 @@ const printPublicPost = (newPublicPosts) => {
   btnLike.setAttribute('id', postskey);
 
   btnLike.setAttribute('class', "w3-button w3-theme-d1 w3-margin-bottom");
-  // btnLike.setAttribute('style','margin: 2px')
+
   
   const contadorlike = document.createElement('a');
   contadorlike.setAttribute('class', 'w3-button w3-margin-bottom ')
@@ -268,10 +268,10 @@ const printPublicPost = (newPublicPosts) => {
   contPost.appendChild(line);
   contPost.appendChild(contadorlike);
   contPost.appendChild(btnLike);
-  // btnLike.appendChild(icolike);
+
   if (`${newPublicPosts.val().author}` == 'undefined') {
     author.innerHTML = `${newPublicPosts.val().email}`
-    image.setAttribute('src', 'https://cdn.icon-icons.com/icons2/1540/PNG/128/cinterior150_107120.png')
+    image.setAttribute('src', 'https://png.icons8.com/ios/1600/user-male-circle-filled.png')
   }
   else {
     author.innerHTML = `${newPublicPosts.val().author}`
@@ -298,11 +298,7 @@ const showPostsUserProfile = (newPostsUser) => {
   const author = document.createElement('h4');
   author.setAttribute('class', "author");
   author.setAttribute('style', "margin-top: 22px");
-  // author.setAttribute('class',  )
 
-  /* const author = document.createElement('h4');
-  author.setAttribute('style', "margin-top: 22px");
-  author.setAttribute('class', "author"); */
 
   const textPost = document.createElement('p');
   textPost.setAttribute('class', "w3-left w3-circle w3-margin-right");
@@ -318,8 +314,7 @@ const showPostsUserProfile = (newPostsUser) => {
   btnEdit.setAttribute('id', postskey);
   btnEdit.setAttribute('class', "w3-button w3-theme-d1 w3-margin-bottom")
   btnEdit.setAttribute('style', 'margin: 10px')
-/*   const icoEdit = document.createElement('i');
-  icoEdit.setAttribute('class', 'fas fa-pen'); */
+
 
   const btnDelete = document.createElement('input');
   btnDelete.setAttribute('value', 'Borrar');
@@ -327,8 +322,7 @@ const showPostsUserProfile = (newPostsUser) => {
   btnDelete.setAttribute('id', postskey);
   btnDelete.setAttribute('class', "w3-button w3-theme-d1 w3-margin-bottom");
   btnDelete.setAttribute('style', 'margin: 10px');
-/*   const icoDelete = document.createElement('i');
-  icoDelete.setAttribute('class', 'fas fa-trash'); */
+
 
 
   btnDelete.addEventListener('click', (e) => {
@@ -342,8 +336,7 @@ const showPostsUserProfile = (newPostsUser) => {
           }
       }
   });
-/* 
-  while(contPost.firstChild) contPost.removeChild(contPost.firstChild); */
+
     
 
   btnEdit.addEventListener('click', (e) => {
@@ -376,8 +369,7 @@ const showPostsUserProfile = (newPostsUser) => {
               firebase.database().ref().update(updatesPost);
               reloadPage();
           }
-         /*  btnSave.style.display = 'none';
-          btnEdit.style.display = 'block'; */
+
           textPost.contentEditable = "false";
       })
       contPost.appendChild(btnSave);
@@ -395,8 +387,9 @@ const showPostsUserProfile = (newPostsUser) => {
 
   if (`${newPostsUser.val().author}` == 'undefined') {
       author.innerHTML = `${newPostsUser.val().email}`
-      image.setAttribute('src', 'https://cdn.icon-icons.com/icons2/1540/PNG/128/cinterior150_107120.png')
+      image.setAttribute('src', 'https://png.icons8.com/ios/1600/user-male-circle-filled.png')
   }
+  
   else {
       author.innerHTML = `${newPostsUser.val().author}`
       image.setAttribute('src', `${newPostsUser.val().image}`)
@@ -462,7 +455,7 @@ const writePrivateUserPost = () => {
 const writtingPost = () => {
   const composerAreaValue = textComposerArea.value;
   const privacyValue = statusOfPrivacy.value;
-  /* const select = selectPublicPrivate.value; */
+
   if (composerAreaValue.length === 0 && composerAreaValue === '') {
     alert('Escribe un texto antes de enviar');
 
