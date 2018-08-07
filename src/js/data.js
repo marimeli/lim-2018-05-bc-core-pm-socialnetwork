@@ -5,7 +5,6 @@ window.registerWithFirebase = () => {
     .then(() => {
       console.log('usuario creado con éxito');
       alert('Su usuario fue creado con éxito')
-
     })
     .catch((error) => {
       //Corregir
@@ -25,6 +24,7 @@ window.registerWithFirebase = () => {
     });
 };
 
+<<<<<<< HEAD
 //Oculta y muestra bloque de perfil de acuerdo al estado del usuario
 const hideContainers = () => {
   postComposerContainer.style.display = 'block';
@@ -75,6 +75,8 @@ window.myProfile = () => {
 
 
 
+=======
+>>>>>>> 6b38473f5e0c3008be9bef47351b2901629d0e79
 //*********WINDOWS ONLOAD***********
 window.onload = () => {
   //Listener en tiempo real EL CHISMOSO
@@ -96,15 +98,11 @@ window.onload = () => {
       } else {
         userImage.setAttribute('src', user.photoURL);
       }
-
       //Muestra perfil y container para publicar
-      hideContainers();
-
-      writeUserData(user.uid, user.displayName, user.email, user.photoURL);
-      // getAllPostsbyFirebase(user.uid)
-
-
       
+      hideContainers();
+      writeUserData(user.uid, user.displayName, user.email, user.photoURL);
+
     } else {//Si NO está logueado, mostramos formulario(OPCION LOGGEDOUT)
       console.log('Usuario NO logueado');
       showContainers();
@@ -113,6 +111,8 @@ window.onload = () => {
     console.log('User > ' + JSON.stringify(user));
     getPrivatePostbyFirebase(user.uid);
     getPublicPostByFirebase(user.uid);
+
+    myProfile();
   });
 
 };
