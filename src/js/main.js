@@ -88,16 +88,6 @@ xRegButton.addEventListener('click', xButtonCloseRegister);
 registerButton.addEventListener('click', registerWithFirebase);
 
 //Login con Email
-<<<<<<< HEAD
-
-//FUNCIONES DISPLAY
-// const dontShowTimeLine = () => {
-//   let user = firebase.auth().currentUser;
-//   if (user != null) {
-//     document.getElementsByClassName('w3-theme-15').style.display = 'none';
-//   }
-// }
-=======
 loginButton.addEventListener('click', loginWithFirebase);
 
 //Login con Facebook
@@ -142,4 +132,3 @@ function openNav() {
       logged.className = logged.className.replace(" w3-show", "");
     }
 };
->>>>>>> e607533498631a7e443cc1a73d7578ea99b66cf0
