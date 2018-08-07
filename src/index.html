@@ -25,7 +25,7 @@
                 </a>
                 <!--  Título de la red social -->
                 <a class="w3-bar-item w3-button w3-padding-large w3-theme-d4 w3-hover-white">
-                    <i class="fa fa-home w3-margin-right"></i>Cooltural</a>
+                    <img src="logo.png" alt=""> Cooltural</a>
                 <!-- Opciones de menu del navbar -->
                 <a id="feed-button" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Inicio">
                     <i class="fa fa-globe"></i>
@@ -46,7 +46,7 @@
             <a href="#" class="w3-bar-item w3-button w3-padding-large">Mi perfil</a>
             <a id="login-navbar" class="w3-bar-item w3-button w3-padding-large">Iniciar sesión</a>
             <!--       Aquí el usuario puede cerrar sesión. Debemos ponerlo en botón para que no burle la autentif-->
-            <a href="login.html" id="logout-navbar" class="w3-bar-item w3-button w3-padding-large">Cerrar sesión</a>
+            <a href="index.html" id="logout-navbar" class="w3-bar-item w3-button w3-padding-large">Cerrar sesión</a>
         </div>
         <!-- Page Container -->
         <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
@@ -54,6 +54,7 @@
             <div class="w3-row">
                 <!-- Left Column -->
                 <div class="w3-col m3">
+
                     <!-- Profile -->
                     <div class="w3-card w3-round w3-white">
                         <div id="profile-container" class="w3-container">
@@ -91,19 +92,22 @@
                                 <div class="w3-row-padding">
                                     <br>
                                     <div class="w3-half">
-                                        <img src="/src/concurso-de-arquitectura.png" style="width:100%" class="w3-margin-bottom">
+                                        <img src="https://images.adsttc.com/media/images/579a/3ebb/e58e/ce2c/9200/001a/slideshow/%C2%A9_Archi._Archivo_Digital_de_Arte_Peruano._Vista_a%C3%A9rea_desde_fachada_norte_del_Palacio_de_la_Exposici%C3%B3n._2016.jpg?1469726352"
+                                            style="width:100%" class="w3-margin-bottom">
                                     </div>
                                     <div class="w3-half">
-                                        <img src="/src/evento_buika.jpg" style="width:100%" class="w3-margin-bottom">
+                                        <img src="https://www.wiriko.org/wp-content/uploads/2017/02/14670826_1293756790669561_1281837250935658160_n.jpg" style="width:100%"
+                                            class="w3-margin-bottom">
                                     </div>
                                     <div class="w3-half">
-                                        <img src="/src/patio-central-del-mali.jpg" style="width:100%" class="w3-margin-bottom">
+                                        <img src="http://www.museodata.com/images/museums/MALI_Patio_central.jpg" style="width:100%" class="w3-margin-bottom">
                                     </div>
                                     <div class="w3-half">
-                                        <img src="/src/festival-lima.jpg" style="width:100%" class="w3-margin-bottom">
+                                        <img src="http://dafo.cultura.pe/wp-content/uploads/2016/01/6-festival-lima-independiente.jpg" style="width:100%" class="w3-margin-bottom">
                                     </div>
                                     <div class="w3-half">
-                                        <img src="/src/callao-monumental.jpeg" style="width:100%" class="w3-margin-bottom">
+                                        <img src="https://img.elcomercio.pe/files/ec_article_multimedia_gallery/uploads/2018/03/07/5aa0286c21e54.jpeg" style="width:100%"
+                                            class="w3-margin-bottom">
                                     </div>
                                 </div>
                             </div>
@@ -134,7 +138,9 @@
                         <p>
                             <strong>Hola!</strong>
                         </p>
+
                         <p>¿Todavía no tienes una cuenta? <br> Regístrate aquí. </p>
+
                     </div>
 
                     <!-- End Left Column -->
@@ -151,7 +157,7 @@
             <textarea name="Publicación" id="post"></textarea>
             <input type="button" class="btn btn-lg btn-success btn-block" value="Publicar" id="btn-save">
         </div>
-        <div id="posts " class="hidden ">
+        <div id="posts" class="hidden">
             <h3>Inicio</h3>
         </div> -->
                                 <!-- ESPACIO PARA PUBLICAR UN POST
@@ -164,7 +170,7 @@
                                     <!-- Botón publicar -->
                                     <input type="button" id="send-post" class="w3-button w3-theme" value="Publicar">
                                     <!-- <i class="fa fa-pencil"></i> -->
-                                    </input>
+
                                     <select name="status" id="status-of-privacy">
                                         <option value="public">Público</option>
                                         <option value="private">Privado</option>
@@ -177,42 +183,33 @@
                             </div>
                         </div>
                     </div>
-                    <!-- SECCION DE LOS POSTS QUE SE CREARÁN 
-                Esta sección mostrará los post PÚBLICOS PARA TODOS-->
-                    <div id="posts-container">
-                        <!-- Esto es un post ejemplo -->
-                        <div class="w3-container w3-card w3-white w3-round w3-margin">
-                            <!-- <br>
-                            <img src="user.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px"> -->
-                            <!--  <span class="w3-right w3-opacity">1 min</span> TIEMPO-->
-                            <!--        <h4>Nombre del usuario</h4>
-                            <br>
-                            <hr class="w3-clear">
-                            <p>Aquí va el post que escriba el usuario</p>
-                            <div class="w3-row-padding" style="margin:0 -16px">
-                                <div class="w3-half">
-                                    <img src="festival-lima.jpg" style="width:100%" alt="Northern Lights" class="w3-margin-bottom">
+                    <!-- POSTS SECTION, LOS QUE SE CREAN DINAMICAMENTE -->
+                    <div id="section-posts">
+                        <div id="posts-area">
+
+                            <div id="private-wall" class="w3-container w3-card w3-white w3-round w3-margin>">
+                                <p id="personal-posts"> Mis Publicaciones </p>
+                                <div id="public-wall" class="w3-container w3-card w3-white w3-round w3-margin hide">
+                                    <p id="public-posts"> Inicio </p>
                                 </div>
-                                <div class="w3-half">
-                                    <img src="concurso-de-arquitectura.png" style="width:100%" alt="Nature" class="w3-margin-bottom">
+                                <div id="posts-container" class="hide">
+                                    <div class="w3-container w3-card w3-white w3-round w3-margin">
+                                    </div>
                                 </div>
                             </div>
-                            <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom">
-                                <i class="fa fa-thumbs-up"></i> Me gusta</button> -->
-                            <!--  <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom">
-                                <i class="fa fa-comment"></i> Comentar</button> -->
+                            
                         </div>
-                        <!-- Finaliza post ejemplo -->
                     </div>
-                    <!-- End Middle Column -->
+                    <!-- End Section Post -->
                 </div>
-
+                <!-- End Middle Column -->
                 <!-- Right Column -->
                 <div class="w3-col m2">
                     <div class="w3-card w3-round w3-white w3-center">
                         <div class="w3-container">
                             <p>Próximos eventos:</p>
-                            <img src="evento_buika.jpg" alt="Forest" style="width:100%;">
+                            <img src="https://www.wiriko.org/wp-content/uploads/2017/02/14670826_1293756790669561_1281837250935658160_n.jpg" alt="Forest"
+                                style="width:100%;">
                             <p>
                                 <strong>Buika - En concierto</strong>
                             </p>
@@ -260,7 +257,7 @@
                         </div>
                     </div>
                     <br>
-                    <!-- End Right Column -->
+                    <! End Right Column -->
                 </div>
                 <!-- End Grid -->
             </div>
@@ -357,35 +354,10 @@
     </div>
     <!-- Fin -->
     <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
-<<<<<<< HEAD
-    <script>
-        // Accordion
-        function myFunction(id) {
-            var x = document.getElementById(id);
-            if (x.className.indexOf("w3-show ") == -1) {
-                x.className += " w3-show ";
-                x.previousElementSibling.className += " w3-theme-d1 ";
-            } else {
-                x.className = x.className.replace("w3-show ", " ");
-                x.previousElementSibling.className =
-                    x.previousElementSibling.className.replace(" w3-theme-d1 ", " ");
-            }
-        }
-        // Used to toggle the menu on smaller screens when clicking on the menu button
-        function openNav() {
-            var x = document.getElementById("logged-in ");
-            if (x.className.indexOf("w3-show ") == -1) {
-                x.className += " w3-show ";
-            } else {
-                x.className = x.className.replace(" w3-show ", " ");
-            }
-        }
-    </script>
-=======
->>>>>>> e607533498631a7e443cc1a73d7578ea99b66cf0
     <script src="js/firebase.js"></script>
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/login.js"></script>
 </body>
 
 </html>
