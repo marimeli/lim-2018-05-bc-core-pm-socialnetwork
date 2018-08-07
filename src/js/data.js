@@ -5,7 +5,6 @@ window.registerWithFirebase = () => {
     .then(() => {
       console.log('usuario creado con éxito');
       alert('Su usuario fue creado con éxito')
-
     })
     .catch((error) => {
       //Corregir
@@ -25,39 +24,6 @@ window.registerWithFirebase = () => {
     });
 };
 
-//Oculta y muestra bloque de perfil de acuerdo al estado del usuario
-const hideContainers = () => {
-  postComposerContainer.style.display = 'block';
-  profileContainer.style.display = 'block';
-  logoutButton.style.display = 'block';
-  callModalRegister.style.display = 'none';
-  callModalLogin.style.display = 'none';
-  postsContainer.style.display = 'block';
-  feedButton.style.display = 'block';
-  profileButton.style.display = 'block';
-};
-
-const showContainers = () => {
-  postComposerContainer.style.display = 'none';
-  profileContainer.style.display = 'none';
-  logoutButton.style.display = 'none';
-  callModalRegister.style.display = 'block';
-  callModalLogin.style.display = 'block';
-  postsContainer.style.display = 'block';
-  feedButton.style.display = 'none';
-  profileButton.style.display = 'none';
-};
-
-const showFeed = () => {
-  postComposerContainer.style.display = 'none';
-  profileContainer.style.display = 'none';
-  logoutButton.style.display = 'block';
-  callModalRegister.style.display = 'none';
-  callModalLogin.style.display = 'none';
-  postsContainer.style.display = 'block';
-}
-
-
 //*********WINDOWS ONLOAD***********
 window.onload = () => {
   //Listener en tiempo real EL CHISMOSO
@@ -75,22 +41,27 @@ window.onload = () => {
       }
       //Imprime foto en perfil
       if (user.photoURL == null) {
-        userImage.setAttribute('src', "/src/user.png");
+        userImage.setAttribute('src', "https://png.icons8.com/ios/1600/user-male-circle-filled.png");
       } else {
         userImage.setAttribute('src', user.photoURL);
       }
       //Muestra perfil y container para publicar
+      
       hideContainers();
-
       writeUserData(user.uid, user.displayName, user.email, user.photoURL);
-      getAllPostsbyFirebase(user.uid)
+
     } else {//Si NO está logueado, mostramos formulario(OPCION LOGGEDOUT)
       console.log('Usuario NO logueado');
       showContainers();
     }
     //Imprimimos datos que Firebase tiene del usuario
     console.log('User > ' + JSON.stringify(user));
+    getPrivatePostbyFirebase(user.uid);
+    getPublicPostByFirebase(user.uid);
+
+    myProfile();
   });
+
 };
 
 //*********LOGIN EMAIL***********
@@ -204,25 +175,22 @@ const printPublicPost = (newPublicPosts) => {
   const author = document.createElement('h4');
   author.setAttribute('style', "margin-top: 22px,");
   author.setAttribute('class', "author");
-  // author.setAttribute('class',  )
 
   const textPost = document.createElement('p');
   textPost.setAttribute('class', 'w3-left w3-circle w3-margin-right');
   textPost.setAttribute('id', postskey);
   textPost.innerHTML = `${newPublicPosts.val().body}`;
 
-  /* <button id="${newPostsUser.val().key}" type="button" class="w3-button w3-theme-d1 w3-margin-bottom "><i class="fa fa-thumbs-up"></i> EcoLike</button>  */
-  const br = document.createElement('br');
+  const lineBreak = document.createElement('br');
+
   const btnLike = document.createElement('input');
   btnLike.setAttribute('value', 'Me gusta');
   btnLike.setAttribute('type', 'button')
   btnLike.setAttribute('id', postskey);
-  // btnLike.setAttribute('style', "background-color: orange;");
-  btnLike.setAttribute('class', "w3-button w3-theme-d1 w3-margin-bottom");
-  // btnLike.setAttribute('style','margin: 2px')
-  // const icolike = document.createElement('i');
 
-  // icolike.setAttribute('class', 'fas fa-thumbs-up');
+  btnLike.setAttribute('class', "w3-button w3-theme-d1 w3-margin-bottom");
+
+  
   const contadorlike = document.createElement('a');
   contadorlike.setAttribute('class', 'w3-button w3-margin-bottom ')
   contadorlike.setAttribute('id', postskey);
@@ -251,19 +219,19 @@ const printPublicPost = (newPublicPosts) => {
 
   })
 
-  postsContainer.appendChild(contPost);
+  publicContainer.appendChild(contPost);
   contPost.appendChild(image);
   contPost.appendChild(author);
   contPost.appendChild(line);
   contPost.appendChild(textPost);
-  contPost.appendChild(br);
+  contPost.appendChild(lineBreak);
   contPost.appendChild(line);
   contPost.appendChild(contadorlike);
   contPost.appendChild(btnLike);
-  // btnLike.appendChild(icolike);
+  
   if (`${newPublicPosts.val().author}` == 'undefined') {
     author.innerHTML = `${newPublicPosts.val().email}`
-    image.setAttribute('src', 'https://cdn.icon-icons.com/icons2/1540/PNG/128/cinterior150_107120.png')
+    image.setAttribute('src', 'https://png.icons8.com/ios/1600/user-male-circle-filled.png')
   }
   else {
     author.innerHTML = `${newPublicPosts.val().author}`
@@ -273,6 +241,7 @@ const printPublicPost = (newPublicPosts) => {
 
 // Esta es la función para pintar dinámicamente los post personales(privados)
 const showPostsUserProfile = (newPostsUser) => {
+
   const postskey = newPostsUser.key
 
   const contPost = document.createElement('div');
@@ -287,20 +256,17 @@ const showPostsUserProfile = (newPostsUser) => {
   line.setAttribute('class', "w3-clear")
 
   const author = document.createElement('h4');
-  author.setAttribute('class', "w3-left w3-circle w3-margin-left");
+  author.setAttribute('class', "author");
   author.setAttribute('style', "margin-top: 22px");
-  // author.setAttribute('class',  )
-  const lineBreak = document.createElement('br');
-  lineBreak.setAttribute('class', "w3-clear");
+
 
   const textPost = document.createElement('p');
   textPost.setAttribute('class', "w3-left w3-circle w3-margin-right");
-
   textPost.setAttribute('id', postskey);
   textPost.innerHTML = `${newPostsUser.val().body}`;
 
-  const lineBreak2 = document.createElement('br');
-  lineBreak2.setAttribute('class', "w3-clear");
+  const lineBreak = document.createElement('br');
+  lineBreak.setAttribute('class', "w3-clear");
 
   const btnEdit = document.createElement('input');
   btnEdit.setAttribute('value', 'Editar');
@@ -308,8 +274,7 @@ const showPostsUserProfile = (newPostsUser) => {
   btnEdit.setAttribute('id', postskey);
   btnEdit.setAttribute('class', "w3-button w3-theme-d1 w3-margin-bottom")
   btnEdit.setAttribute('style', 'margin: 10px')
-/*   const icoEdit = document.createElement('i');
-  icoEdit.setAttribute('class', 'fas fa-pen'); */
+
 
   const btnDelete = document.createElement('input');
   btnDelete.setAttribute('value', 'Borrar');
@@ -317,8 +282,6 @@ const showPostsUserProfile = (newPostsUser) => {
   btnDelete.setAttribute('id', postskey);
   btnDelete.setAttribute('class', "w3-button w3-theme-d1 w3-margin-bottom");
   btnDelete.setAttribute('style', 'margin: 10px');
-/*   const icoDelete = document.createElement('i');
-  icoDelete.setAttribute('class', 'fas fa-trash'); */
 
 
   btnDelete.addEventListener('click', (e) => {
@@ -332,20 +295,19 @@ const showPostsUserProfile = (newPostsUser) => {
           }
       }
   });
-/* 
-  while(contPost.firstChild) contPost.removeChild(contPost.firstChild); */
+
     
 
   btnEdit.addEventListener('click', (e) => {
       textPost.contentEditable = "true";
       btnEdit.style.display = 'none';
-      const btnpublish = document.createElement('input');
-      btnpublish.setAttribute('value', 'Guardar');
-      btnpublish.setAttribute('type', 'button');
-      btnpublish.setAttribute('class', "w3-pink w3-button w3-margin-bottom");
-      btnpublish.setAttribute('id', postskey);
-      btnpublish.setAttribute('style', 'margin: 10px');
-      btnpublish.addEventListener('click', (e) => {
+      const btnSave = document.createElement('input');
+      btnSave.setAttribute('value', 'Guardar');
+      btnSave.setAttribute('type', 'button');
+      btnSave.setAttribute('class', "w3-pink w3-button w3-margin-bottom");
+      btnSave.setAttribute('id', postskey);
+      btnSave.setAttribute('style', 'margin: 10px');
+      btnSave.addEventListener('click', (e) => {
           if (postskey === e.target.id) {
               const currentUser = firebase.auth().currentUser;
               const newUpdate = textPost.innerText
@@ -364,29 +326,27 @@ const showPostsUserProfile = (newPostsUser) => {
               updatesPost[`/posts/${newPostsUser.key}`] = nuevoPost;
               firebase.database().ref().update(updatesUser);
               firebase.database().ref().update(updatesPost);
+              reloadPage();
           }
-          btnpublish.style.display = 'none';
-          btnEdit.style.display = 'block';
+
           textPost.contentEditable = "false";
       })
-      contPost.appendChild(btnpublish);
+      contPost.appendChild(btnSave);
   });
 
-  postsContainer.appendChild(contPost);
+  privateContainer.appendChild(contPost);
   contPost.appendChild(image);
   contPost.appendChild(author);
-  contPost.appendChild(lineBreak);
   contPost.appendChild(line);
   contPost.appendChild(textPost);
-  contPost.appendChild(lineBreak2);
+  contPost.appendChild(lineBreak);
   contPost.appendChild(line);
   contPost.appendChild(btnEdit);
-/*   btnEdit.appendChild(icoEdit); */
   contPost.appendChild(btnDelete);
-/*   btnDelete.appendChild(icoDelete); */
+
   if (`${newPostsUser.val().author}` == 'undefined') {
       author.innerHTML = `${newPostsUser.val().email}`
-      image.setAttribute('src', 'https://cdn.icon-icons.com/icons2/1540/PNG/128/cinterior150_107120.png')
+      image.setAttribute('src', 'https://png.icons8.com/ios/1600/user-male-circle-filled.png')
   }
   else {
       author.innerHTML = `${newPostsUser.val().author}`
@@ -395,18 +355,25 @@ const showPostsUserProfile = (newPostsUser) => {
 };
 
 //  Función para traer todos los posts almacenados en Firebase. 
-const getAllPostsbyFirebase = (uid) => {
-  //Trae solo los posts del usuario (Personales)
-  const userPosts = firebase.database().ref('user-posts').child(uid);
-  userPosts.on("child_added", newUserPosts => {
-    showPostsUserProfile(newUserPosts);
-  });
-  //Trae los posts de todos los usuarios (Públicos)
+
+const getPublicPostByFirebase = (uid) => {
+  // Trae los posts de todos los usuarios (Públicos)
   const allUsersPosts = firebase.database().ref('posts');
   allUsersPosts.on("child_added", newPublicPosts => {
     printPublicPost(newPublicPosts);
   });
 };
+
+
+const getPrivatePostbyFirebase = (uid) => {
+  //Trae solo los posts del usuario (Personales)
+  const userPosts = firebase.database().ref('user-posts').child(uid);
+  userPosts.on("child_added", newUserPosts => {
+    showPostsUserProfile(newUserPosts);
+  });
+};
+
+
 
 //  Función para escribir un post
 
@@ -455,7 +422,7 @@ const writtingPost = () => {
   const privacyValue = statusOfPrivacy.value;
   /* const select = selectPublicPrivate.value; */
   if (composerAreaValue.length === 0 && composerAreaValue === '') {
-    alert('Escribe un texto antes de enviar');
+    alert('Escribe un texto antes de publicar');
 
   } else {
     if (privacyValue == 'public') {
@@ -471,9 +438,6 @@ const writtingPost = () => {
   }
 }
 
-
-
-
-/* window.reload_page = () => {
+window.reloadPage = () => {
   window.location.reload();
-}; */
+};
