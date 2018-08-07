@@ -280,7 +280,7 @@ const printPublicPost = (newPublicPosts) => {
   
   if (`${newPublicPosts.val().author}` == 'undefined') {
     author.innerHTML = `${newPublicPosts.val().email}`
-    image.setAttribute('src', 'https://cdn.icon-icons.com/icons2/1540/PNG/128/cinterior150_107120.png')
+    image.setAttribute('src', 'https://png.icons8.com/ios/1600/user-male-circle-filled.png')
   }
   else {
     author.innerHTML = `${newPublicPosts.val().author}`
@@ -395,7 +395,7 @@ const showPostsUserProfile = (newPostsUser) => {
 
   if (`${newPostsUser.val().author}` == 'undefined') {
       author.innerHTML = `${newPostsUser.val().email}`
-      image.setAttribute('src', 'https://cdn.icon-icons.com/icons2/1540/PNG/128/cinterior150_107120.png')
+      image.setAttribute('src', 'https://png.icons8.com/ios/1600/user-male-circle-filled.png')
   }
   else {
       author.innerHTML = `${newPostsUser.val().author}`
