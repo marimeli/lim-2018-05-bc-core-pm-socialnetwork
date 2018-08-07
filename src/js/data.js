@@ -55,7 +55,16 @@ const showFeed = () => {
   callModalRegister.style.display = 'none';
   callModalLogin.style.display = 'none';
   postsContainer.style.display = 'block';
-}
+};
+
+
+window.myProfile = () => {
+    /* allPostsWall.style.display = 'none';  */
+    postsContainer.style.display = 'block'; //postcontainer
+    profileContainer.style.display = 'block'; //profileContainer
+    /* titlePublicaciones.style.display = 'block'; //solo es el titulo */
+};
+
 
 
 //*********WINDOWS ONLOAD***********
