@@ -19,13 +19,29 @@ const postComposerContainer = document.getElementById('post-composer-container')
 const textComposerArea = document.getElementById('text-composer-area'); //área para hacer una publicación
 const sendPostButton = document.getElementById('send-post'); //botón para publicar
 
-
-
-
 const statusOfPrivacy = document.getElementById('status-of-privacy');
 const feedButton = document.getElementById('feed-button');
 const profileButton = document.getElementById('profile-button');
 
+
+/* FUNCIONES */
+
+const showFeed = () => {
+  postComposerContainer.style.display = 'none';
+  profileContainer.style.display = 'none';
+  logoutButton.style.display = 'block';
+  callModalRegister.style.display = 'none';
+  callModalLogin.style.display = 'none';
+  publicContainer.style.display = 'block';
+  privateContainer.style.display = 'none'; 
+};
+
+const myProfile = () => {
+  postComposerContainer.style.display = 'block';
+    profileContainer.style.display = 'block'; //profileContainer
+    publicContainer.style.display = 'none';
+    privateContainer.style.display = 'block';   
+};
 
 
 // Accordion
@@ -57,7 +73,11 @@ logoutButton.addEventListener('click', logoutWithFirebase);
 
 sendPostButton.addEventListener('click', writtingPost);
 
-feedButton.addEventListener('click', showFeed);
 
+
+feedButton.addEventListener('click', showFeed);
 profileButton.addEventListener('click', myProfile);
+
+
+
 

@@ -5,7 +5,6 @@ window.registerWithFirebase = () => {
     .then(() => {
       console.log('usuario creado con éxito');
       alert('Su usuario fue creado con éxito')
-
     })
     .catch((error) => {
       //Corregir
@@ -50,27 +49,9 @@ const showContainers = () => {
   profileButton.style.display = 'none';  
 };
 
-const showFeed = () => {
-  postComposerContainer.style.display = 'none';
-  profileContainer.style.display = 'none';
-  logoutButton.style.display = 'block';
-  callModalRegister.style.display = 'none';
-  callModalLogin.style.display = 'none';
-  publicContainer.style.display = 'block';
-  privateContainer.style.display = 'none';
-  
-};
 
 
-window.myProfile = () => {
-  postComposerContainer.style.display = 'block';
 
-    profileContainer.style.display = 'block'; //profileContainer
-
-    publicContainer.style.display = 'none';
-    privateContainer.style.display = 'block';
-    
-};
 
 
 
@@ -112,6 +93,8 @@ window.onload = () => {
     console.log('User > ' + JSON.stringify(user));
     getPrivatePostbyFirebase(user.uid);
     getPublicPostByFirebase(user.uid);
+
+    myProfile();
   });
 
 };
