@@ -48,6 +48,7 @@ const showContainers = () => {
   postsContainer.style.display = 'block';
   feedButton.style.display = 'none';
   profileButton.style.display = 'none';  
+  acordion.style.display = 'none'; 
 };
 
 const showFeed = () => {

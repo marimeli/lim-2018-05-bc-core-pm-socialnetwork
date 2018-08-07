@@ -8,6 +8,8 @@ const profileContainer = document.getElementById('profile-container');
 const userName = document.getElementById('userName');
 const userImage = document.getElementById('user-image');
 const alertBox = document.getElementById('alert-box');
+const acordion = document.getElementById('acordeon');
+
 //TIMELINE
 const addBanner = document.getElementById('add-banner');
 
