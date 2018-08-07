@@ -24,37 +24,6 @@ window.registerWithFirebase = () => {
     });
 };
 
-//Oculta y muestra bloque de perfil de acuerdo al estado del usuario
-const hideContainers = () => {
-  postComposerContainer.style.display = 'block';
-  profileContainer.style.display = 'block';
-  logoutButton.style.display = 'block';
-  callModalRegister.style.display = 'none';
-  callModalLogin.style.display = 'none';
-  postsContainer.style.display = 'block';
-  feedButton.style.display = 'block';
-  profileButton.style.display = 'block';
-  alertBox.style.display = 'none';
-  addBanner.style.display = 'none';
-};
-
-const showContainers = () => {
-  postComposerContainer.style.display = 'none';
-  profileContainer.style.display = 'none';
-  logoutButton.style.display = 'none';
-  callModalRegister.style.display = 'block';
-  callModalLogin.style.display = 'block';
-  postsContainer.style.display = 'block';
-  feedButton.style.display = 'none';
-  profileButton.style.display = 'none';  
-};
-
-
-
-
-
-
-
 //*********WINDOWS ONLOAD***********
 window.onload = () => {
   //Listener en tiempo real EL CHISMOSO
@@ -76,15 +45,10 @@ window.onload = () => {
       } else {
         userImage.setAttribute('src', user.photoURL);
       }
-
       //Muestra perfil y container para publicar
       hideContainers();
-
       writeUserData(user.uid, user.displayName, user.email, user.photoURL);
-      // getAllPostsbyFirebase(user.uid)
 
-
-      
     } else {//Si NO está logueado, mostramos formulario(OPCION LOGGEDOUT)
       console.log('Usuario NO logueado');
       showContainers();

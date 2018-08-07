@@ -43,6 +43,32 @@ const myProfile = () => {
     privateContainer.style.display = 'block';   
 };
 
+//Cuando inicia sesión, se ejecuta la función que oculta contenedores y modales.
+const hideContainers = () => {
+  postComposerContainer.style.display = 'block';
+  profileContainer.style.display = 'block';
+  logoutButton.style.display = 'block';
+  callModalRegister.style.display = 'none';
+  callModalLogin.style.display = 'none';
+  postsContainer.style.display = 'block';
+  feedButton.style.display = 'block';
+  profileButton.style.display = 'block';
+  alertBox.style.display = 'none';
+  addBanner.style.display = 'none';
+};
+
+//Cuando cierra sesión, se ejecuta la función que muestra contenedores.
+const showContainers = () => {
+  postComposerContainer.style.display = 'none';
+  profileContainer.style.display = 'none';
+  logoutButton.style.display = 'none';
+  callModalRegister.style.display = 'block';
+  callModalLogin.style.display = 'block';
+  postsContainer.style.display = 'block';
+  feedButton.style.display = 'none';
+  profileButton.style.display = 'none';  
+};
+
 
 // Accordion
 const myFunction = (id) => {
