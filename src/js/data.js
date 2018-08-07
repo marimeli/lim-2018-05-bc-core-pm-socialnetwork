@@ -47,7 +47,8 @@ const showContainers = () => {
   callModalLogin.style.display = 'block';
   postsContainer.style.display = 'block';
   feedButton.style.display = 'none';
-  profileButton.style.display = 'none';  
+  profileButton.style.display = 'none'; 
+  
 };
 
 const showFeed = () => {
@@ -59,6 +60,7 @@ const showFeed = () => {
   publicContainer.style.display = 'block';
   privateContainer.style.display = 'none';
   
+  
 };
 
 
@@ -69,6 +71,7 @@ window.myProfile = () => {
 
     publicContainer.style.display = 'none';
     privateContainer.style.display = 'block';
+    
     
 };
 
@@ -97,6 +100,7 @@ window.onload = () => {
       }
 
       //Muestra perfil y container para publicar
+      
       hideContainers();
 
       writeUserData(user.uid, user.displayName, user.email, user.photoURL);
@@ -112,6 +116,7 @@ window.onload = () => {
     console.log('User > ' + JSON.stringify(user));
     getPrivatePostbyFirebase(user.uid);
     getPublicPostByFirebase(user.uid);
+    
   });
 
 };
