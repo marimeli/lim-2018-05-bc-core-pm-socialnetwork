@@ -5,6 +5,7 @@ window.registerWithFirebase = () => {
     .then(() => {
       console.log('usuario creado con éxito');
       alert('Su usuario fue creado con éxito')
+
     })
     .catch((error) => {
       //Corregir
@@ -24,7 +25,6 @@ window.registerWithFirebase = () => {
     });
 };
 
-<<<<<<< HEAD
 //Oculta y muestra bloque de perfil de acuerdo al estado del usuario
 const hideContainers = () => {
   postComposerContainer.style.display = 'block';
@@ -35,8 +35,6 @@ const hideContainers = () => {
   postsContainer.style.display = 'block';
   feedButton.style.display = 'block';
   profileButton.style.display = 'block';
-  alertBox.style.display = 'none';
-  addBanner.style.display = 'none';
 };
 
 const showContainers = () => {
@@ -47,8 +45,7 @@ const showContainers = () => {
   callModalLogin.style.display = 'block';
   postsContainer.style.display = 'block';
   feedButton.style.display = 'none';
-  profileButton.style.display = 'none';  
-  acordion.style.display = 'none'; 
+  profileButton.style.display = 'none';
 };
 
 const showFeed = () => {
@@ -57,26 +54,19 @@ const showFeed = () => {
   logoutButton.style.display = 'block';
   callModalRegister.style.display = 'none';
   callModalLogin.style.display = 'none';
-  publicContainer.style.display = 'block';
-  privateContainer.style.display = 'none';
-  
+  postsContainer.style.display = 'block';
 };
 
 
 window.myProfile = () => {
-  postComposerContainer.style.display = 'block';
-
+    /* allPostsWall.style.display = 'none';  */
+    postsContainer.style.display = 'block'; //postcontainer
     profileContainer.style.display = 'block'; //profileContainer
-
-    publicContainer.style.display = 'none';
-    privateContainer.style.display = 'block';
-    
+    /* titlePublicaciones.style.display = 'block'; //solo es el titulo */
 };
 
 
 
-=======
->>>>>>> 6b38473f5e0c3008be9bef47351b2901629d0e79
 //*********WINDOWS ONLOAD***********
 window.onload = () => {
   //Listener en tiempo real EL CHISMOSO
@@ -99,22 +89,17 @@ window.onload = () => {
         userImage.setAttribute('src', user.photoURL);
       }
       //Muestra perfil y container para publicar
-      
       hideContainers();
-      writeUserData(user.uid, user.displayName, user.email, user.photoURL);
 
+      writeUserData(user.uid, user.displayName, user.email, user.photoURL);
+      getAllPostsbyFirebase(user.uid)
     } else {//Si NO está logueado, mostramos formulario(OPCION LOGGEDOUT)
       console.log('Usuario NO logueado');
       showContainers();
     }
     //Imprimimos datos que Firebase tiene del usuario
     console.log('User > ' + JSON.stringify(user));
-    getPrivatePostbyFirebase(user.uid);
-    getPublicPostByFirebase(user.uid);
-
-    myProfile();
   });
-
 };
 
 //*********LOGIN EMAIL***********
@@ -242,7 +227,7 @@ const printPublicPost = (newPublicPosts) => {
   btnLike.setAttribute('id', postskey);
 
   btnLike.setAttribute('class', "w3-button w3-theme-d1 w3-margin-bottom");
-
+  // btnLike.setAttribute('style','margin: 2px')
   
   const contadorlike = document.createElement('a');
   contadorlike.setAttribute('class', 'w3-button w3-margin-bottom ')
@@ -272,7 +257,7 @@ const printPublicPost = (newPublicPosts) => {
 
   })
 
-  publicContainer.appendChild(contPost);
+  postsContainer.appendChild(contPost);
   contPost.appendChild(image);
   contPost.appendChild(author);
   contPost.appendChild(line);
@@ -281,14 +266,10 @@ const printPublicPost = (newPublicPosts) => {
   contPost.appendChild(line);
   contPost.appendChild(contadorlike);
   contPost.appendChild(btnLike);
-<<<<<<< HEAD
-
-=======
-  
->>>>>>> 8445d41c443311a698e5d4af91093023e4dafb88
+  // btnLike.appendChild(icolike);
   if (`${newPublicPosts.val().author}` == 'undefined') {
     author.innerHTML = `${newPublicPosts.val().email}`
-    image.setAttribute('src', 'https://png.icons8.com/ios/1600/user-male-circle-filled.png')
+    image.setAttribute('src', 'https://cdn.icon-icons.com/icons2/1540/PNG/128/cinterior150_107120.png')
   }
   else {
     author.innerHTML = `${newPublicPosts.val().author}`
@@ -315,7 +296,11 @@ const showPostsUserProfile = (newPostsUser) => {
   const author = document.createElement('h4');
   author.setAttribute('class', "author");
   author.setAttribute('style', "margin-top: 22px");
+  // author.setAttribute('class',  )
 
+  /* const author = document.createElement('h4');
+  author.setAttribute('style', "margin-top: 22px");
+  author.setAttribute('class', "author"); */
 
   const textPost = document.createElement('p');
   textPost.setAttribute('class', "w3-left w3-circle w3-margin-right");
@@ -331,7 +316,8 @@ const showPostsUserProfile = (newPostsUser) => {
   btnEdit.setAttribute('id', postskey);
   btnEdit.setAttribute('class', "w3-button w3-theme-d1 w3-margin-bottom")
   btnEdit.setAttribute('style', 'margin: 10px')
-
+/*   const icoEdit = document.createElement('i');
+  icoEdit.setAttribute('class', 'fas fa-pen'); */
 
   const btnDelete = document.createElement('input');
   btnDelete.setAttribute('value', 'Borrar');
@@ -339,10 +325,8 @@ const showPostsUserProfile = (newPostsUser) => {
   btnDelete.setAttribute('id', postskey);
   btnDelete.setAttribute('class', "w3-button w3-theme-d1 w3-margin-bottom");
   btnDelete.setAttribute('style', 'margin: 10px');
-<<<<<<< HEAD
-
-=======
->>>>>>> 8445d41c443311a698e5d4af91093023e4dafb88
+/*   const icoDelete = document.createElement('i');
+  icoDelete.setAttribute('class', 'fas fa-trash'); */
 
 
   btnDelete.addEventListener('click', (e) => {
@@ -356,7 +340,8 @@ const showPostsUserProfile = (newPostsUser) => {
           }
       }
   });
-
+/* 
+  while(contPost.firstChild) contPost.removeChild(contPost.firstChild); */
     
 
   btnEdit.addEventListener('click', (e) => {
@@ -389,13 +374,14 @@ const showPostsUserProfile = (newPostsUser) => {
               firebase.database().ref().update(updatesPost);
               reloadPage();
           }
-
+         /*  btnSave.style.display = 'none';
+          btnEdit.style.display = 'block'; */
           textPost.contentEditable = "false";
       })
       contPost.appendChild(btnSave);
   });
 
-  privateContainer.appendChild(contPost);
+  postsContainer.appendChild(contPost);
   contPost.appendChild(image);
   contPost.appendChild(author);
   contPost.appendChild(line);
@@ -407,9 +393,8 @@ const showPostsUserProfile = (newPostsUser) => {
 
   if (`${newPostsUser.val().author}` == 'undefined') {
       author.innerHTML = `${newPostsUser.val().email}`
-      image.setAttribute('src', 'https://png.icons8.com/ios/1600/user-male-circle-filled.png')
+      image.setAttribute('src', 'https://cdn.icon-icons.com/icons2/1540/PNG/128/cinterior150_107120.png')
   }
-  
   else {
       author.innerHTML = `${newPostsUser.val().author}`
       image.setAttribute('src', `${newPostsUser.val().image}`)
@@ -417,25 +402,18 @@ const showPostsUserProfile = (newPostsUser) => {
 };
 
 //  Función para traer todos los posts almacenados en Firebase. 
-
-const getPublicPostByFirebase = (uid) => {
-  // Trae los posts de todos los usuarios (Públicos)
-  const allUsersPosts = firebase.database().ref('posts');
-  allUsersPosts.on("child_added", newPublicPosts => {
-    printPublicPost(newPublicPosts);
-  });
-};
-
-
-const getPrivatePostbyFirebase = (uid) => {
+const getAllPostsbyFirebase = (uid) => {
   //Trae solo los posts del usuario (Personales)
   const userPosts = firebase.database().ref('user-posts').child(uid);
   userPosts.on("child_added", newUserPosts => {
     showPostsUserProfile(newUserPosts);
   });
+  //Trae los posts de todos los usuarios (Públicos)
+  const allUsersPosts = firebase.database().ref('posts');
+  allUsersPosts.on("child_added", newPublicPosts => {
+    printPublicPost(newPublicPosts);
+  });
 };
-
-
 
 //  Función para escribir un post
 
@@ -482,9 +460,9 @@ const writePrivateUserPost = () => {
 const writtingPost = () => {
   const composerAreaValue = textComposerArea.value;
   const privacyValue = statusOfPrivacy.value;
-
+  /* const select = selectPublicPrivate.value; */
   if (composerAreaValue.length === 0 && composerAreaValue === '') {
-    alert('Escribe un texto antes de publicar');
+    alert('Escribe un texto antes de enviar');
 
   } else {
     if (privacyValue == 'public') {
