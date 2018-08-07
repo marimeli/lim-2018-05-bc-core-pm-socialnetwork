@@ -14,7 +14,9 @@ const sectionPosts = document.getElementById('section-posts');
 const postsAreaContainer= document.getElementById('posts-area');
 
 
-const postsContainer = document.getElementById('posts-container'); //contenedor que guardará todos los posts que se creen dinámicamente  */
+const postsContainerFeed = document.getElementById('posts-container-feed'); //contenedor que guardará todos los posts que se creen dinámicamente  */
+const postsContainerProfile = document.getElementById('posts-container-profile');
+
 const postComposerContainer = document.getElementById('post-composer-container'); //contenedor de base de datos
 const textComposerArea = document.getElementById('text-composer-area'); //área para hacer una publicación
 const sendPostButton = document.getElementById('send-post'); //botón para publicar
@@ -59,7 +61,7 @@ logoutButton.addEventListener('click', logoutWithFirebase);
 
 sendPostButton.addEventListener('click', writtingPost);
 
+/* Botones para mostrar seccion inicio y mi perfil */
 feedButton.addEventListener('click', showFeed);
-
 profileButton.addEventListener('click', myProfile);
 
