@@ -5,7 +5,6 @@ window.registerWithFirebase = () => {
     .then(() => {
       console.log('usuario creado con éxito');
       alert('Su usuario fue creado con éxito')
-
     })
     .catch((error) => {
       //Corregir
@@ -24,55 +23,6 @@ window.registerWithFirebase = () => {
       console.log('Error Firebase > Mensaje > ' + error.messaje); 
     });
 };
-
-//Oculta y muestra bloque de perfil de acuerdo al estado del usuario
-const hideContainers = () => {
-  postComposerContainer.style.display = 'block';
-  profileContainer.style.display = 'block';
-  logoutButton.style.display = 'block';
-  callModalRegister.style.display = 'none';
-  callModalLogin.style.display = 'none';
-  postsContainer.style.display = 'block';
-  feedButton.style.display = 'block';
-  profileButton.style.display = 'block';
-  alertBox.style.display = 'none';
-  addBanner.style.display = 'none';
-};
-
-const showContainers = () => {
-  postComposerContainer.style.display = 'none';
-  profileContainer.style.display = 'none';
-  logoutButton.style.display = 'none';
-  callModalRegister.style.display = 'block';
-  callModalLogin.style.display = 'block';
-  postsContainer.style.display = 'block';
-  feedButton.style.display = 'none';
-  profileButton.style.display = 'none';  
-};
-
-const showFeed = () => {
-  postComposerContainer.style.display = 'none';
-  profileContainer.style.display = 'none';
-  logoutButton.style.display = 'block';
-  callModalRegister.style.display = 'none';
-  callModalLogin.style.display = 'none';
-  publicContainer.style.display = 'block';
-  privateContainer.style.display = 'none';
-  
-};
-
-
-window.myProfile = () => {
-  postComposerContainer.style.display = 'block';
-
-    profileContainer.style.display = 'block'; //profileContainer
-
-    publicContainer.style.display = 'none';
-    privateContainer.style.display = 'block';
-    
-};
-
-
 
 //*********WINDOWS ONLOAD***********
 window.onload = () => {
@@ -95,15 +45,10 @@ window.onload = () => {
       } else {
         userImage.setAttribute('src', user.photoURL);
       }
-
       //Muestra perfil y container para publicar
       hideContainers();
-
       writeUserData(user.uid, user.displayName, user.email, user.photoURL);
-      // getAllPostsbyFirebase(user.uid)
 
-
-      
     } else {//Si NO está logueado, mostramos formulario(OPCION LOGGEDOUT)
       console.log('Usuario NO logueado');
       showContainers();
@@ -112,6 +57,8 @@ window.onload = () => {
     console.log('User > ' + JSON.stringify(user));
     getPrivatePostbyFirebase(user.uid);
     getPublicPostByFirebase(user.uid);
+
+    myProfile();
   });
 
 };
