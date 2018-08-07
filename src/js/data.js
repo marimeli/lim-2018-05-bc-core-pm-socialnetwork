@@ -36,7 +36,7 @@ const hideContainers = () => {
   feedButton.style.display = 'block';
   profileButton.style.display = 'block';
   alertBox.style.display = 'none';
-  // addBanner.style.display = 'none';
+  addBanner.style.display = 'none';
 };
 
 const showContainers = () => {

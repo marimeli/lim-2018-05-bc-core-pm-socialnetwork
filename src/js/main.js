@@ -9,7 +9,7 @@ const userName = document.getElementById('userName');
 const userImage = document.getElementById('user-image');
 const alertBox = document.getElementById('alert-box');
 //TIMELINE
-// const addBanner = document.getElementById('add-banner');
+const addBanner = document.getElementById('add-banner');
 const postsContainer = document.getElementById('posts-container'); //contenedor que guardará todos los posts que se creen dinámicamente  */
 const privateContainer = document.getElementById('private-container'); //contenedor de post privados
 const publicContainer= document.getElementById('public-container'); //contenedor de post publicos
