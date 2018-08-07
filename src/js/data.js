@@ -57,23 +57,12 @@ const showFeed = () => {
   postsContainer.style.display = 'block';
 };
 
-// buttonProfile.addEventListener('click', () => {
-//   allPostsWall.style.display = 'none';
-//   userPostProfile.style.display = 'block';
-//   profileInformation.style.display = 'block';
-//   perfilNoticias.setAttribute("class", "newsProfile");
-//   titlePublicaciones.style.display = 'block';
-
-// })
-
 
 window.myProfile = () => {
-  thePublicPosts.style.display = 'none';
-  publicWallContainer.style.display = 'none';
-  postsContainer.style.display = 'block';
-  postComposerContainer.style.display = 'block';
-  profileContainer.style.display = 'block';
-  myPersonalPosts.style.display = 'block';
+    /* allPostsWall.style.display = 'none';  */
+    postsContainer.style.display = 'block'; //postcontainer
+    profileContainer.style.display = 'block'; //profileContainer
+    /* titlePublicaciones.style.display = 'block'; //solo es el titulo */
 };
 
 
@@ -267,7 +256,7 @@ const printPublicPost = (newPublicPosts) => {
     firebase.database().ref().update(updatesPost);
 
   })
-  
+
   postsContainer.appendChild(contPost);
   contPost.appendChild(image);
   contPost.appendChild(author);
@@ -292,16 +281,6 @@ const printPublicPost = (newPublicPosts) => {
 const showPostsUserProfile = (newPostsUser) => {
 
   const postskey = newPostsUser.key
-
-  console.log("New post key > " + newPostsUser)
-  console.log("Post de usuario > " + postskey)
-  function getParent(newPostsUser) {
-    var ref = newPostsUser.ref();
-    var result =  ref.parent().name();
-    return result
-    console.log(newPostsUser.parent().name())
-    console.log(newPostsUser.ref())
-   }
 
   const contPost = document.createElement('div');
   contPost.setAttribute('class', "w3-container w3-card w3-white w3-round w3-margin")
@@ -402,7 +381,7 @@ const showPostsUserProfile = (newPostsUser) => {
       contPost.appendChild(btnSave);
   });
 
-  privateWallContainer.appendChild(contPost);
+  postsContainer.appendChild(contPost);
   contPost.appendChild(image);
   contPost.appendChild(author);
   contPost.appendChild(line);
