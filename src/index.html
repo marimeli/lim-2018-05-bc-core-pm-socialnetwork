@@ -25,7 +25,7 @@
                 </a>
                 <!--  Título de la red social -->
                 <a class="w3-bar-item w3-button w3-padding-large w3-theme-d4 w3-hover-white">
-                    <img src="logo.png" alt=""> Cooltural</a>
+                    <img src="logo.png" alt="logo cooltural"> Cooltural</a>
                 <!-- Opciones de menu del navbar -->
                 <a id="feed-button" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Inicio">
                     <i class="fa fa-globe"></i>
@@ -34,11 +34,11 @@
                     <i class="fa fa-user"></i>
                 </a>
                 <!--  Opciones para logeo -->
-                <a class="w3-bar-item w3-button w3-right w3-hide-small w3-padding-large w3-hover-white" title="Profile Options">
+                <div class="w3-bar-item w3-button w3-right w3-hide-small w3-padding-large w3-hover-white">
                     <input type="button" class="w3-bar-item w3-button w3-padding-large" id="call-modal-register" value="Registrarse">
                     <input type="button" class="w3-bar-item w3-button w3-padding-large" id="call-modal-login" value="Iniciar Sesión">
                     <input type="button" class="w3-bar-item w3-button w3-padding-large" id="logout" value="Cerrar Sesión">
-                </a>
+                </div>
             </div>
         </div>
         <!-- Navbar on small screens -->
@@ -60,7 +60,7 @@
                         <div id="profile-container" class="w3-container">
                             <h4 id="userName" class="w3-center"></h4>
                             <p id="user-name" class="w3-center">
-                                <img id="user-image" class="w3-circle" style="height:106px;width:106px" alt="user photo">
+                                <img id="user-image" src="user.png" class="w3-circle" style="height:106px;width:106px" alt="user photo">
                                 <!--  height="80" width="80" -->
                             </p>
                             <hr>
@@ -93,43 +93,28 @@
                                     <br>
                                     <div class="w3-half">
                                         <img src="https://images.adsttc.com/media/images/579a/3ebb/e58e/ce2c/9200/001a/slideshow/%C2%A9_Archi._Archivo_Digital_de_Arte_Peruano._Vista_a%C3%A9rea_desde_fachada_norte_del_Palacio_de_la_Exposici%C3%B3n._2016.jpg?1469726352"
-                                            style="width:100%" class="w3-margin-bottom">
+                                            style="width:100%" class="w3-margin-bottom" alt="mali">
                                     </div>
                                     <div class="w3-half">
                                         <img src="https://www.wiriko.org/wp-content/uploads/2017/02/14670826_1293756790669561_1281837250935658160_n.jpg" style="width:100%"
-                                            class="w3-margin-bottom">
+                                            class="w3-margin-bottom" alt="buika concert">
                                     </div>
                                     <div class="w3-half">
-                                        <img src="http://www.museodata.com/images/museums/MALI_Patio_central.jpg" style="width:100%" class="w3-margin-bottom">
+                                        <img src="http://www.museodata.com/images/museums/MALI_Patio_central.jpg" style="width:100%" class="w3-margin-bottom" alt="mali interior">
                                     </div>
                                     <div class="w3-half">
-                                        <img src="http://dafo.cultura.pe/wp-content/uploads/2016/01/6-festival-lima-independiente.jpg" style="width:100%" class="w3-margin-bottom">
+                                        <img src="http://dafo.cultura.pe/wp-content/uploads/2016/01/6-festival-lima-independiente.jpg" style="width:100%" class="w3-margin-bottom" alt="festival cine">
                                     </div>
                                     <div class="w3-half">
                                         <img src="https://img.elcomercio.pe/files/ec_article_multimedia_gallery/uploads/2018/03/07/5aa0286c21e54.jpeg" style="width:100%"
-                                            class="w3-margin-bottom">
+                                            class="w3-margin-bottom" alt="monumental callao">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <br>
-
-                    <!-- Interests -->
-                    <!-- <div class="w3-card w3-round w3-white w3-hide-small">
-                        <div class="w3-container">
-                            <p>Intereses</p>
-                            <p>
-                                <span class="w3-tag w3-small w3-theme-d5">Music</span>
-                                <span class="w3-tag w3-small w3-theme-d2">Cine</span>
-                                <span class="w3-tag w3-small w3-theme-l1">UX</span>
-                                <span class="w3-tag w3-small w3-theme-l4">Art</span>
-                                <span class="w3-tag w3-small w3-theme-l5">Photography</span>
-                            </p>
-                        </div>
-                    </div> -->
                     <br>
-
                     <!-- Alert Box -->
                     <div id="alert-box" class="w3-container w3-display-container w3-round w3-theme-l4 w3-border w3-theme-border w3-margin-bottom w3-hide-small">
                         <span onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-l3 w3-display-topright">
@@ -141,26 +126,14 @@
                         <br>
                         <p>¿Todavía no tienes una cuenta?
                             <br> ¡Regístrate! </p>
-
                     </div>
-
                     <!-- End Left Column -->
                 </div>
-
                 <!-- Middle Column -->
                 <div class="w3-col m7">
-
                     <div class="w3-row-padding">
                         <div class="w3-col m12">
                             <div class="w3-card w3-round w3-white">
-                                <!-- BASE DE DATOS -->
-                                <!--  <div id="bd" class="hidden">
-            <textarea name="Publicación" id="post"></textarea>
-            <input type="button" class="btn btn-lg btn-success btn-block" value="Publicar" id="btn-save">
-        </div>
-        <div id="posts" class="hidden">
-            <h3>Inicio</h3>
-        </div> -->
                                 <!-- ESPACIO PARA PUBLICAR UN POST
                             Esta sección solo se mostrará para los usuarios logueados, osea debe al inicio estar HIDE para anonymous-->
                                 <div id="post-composer-container" class="w3-container w3-padding show">
@@ -176,10 +149,6 @@
                                         <option value="public">Público</option>
                                         <option value="private">Privado</option>
                                     </select>
-                                    <!--    <input id="photo-selector" type="file"> -->
-                                    <!-- Botón subir foto -->
-                                    <!-- <button type="button" id="send-photo" class="w3-button w3-theme">
-                                    <i class="fa fa-camera"></i>  Subir imagen</button> -->
                                 </div>
                             </div>
                         </div>
@@ -187,18 +156,15 @@
                     <!-- POSTS SECTION, LOS QUE SE CREAN DINAMICAMENTE -->
                     <div id="posts-container">
                         <div id="public-container">
-
                         </div>
                         <div id="private-container">
                         </div>
-
                         <div class="w3-container w3-card w3-white w3-round w3-margin">
-                            <img id="add-banner" src="banner.jpg" alt="">
+                            <img id="add-banner" src="banner.jpg" alt="banner">
                         </div>
                     </div>
                     <!-- End Section Post -->
                     <!-- Banner de registro -->
-
                 </div>
                 <!-- End Middle Column -->
                 <!-- Right Column -->
@@ -206,7 +172,7 @@
                     <div class="w3-card w3-round w3-white w3-center">
                         <div class="w3-container">
                             <p>Próximos eventos:</p>
-                            <img src="https://www.wiriko.org/wp-content/uploads/2017/02/14670826_1293756790669561_1281837250935658160_n.jpg" alt="Forest"
+                            <img src="https://www.wiriko.org/wp-content/uploads/2017/02/14670826_1293756790669561_1281837250935658160_n.jpg" alt="buika"
                                 style="width:100%;">
                             <p>
                                 <strong>Buika - En concierto</strong>
@@ -222,7 +188,7 @@
                     <div class="w3-card w3-round w3-white w3-center">
                         <div class="w3-container">
                             <p>Próximos eventos:</p>
-                            <img src="festival-cine-pupc.jpg" alt="Forest" style="width:100%;">
+                            <img src="festival-cine-pupc.jpg" alt="cine upc" style="width:100%;">
                             <p>
                                 <strong>22 Festival de cine de Lima</strong>
                             </p>
@@ -233,39 +199,13 @@
                         </div>
                     </div>
                     <br>
-
-                    <!-- <div class="w3-card w3-round w3-white w3-center">
-                        <div class="w3-container">
-                            <p>Solicitud de amistad</p>
-                            <img src="user.png" alt="Avatar" style="width:50%">
-                            <br>
-                            <span>usuarioW</span>
-                            <div class="w3-row w3-opacity">
-                                <div class="w3-half">
-                                    <button class="w3-button w3-block w3-green w3-section" title="Accept">
-                                        <i class="fa fa-check"></i>
-                                    </button>
-                                </div>
-                                <div class="w3-half">
-                                    <button class="w3-button w3-block w3-red w3-section" title="Decline">
-                                        <i class="fa fa-remove"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <! End Right Column -->
+                    <!-- End Right Column -->
                 </div>
                 <!-- End Grid -->
-
             </div>
-
             <!-- End Page Container -->
-
         </div>
         <br>
-
         <!-- Footer -->
         <footer class="w3-container w3-theme-d3 w3-padding-16">
             <!-- <h5>Footer</h5> -->
@@ -274,12 +214,10 @@
         <footer class="w3-container w3-theme-d5">
         </footer>
     </main>
-
     <!-- MODAL LOGIN -->
     <div id="loginModal" class="w3-modal">
         <!-- LOGIN -->
         <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
-
             <form class="w3-container">
                 <div class="w3-center">
                     <br>
@@ -290,7 +228,7 @@
                     <label>
                         <b>Correo electrónico</b>
                     </label>
-                    <input class="w3-input w3-border w3-margin-bottom" id="email" class="form-control" placeholder="yourmail@example.com" name="email"
+                    <input class="w3-input w3-border w3-margin-bottom" id="email" placeholder="yourmail@example.com" name="email"
                         type="email">
                     <!-- <input id="email" class="w3-input w3-border w3-margin-bottom" placeholder="yourmail@example.com" class="form-control" name="email" type="email" required> -->
                     <p id="error-email" style="color: red"></p>
@@ -298,10 +236,8 @@
                         <b>Password</b>
                     </label>
                     <input id="password" class="w3-input w3-border" placeholder="Your Password" name="password" type="password">
-                    <!-- <input id="password" class="w3-input w3-border" placeholder="Password" name="password" type="password"> -->
                     <p id="error-password" style="color: red"></p>
                     <!-- <input class="w3-check w3-margin-top" type="checkbox" checked="checked"> Recordarme -->
-                    <!-- <button id="login-btn" class="w3-button w3-block w3-green w3-section w3-padding">Iniciar sesión</button> -->
                     <input id="login-btn" class="w3-button w3-block w3-green w3-section w3-padding" type="button" value="Iniciar sesión">
                 </div>
                 <div class="w3-center">
@@ -310,10 +246,6 @@
                     <a id="google-button" class="fa fa-google"></a>
                 </div>
                 <br>
-                <!--     <button id="facebook-button"> Acceder con Facebook</button>
-                <input id="google-button" class="fa fa-google" type="submit" value="Acceder con Google"> -->
-                <!-- <input  class="btn btn-lg btn-facebook btn-block" tipe="button" value="Acceder con Facebook"> -->
-
                 <div class="w3-container  w3-padding-16 w3-light-grey">
                     <input id="cancel-button" class="w3-button w3-red" type="button" value="Cancel">
                     <span class="w3-right w3-padding w3-hide-small">¿Olvidaste
@@ -336,7 +268,7 @@
                     <label>
                         <b>Correo electrónico</b>
                     </label>
-                    <input class="w3-input w3-border w3-margin-bottom" id="email-register" class="form-control" placeholder="yourmail@example.com"
+                    <input class="w3-input w3-border w3-margin-bottom" id="email-register" placeholder="yourmail@example.com"
                         name="email" type="email" required>
                     <p id="advice-emailRegister" style="color: red"></p>
                     <label>
@@ -346,7 +278,6 @@
                     <p id="advice-passwordRegister" style="color: red"></p>
                     <input id="register-button" class="w3-button w3-block w3-green w3-section w3-padding" type="button" value="Registrarse">
                 </div>
-
                 <div class="w3-container  w3-padding-16 w3-light-grey">
                     <input id="register-cancel-button" class="w3-button w3-red" type="button" value="Cancel">
                 </div>
