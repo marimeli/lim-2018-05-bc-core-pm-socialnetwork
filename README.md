@@ -47,7 +47,7 @@ Tiene mucho sentido que conectar con otra persona por nuestros intereses literar
 La educación cultural y artística desempeña un papel fundamental en la vida de los ciudadanos porque estimula experiencias y aprendizajes básicos para todas las personas. Sin embargo, en Perú y Latinoamérica existe poca difusión de actividades culturales y del talento artístico. 
 
 
-### Guía de preguntas
+
 
 ### Encuesta a usuarios
 
@@ -72,14 +72,11 @@ A partir de la encuesta online realizada a 30 usuarios, se llegó a las siguient
 
 En el Perú y en Latinoamérica hay una gran cantidad de artistas y personas interesadas en actividades culturales que carecen de un espacio digital propio en donde- además de compartir su talento y eventos-puedan generar redes de contacto. 
 
-### Persona UX 
-
-![](https://user-images.githubusercontent.com/39272944/43754558-16e811e0-99d1-11e8-947a-c7a39da98038.jpg)
-
 ### Entrevista 1 :Usuarios
 
 ### Guía de preguntas
 ![](https://user-images.githubusercontent.com/39272944/43245203-17c007a6-9073-11e8-8370-062082df3d18.jpg)
+![](https://user-images.githubusercontent.com/39272944/43755472-a3ba6f6a-99d5-11e8-9ea2-710d4402e6bc.jpg)
 
 ### Conclusiones
 
@@ -91,6 +88,10 @@ Luego de entrevistas a los usuarios llegamos a las siguientes conclusiones:
 * Los usuarios indican que desean un red social que les permita publicar  y compartir al igual que Facebook. Además, indican que quieren encontrar todos los eventos culturales. 
 * El tema visual es importante para ellos. Priorizan las imágenes sobre el texto. Desean información sucinta. Tambièn desean algo colorido.
 
+
+### Persona UX 
+
+![](https://user-images.githubusercontent.com/39272944/43754558-16e811e0-99d1-11e8-947a-c7a39da98038.jpg)
 
 ##  Benchmark: Antecedentes (Red social para artistas)
 
@@ -142,7 +143,7 @@ Resumen de entrevistas con usuarios
 ![photo5105341124570097636](https://user-images.githubusercontent.com/38727384/43291546-68b756ee-90f7-11e8-929a-0a88df9d133e.jpg)
 
 
-### - Prototipo de media fidelidad
+### - Prototipo alta fidelidad
 
 [Ver en Figma](https://www.figma.com/file/bFp2KSQNXLA33ndHvjCXKAsP/Cooltural-Social-Network?node-id=0%3A1)
 
