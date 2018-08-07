@@ -57,15 +57,20 @@ const showFeed = () => {
   logoutButton.style.display = 'block';
   callModalRegister.style.display = 'none';
   callModalLogin.style.display = 'none';
-  postsContainer.style.display = 'block';
+  publicContainer.style.display = 'block';
+  privateContainer.style.display = 'none';
+  
 };
 
 
 window.myProfile = () => {
-    /* allPostsWall.style.display = 'none';  */
-    postsContainer.style.display = 'block'; //postcontainer
+  postComposerContainer.style.display = 'block';
+
     profileContainer.style.display = 'block'; //profileContainer
-    /* titlePublicaciones.style.display = 'block'; //solo es el titulo */
+
+    publicContainer.style.display = 'none';
+    privateContainer.style.display = 'block';
+    
 };
 
 
@@ -91,18 +96,25 @@ window.onload = () => {
       } else {
         userImage.setAttribute('src', user.photoURL);
       }
+
       //Muestra perfil y container para publicar
       hideContainers();
 
       writeUserData(user.uid, user.displayName, user.email, user.photoURL);
-      getAllPostsbyFirebase(user.uid)
+      // getAllPostsbyFirebase(user.uid)
+
+
+      
     } else {//Si NO está logueado, mostramos formulario(OPCION LOGGEDOUT)
       console.log('Usuario NO logueado');
       showContainers();
     }
     //Imprimimos datos que Firebase tiene del usuario
     console.log('User > ' + JSON.stringify(user));
+    getPrivatePostbyFirebase(user.uid);
+    getPublicPostByFirebase(user.uid);
   });
+
 };
 
 //*********LOGIN EMAIL***********
@@ -260,7 +272,7 @@ const printPublicPost = (newPublicPosts) => {
 
   })
 
-  postsContainer.appendChild(contPost);
+  publicContainer.appendChild(contPost);
   contPost.appendChild(image);
   contPost.appendChild(author);
   contPost.appendChild(line);
@@ -269,7 +281,11 @@ const printPublicPost = (newPublicPosts) => {
   contPost.appendChild(line);
   contPost.appendChild(contadorlike);
   contPost.appendChild(btnLike);
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 8445d41c443311a698e5d4af91093023e4dafb88
   if (`${newPublicPosts.val().author}` == 'undefined') {
     author.innerHTML = `${newPublicPosts.val().email}`
     image.setAttribute('src', 'https://png.icons8.com/ios/1600/user-male-circle-filled.png')
@@ -323,7 +339,10 @@ const showPostsUserProfile = (newPostsUser) => {
   btnDelete.setAttribute('id', postskey);
   btnDelete.setAttribute('class', "w3-button w3-theme-d1 w3-margin-bottom");
   btnDelete.setAttribute('style', 'margin: 10px');
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8445d41c443311a698e5d4af91093023e4dafb88
 
 
   btnDelete.addEventListener('click', (e) => {
@@ -376,7 +395,7 @@ const showPostsUserProfile = (newPostsUser) => {
       contPost.appendChild(btnSave);
   });
 
-  postsContainer.appendChild(contPost);
+  privateContainer.appendChild(contPost);
   contPost.appendChild(image);
   contPost.appendChild(author);
   contPost.appendChild(line);
@@ -398,18 +417,25 @@ const showPostsUserProfile = (newPostsUser) => {
 };
 
 //  Función para traer todos los posts almacenados en Firebase. 
-const getAllPostsbyFirebase = (uid) => {
-  //Trae solo los posts del usuario (Personales)
-  const userPosts = firebase.database().ref('user-posts').child(uid);
-  userPosts.on("child_added", newUserPosts => {
-    showPostsUserProfile(newUserPosts);
-  });
-  //Trae los posts de todos los usuarios (Públicos)
+
+const getPublicPostByFirebase = (uid) => {
+  // Trae los posts de todos los usuarios (Públicos)
   const allUsersPosts = firebase.database().ref('posts');
   allUsersPosts.on("child_added", newPublicPosts => {
     printPublicPost(newPublicPosts);
   });
 };
+
+
+const getPrivatePostbyFirebase = (uid) => {
+  //Trae solo los posts del usuario (Personales)
+  const userPosts = firebase.database().ref('user-posts').child(uid);
+  userPosts.on("child_added", newUserPosts => {
+    showPostsUserProfile(newUserPosts);
+  });
+};
+
+
 
 //  Función para escribir un post
 
@@ -458,7 +484,7 @@ const writtingPost = () => {
   const privacyValue = statusOfPrivacy.value;
 
   if (composerAreaValue.length === 0 && composerAreaValue === '') {
-    alert('Escribe un texto antes de enviar');
+    alert('Escribe un texto antes de publicar');
 
   } else {
     if (privacyValue == 'public') {
