@@ -35,6 +35,8 @@ const hideContainers = () => {
   postsContainer.style.display = 'block';
   feedButton.style.display = 'block';
   profileButton.style.display = 'block';
+  alertBox.style.display = 'none';
+  addBanner.style.display = 'none';
 };
 
 const showContainers = () => {
@@ -45,7 +47,7 @@ const showContainers = () => {
   callModalLogin.style.display = 'block';
   postsContainer.style.display = 'block';
   feedButton.style.display = 'none';
-  profileButton.style.display = 'none';
+  profileButton.style.display = 'none';  
 };
 
 const showFeed = () => {

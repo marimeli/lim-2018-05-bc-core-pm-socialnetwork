@@ -43,3 +43,7 @@ p {
     width: 100%;
     resize: none;
 }
+
+#add-banner {
+    width:100%;
+}

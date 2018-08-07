@@ -7,8 +7,9 @@ const logoutButton = document.getElementById('logout');
 const profileContainer = document.getElementById('profile-container');
 const userName = document.getElementById('userName');
 const userImage = document.getElementById('user-image');
-
+const alertBox = document.getElementById('alert-box');
 //TIMELINE
+const addBanner = document.getElementById('add-banner');
 
 const sectionPosts = document.getElementById('section-posts');
 const postsAreaContainer= document.getElementById('posts-area');
