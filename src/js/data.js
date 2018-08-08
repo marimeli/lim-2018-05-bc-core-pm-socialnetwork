@@ -25,48 +25,6 @@ window.registerWithFirebase = () => {
     });
 };
 
-//Oculta y muestra bloque de perfil de acuerdo al estado del usuario
-const hideContainers = () => {
-  postComposerContainer.style.display = 'block';
-  profileContainer.style.display = 'block';
-  logoutButton.style.display = 'block';
-  callModalRegister.style.display = 'none';
-  callModalLogin.style.display = 'none';
-  postsContainer.style.display = 'block';
-  feedButton.style.display = 'block';
-  profileButton.style.display = 'block';
-};
-
-const showContainers = () => {
-  postComposerContainer.style.display = 'none';
-  profileContainer.style.display = 'none';
-  logoutButton.style.display = 'none';
-  callModalRegister.style.display = 'block';
-  callModalLogin.style.display = 'block';
-  postsContainer.style.display = 'block';
-  feedButton.style.display = 'none';
-  profileButton.style.display = 'none';
-};
-
-const showFeed = () => {
-  postComposerContainer.style.display = 'none';
-  profileContainer.style.display = 'none';
-  logoutButton.style.display = 'block';
-  callModalRegister.style.display = 'none';
-  callModalLogin.style.display = 'none';
-  postsContainer.style.display = 'block';
-};
-
-
-window.myProfile = () => {
-    /* allPostsWall.style.display = 'none';  */
-    postsContainer.style.display = 'block'; //postcontainer
-    profileContainer.style.display = 'block'; //profileContainer
-    /* titlePublicaciones.style.display = 'block'; //solo es el titulo */
-};
-
-
-
 //*********WINDOWS ONLOAD***********
 window.onload = () => {
   //Listener en tiempo real EL CHISMOSO
@@ -266,7 +224,7 @@ const printPublicPost = (newPublicPosts) => {
   contPost.appendChild(line);
   contPost.appendChild(contadorlike);
   contPost.appendChild(btnLike);
-  // btnLike.appendChild(icolike);
+  
   if (`${newPublicPosts.val().author}` == 'undefined') {
     author.innerHTML = `${newPublicPosts.val().email}`
     image.setAttribute('src', 'https://cdn.icon-icons.com/icons2/1540/PNG/128/cinterior150_107120.png')
@@ -325,8 +283,6 @@ const showPostsUserProfile = (newPostsUser) => {
   btnDelete.setAttribute('id', postskey);
   btnDelete.setAttribute('class', "w3-button w3-theme-d1 w3-margin-bottom");
   btnDelete.setAttribute('style', 'margin: 10px');
-/*   const icoDelete = document.createElement('i');
-  icoDelete.setAttribute('class', 'fas fa-trash'); */
 
 
   btnDelete.addEventListener('click', (e) => {
