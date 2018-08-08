@@ -5,7 +5,6 @@ window.registerWithFirebase = () => {
     .then(() => {
       console.log('usuario creado con éxito');
       alert('Su usuario fue creado con éxito')
-
     })
     .catch((error) => {
       //Corregir
@@ -24,51 +23,6 @@ window.registerWithFirebase = () => {
       console.log('Error Firebase > Mensaje > ' + error.messaje); 
     });
 };
-
-//Oculta y muestra bloque de perfil de acuerdo al estado del usuario
-const hideContainers = () => {
-  postComposerContainer.style.display = 'block';
-  profileContainer.style.display = 'block';
-  logoutButton.style.display = 'block';
-  callModalRegister.style.display = 'none';
-  callModalLogin.style.display = 'none';
-  postsContainer.style.display = 'block';
-  feedButton.style.display = 'block';
-  profileButton.style.display = 'block';
-  alertBox.style.display = 'none';
-  addBanner.style.display = 'none';
-};
-
-const showContainers = () => {
-  postComposerContainer.style.display = 'none';
-  profileContainer.style.display = 'none';
-  logoutButton.style.display = 'none';
-  callModalRegister.style.display = 'block';
-  callModalLogin.style.display = 'block';
-  postsContainer.style.display = 'block';
-  feedButton.style.display = 'none';
-  profileButton.style.display = 'none';  
-  acordion.style.display = 'none'; 
-};
-
-const showFeed = () => {
-  postComposerContainer.style.display = 'none';
-  profileContainer.style.display = 'none';
-  logoutButton.style.display = 'block';
-  callModalRegister.style.display = 'none';
-  callModalLogin.style.display = 'none';
-  postsContainer.style.display = 'block';
-};
-
-
-window.myProfile = () => {
-    /* allPostsWall.style.display = 'none';  */
-    postsContainer.style.display = 'block'; //postcontainer
-    profileContainer.style.display = 'block'; //profileContainer
-    /* titlePublicaciones.style.display = 'block'; //solo es el titulo */
-};
-
-
 
 //*********WINDOWS ONLOAD***********
 window.onload = () => {
@@ -92,17 +46,22 @@ window.onload = () => {
         userImage.setAttribute('src', user.photoURL);
       }
       //Muestra perfil y container para publicar
+      
       hideContainers();
-
       writeUserData(user.uid, user.displayName, user.email, user.photoURL);
-      getAllPostsbyFirebase(user.uid)
+
     } else {//Si NO está logueado, mostramos formulario(OPCION LOGGEDOUT)
       console.log('Usuario NO logueado');
       showContainers();
     }
     //Imprimimos datos que Firebase tiene del usuario
     console.log('User > ' + JSON.stringify(user));
+    getPrivatePostbyFirebase(user.uid);
+    getPublicPostByFirebase(user.uid);
+
+    myProfile();
   });
+
 };
 
 //*********LOGIN EMAIL***********
@@ -260,7 +219,7 @@ const printPublicPost = (newPublicPosts) => {
 
   })
 
-  postsContainer.appendChild(contPost);
+  publicContainer.appendChild(contPost);
   contPost.appendChild(image);
   contPost.appendChild(author);
   contPost.appendChild(line);
@@ -269,7 +228,7 @@ const printPublicPost = (newPublicPosts) => {
   contPost.appendChild(line);
   contPost.appendChild(contadorlike);
   contPost.appendChild(btnLike);
-
+  
   if (`${newPublicPosts.val().author}` == 'undefined') {
     author.innerHTML = `${newPublicPosts.val().email}`
     image.setAttribute('src', 'https://png.icons8.com/ios/1600/user-male-circle-filled.png')
@@ -325,7 +284,6 @@ const showPostsUserProfile = (newPostsUser) => {
   btnDelete.setAttribute('style', 'margin: 10px');
 
 
-
   btnDelete.addEventListener('click', (e) => {
       if (newPostsUser.key === e.target.id) {
           const question = confirm('¿Esta seguro que desea eliminar esta publicación?')
@@ -376,7 +334,7 @@ const showPostsUserProfile = (newPostsUser) => {
       contPost.appendChild(btnSave);
   });
 
-  postsContainer.appendChild(contPost);
+  privateContainer.appendChild(contPost);
   contPost.appendChild(image);
   contPost.appendChild(author);
   contPost.appendChild(line);
@@ -398,18 +356,25 @@ const showPostsUserProfile = (newPostsUser) => {
 };
 
 //  Función para traer todos los posts almacenados en Firebase. 
-const getAllPostsbyFirebase = (uid) => {
-  //Trae solo los posts del usuario (Personales)
-  const userPosts = firebase.database().ref('user-posts').child(uid);
-  userPosts.on("child_added", newUserPosts => {
-    showPostsUserProfile(newUserPosts);
-  });
-  //Trae los posts de todos los usuarios (Públicos)
+
+const getPublicPostByFirebase = (uid) => {
+  // Trae los posts de todos los usuarios (Públicos)
   const allUsersPosts = firebase.database().ref('posts');
   allUsersPosts.on("child_added", newPublicPosts => {
     printPublicPost(newPublicPosts);
   });
 };
+
+
+const getPrivatePostbyFirebase = (uid) => {
+  //Trae solo los posts del usuario (Personales)
+  const userPosts = firebase.database().ref('user-posts').child(uid);
+  userPosts.on("child_added", newUserPosts => {
+    showPostsUserProfile(newUserPosts);
+  });
+};
+
+
 
 //  Función para escribir un post
 
@@ -458,7 +423,7 @@ const writtingPost = () => {
   const privacyValue = statusOfPrivacy.value;
 
   if (composerAreaValue.length === 0 && composerAreaValue === '') {
-    alert('Escribe un texto antes de enviar');
+    alert('Escribe un texto antes de publicar');
 
   } else {
     if (privacyValue == 'public') {

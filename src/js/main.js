@@ -12,25 +12,64 @@ const acordion = document.getElementById('acordeon');
 
 //TIMELINE
 const addBanner = document.getElementById('add-banner');
-
-const sectionPosts = document.getElementById('section-posts');
-const postsAreaContainer= document.getElementById('posts-area');
-
-
 const postsContainer = document.getElementById('posts-container'); //contenedor que guardará todos los posts que se creen dinámicamente  */
+const privateContainer = document.getElementById('private-container'); //contenedor de post privados
+const publicContainer= document.getElementById('public-container'); //contenedor de post publicos
+
+
 const postComposerContainer = document.getElementById('post-composer-container'); //contenedor de base de datos
 const textComposerArea = document.getElementById('text-composer-area'); //área para hacer una publicación
 const sendPostButton = document.getElementById('send-post'); //botón para publicar
-
-const privateWallContainer = document.getElementById('private-wall'); //contenedor de post privados
-const myPersonalPosts = document.getElementById('personal-posts'); //titulo de la seccion privada
-const publicWallContainer= document.getElementById('public-wall'); //contenedor de post publicos
-const thePublicPosts= document.getElementById('public-posts'); //titulo de la seccion publica
 
 const statusOfPrivacy = document.getElementById('status-of-privacy');
 const feedButton = document.getElementById('feed-button');
 const profileButton = document.getElementById('profile-button');
 
+
+/* FUNCIONES */
+
+const showFeed = () => {
+  postComposerContainer.style.display = 'none';
+  profileContainer.style.display = 'none';
+  logoutButton.style.display = 'block';
+  callModalRegister.style.display = 'none';
+  callModalLogin.style.display = 'none';
+  publicContainer.style.display = 'block';
+  privateContainer.style.display = 'none'; 
+};
+
+const myProfile = () => {
+  postComposerContainer.style.display = 'block';
+    profileContainer.style.display = 'block'; //profileContainer
+    publicContainer.style.display = 'none';
+    privateContainer.style.display = 'block';   
+};
+
+//Cuando inicia sesión, se ejecuta la función que oculta contenedores y modales.
+const hideContainers = () => {
+  postComposerContainer.style.display = 'block';
+  profileContainer.style.display = 'block';
+  logoutButton.style.display = 'block';
+  callModalRegister.style.display = 'none';
+  callModalLogin.style.display = 'none';
+  postsContainer.style.display = 'block';
+  feedButton.style.display = 'block';
+  profileButton.style.display = 'block';
+  alertBox.style.display = 'none';
+  addBanner.style.display = 'none';
+};
+
+//Cuando cierra sesión, se ejecuta la función que muestra contenedores.
+const showContainers = () => {
+  postComposerContainer.style.display = 'none';
+  profileContainer.style.display = 'none';
+  logoutButton.style.display = 'none';
+  callModalRegister.style.display = 'block';
+  callModalLogin.style.display = 'block';
+  postsContainer.style.display = 'block';
+  feedButton.style.display = 'none';
+  profileButton.style.display = 'none';  
+};
 
 
 // Accordion
@@ -62,7 +101,11 @@ logoutButton.addEventListener('click', logoutWithFirebase);
 
 sendPostButton.addEventListener('click', writtingPost);
 
-feedButton.addEventListener('click', showFeed);
 
+
+feedButton.addEventListener('click', showFeed);
 profileButton.addEventListener('click', myProfile);
+
+
+
 
