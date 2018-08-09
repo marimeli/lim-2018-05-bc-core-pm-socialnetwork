@@ -137,6 +137,9 @@ const logoutWithFirebase = () => {
       console.log('Error Firebase > código > ' + error.code); 
       console.log('Error Firebase > Mensaje > ' + error.message); 
     });
+    publicContainer.style.display = 'none';
+    privateContainer.style.display = 'none';
+    addBanner.style.display = 'block'; 
 };
 
 //TIMELINE
@@ -348,7 +351,6 @@ const showPostsUserProfile = (newPostsUser) => {
       author.innerHTML = `${newPostsUser.val().email}`
       image.setAttribute('src', 'https://png.icons8.com/ios/1600/user-male-circle-filled.png')
   }
-  
   else {
       author.innerHTML = `${newPostsUser.val().author}`
       image.setAttribute('src', `${newPostsUser.val().image}`)
@@ -421,7 +423,7 @@ const writePrivateUserPost = () => {
 const writtingPost = () => {
   const composerAreaValue = textComposerArea.value;
   const privacyValue = statusOfPrivacy.value;
-
+  /* const select = selectPublicPrivate.value; */
   if (composerAreaValue.length === 0 && composerAreaValue === '') {
     alert('Escribe un texto antes de publicar');
 
