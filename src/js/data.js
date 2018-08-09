@@ -373,7 +373,7 @@ const getAllPostsbyFirebase = (uid) => {
 
 //  Función para escribir un post
 
-const writeNewPost = () => {
+const writeNewPost = ()2 => {
   const currentUser = firebase.auth().currentUser;
   const messageAreaText = textComposerArea.value;
   const newPostKey = firebase.database().ref().child('posts').push().key;
