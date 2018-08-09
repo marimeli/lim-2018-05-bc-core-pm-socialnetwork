@@ -189,7 +189,7 @@ const printPublicPost = (newPublicPosts) => {
 
   btnLike.setAttribute('class', "w3-button w3-theme-d1 w3-margin-bottom");
 
-  
+
   const contadorlike = document.createElement('a');
   contadorlike.setAttribute('class', 'w3-button w3-margin-bottom ')
   contadorlike.setAttribute('id', postskey);
@@ -227,7 +227,7 @@ const printPublicPost = (newPublicPosts) => {
   contPost.appendChild(line);
   contPost.appendChild(contadorlike);
   contPost.appendChild(btnLike);
-  
+
   if (`${newPublicPosts.val().author}` == 'undefined') {
     author.innerHTML = `${newPublicPosts.val().email}`
     image.setAttribute('src', 'https://png.icons8.com/ios/1600/user-male-circle-filled.png')
@@ -258,14 +258,26 @@ const showPostsUserProfile = (newPostsUser) => {
   author.setAttribute('class', "author");
   author.setAttribute('style', "margin-top: 22px");
 
+/*   function editFocus(textPost) {
+   textPost.style.background = "#e8e8e8";
+  }; */
 
-  const textPost = document.createElement('p');
-  textPost.setAttribute('class', "w3-left w3-circle w3-margin-right");
+  const textPost = document.createElement('input');
+  textPost.setAttribute('type', 'text');
+  /* textPost.setAttribute('class', "w3-left w3-circle w3-margin-right"); */
   textPost.setAttribute('id', postskey);
+  /* textPost = document.getElementById("postskey"); */
+/*   textPost.setAttribute('onfocus', editFocus(textPost)); */
   textPost.innerHTML = `${newPostsUser.val().body}`;
+  
+
 
   const lineBreak = document.createElement('br');
   lineBreak.setAttribute('class', "w3-clear");
+
+
+
+
 
   const btnEdit = document.createElement('input');
   btnEdit.setAttribute('value', 'Editar');
@@ -273,6 +285,8 @@ const showPostsUserProfile = (newPostsUser) => {
   btnEdit.setAttribute('id', postskey);
   btnEdit.setAttribute('class', "w3-button w3-theme-d1 w3-margin-bottom")
   btnEdit.setAttribute('style', 'margin: 10px')
+/*   btnEdit.setAttribute('onfocus', editFocus(this)); */
+  
 
   const btnDelete = document.createElement('input');
   btnDelete.setAttribute('value', 'Borrar');
@@ -294,42 +308,45 @@ const showPostsUserProfile = (newPostsUser) => {
     }
   });
 
-    
+
+  
 
   btnEdit.addEventListener('click', (e) => {
-      textPost.contentEditable = "true";
-      btnEdit.style.display = 'none';
-      const btnSave = document.createElement('input');
-      btnSave.setAttribute('value', 'Guardar');
-      btnSave.setAttribute('type', 'button');
-      btnSave.setAttribute('class', "w3-pink w3-button w3-margin-bottom");
-      btnSave.setAttribute('id', postskey);
-      btnSave.setAttribute('style', 'margin: 10px');
-      btnSave.addEventListener('click', (e) => {
-          if (postskey === e.target.id) {
-              const currentUser = firebase.auth().currentUser;
-              const newUpdate = textPost.innerText
-              const newPostvalue = newUpdate
-              const nuevoPost = {
-                  body: newPostvalue,
-                  image: currentUser.photoURL,
-                  author: currentUser.displayName,
-                  uid: currentUser.uid,
-                  key: postskey,
-                  likeCount: 0,
-              };
-              const updatesUser = {};
-              const updatesPost = {};
-              updatesUser[`/user-posts/${newPostsUser.val().uid}/${newPostsUser.key}`] = nuevoPost;
-              updatesPost[`/posts/${newPostsUser.key}`] = nuevoPost;
-              firebase.database().ref().update(updatesUser);
-              firebase.database().ref().update(updatesPost);
-              reloadPage();
-          }
 
-          textPost.contentEditable = "false";
-      })
-      contPost.appendChild(btnSave);
+    /* textPost.contentEditable = "true"; */
+    btnEdit.style.display = 'none';
+    const btnSave = document.createElement('input');
+    btnSave.setAttribute('value', 'Guardar');
+    btnSave.setAttribute('type', 'button');
+    btnSave.setAttribute('class', "w3-pink w3-button w3-margin-bottom");
+    btnSave.setAttribute('id', postskey);
+    btnSave.setAttribute('style', 'margin: 10px');
+    btnSave.addEventListener('click', (e) => {
+      
+      if (postskey === e.target.id) {
+        const currentUser = firebase.auth().currentUser;
+        const newUpdate = textPost.innerText
+        const newPostvalue = newUpdate
+        const nuevoPost = {
+          body: newPostvalue,
+          image: currentUser.photoURL,
+          author: currentUser.displayName,
+          uid: currentUser.uid,
+          key: postskey,
+          likeCount: 0,
+        };
+        const updatesUser = {};
+        const updatesPost = {};
+        updatesUser[`/user-posts/${newPostsUser.val().uid}/${newPostsUser.key}`] = nuevoPost;
+        updatesPost[`/posts/${newPostsUser.key}`] = nuevoPost;
+        firebase.database().ref().update(updatesUser);
+        firebase.database().ref().update(updatesPost);
+        reloadPage();
+      }
+
+      textPost.contentEditable = "false";
+    })
+    contPost.appendChild(btnSave);
   });
 
   privateContainer.appendChild(contPost);
@@ -343,8 +360,8 @@ const showPostsUserProfile = (newPostsUser) => {
   contPost.appendChild(btnDelete);
 
   if (`${newPostsUser.val().author}` == 'undefined') {
-      author.innerHTML = `${newPostsUser.val().email}`
-      image.setAttribute('src', 'https://png.icons8.com/ios/1600/user-male-circle-filled.png')
+    author.innerHTML = `${newPostsUser.val().email}`
+    image.setAttribute('src', 'https://png.icons8.com/ios/1600/user-male-circle-filled.png')
   }
   else {
     author.innerHTML = `${newPostsUser.val().author}`
