@@ -110,8 +110,7 @@ sendPostButton.addEventListener('click', writtingPost);
 feedButton.addEventListener('click', showFeed);
 profileButton.addEventListener('click', myProfile);
 
-//FUNCIONES MOBILE
-hamburgerMenu.addEventListener('click', openNav)
+
 
 
 
