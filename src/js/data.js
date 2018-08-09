@@ -46,6 +46,7 @@ window.onload = () => {
         userImage.setAttribute('src', user.photoURL);
       }
       //Muestra perfil y container para publicar
+      
       hideContainers();
       writeUserData(user.uid, user.displayName, user.email, user.photoURL);
 
@@ -136,6 +137,9 @@ const logoutWithFirebase = () => {
       console.log('Error Firebase > código > ' + error.code);
       console.log('Error Firebase > Mensaje > ' + error.message);
     });
+    publicContainer.style.display = 'none';
+    privateContainer.style.display = 'none';
+    addBanner.style.display = 'block'; 
 };
 
 //TIMELINE

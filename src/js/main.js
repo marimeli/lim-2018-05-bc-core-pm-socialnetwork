@@ -3,6 +3,9 @@
 //Logout
 const logoutButton = document.getElementById('logout');
 
+//Logout navbar
+const logoutButtonNavbar = document.getElementById('navbar-logout');
+
 //Sección Profile
 const profileContainer = document.getElementById('profile-container');
 const userName = document.getElementById('userName');
@@ -22,6 +25,8 @@ const sendPostButton = document.getElementById('send-post'); //botón para publi
 const statusOfPrivacy = document.getElementById('status-of-privacy');
 const feedButton = document.getElementById('feed-button');
 const profileButton = document.getElementById('profile-button');
+const feedButtonNavbar = document.getElementById('feed-btn-navbar');
+const profileButtonNavbar = document.getElementById('profile-btn-navbar');
 
 
 /* FUNCIONES */
@@ -30,8 +35,11 @@ const showFeed = () => {
   postComposerContainer.style.display = 'none';
   profileContainer.style.display = 'none';
   logoutButton.style.display = 'block';
+  logoutButtonNavbar.style.display = 'block';
   callModalRegister.style.display = 'none';
+  callModalRegisterNavbar.style.display = 'none';
   callModalLogin.style.display = 'none';
+  callModalLoginNavbar.style.display = 'none';
   publicContainer.style.display = 'block';
   privateContainer.style.display = 'none'; 
 };
@@ -48,11 +56,16 @@ const hideContainers = () => {
   postComposerContainer.style.display = 'block';
   profileContainer.style.display = 'block';
   logoutButton.style.display = 'block';
+  logoutButtonNavbar.style.display = 'block';
   callModalRegister.style.display = 'none';
+  callModalRegisterNavbar.style.display = 'none';
   callModalLogin.style.display = 'none';
+  callModalLoginNavbar.style.display = 'none';
   postsContainer.style.display = 'block';
   feedButton.style.display = 'block';
   profileButton.style.display = 'block';
+  feedButtonNavbar.style.display = 'block';
+  profileButtonNavbar.style.display = 'block'
   alertBox.style.display = 'none';
   addBanner.style.display = 'none';
 };
@@ -62,11 +75,16 @@ const showContainers = () => {
   postComposerContainer.style.display = 'none';
   profileContainer.style.display = 'none';
   logoutButton.style.display = 'none';
+  logoutButtonNavbar.style.display = 'none';
   callModalRegister.style.display = 'block';
+  callModalRegisterNavbar.style.display = 'block';
+  callModalLoginNavbar.style.display = 'block';
   callModalLogin.style.display = 'block';
   postsContainer.style.display = 'block';
   feedButton.style.display = 'none';
-  profileButton.style.display = 'none';  
+  feedButtonNavbar.style.display = 'none';
+  profileButton.style.display = 'none';
+  profileButtonNavbar.style.display = 'none';  
 };
 
 
@@ -97,13 +115,12 @@ const openNav = () => {
 
 logoutButton.addEventListener('click', logoutWithFirebase);
 
+// Logout navbar
+logoutButtonNavbar.addEventListener('click', logoutWithFirebase);
+
 sendPostButton.addEventListener('click', writtingPost);
 
 
 
 feedButton.addEventListener('click', showFeed);
 profileButton.addEventListener('click', myProfile);
-
-
-
-
