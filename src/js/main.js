@@ -25,6 +25,10 @@ const statusOfPrivacy = document.getElementById('status-of-privacy');
 const feedButton = document.getElementById('feed-button');
 const profileButton = document.getElementById('profile-button');
 
+//MOBILE
+
+const hamburgerMenu = document.getElementById('hamburger-menu');
+
 
 /* FUNCIONES */
 
@@ -106,6 +110,8 @@ sendPostButton.addEventListener('click', writtingPost);
 feedButton.addEventListener('click', showFeed);
 profileButton.addEventListener('click', myProfile);
 
+//FUNCIONES MOBILE
+hamburgerMenu.addEventListener('click', openNav)
 
 
 
