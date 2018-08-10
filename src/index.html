@@ -33,7 +33,7 @@
                 <a id="profile-button" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Perfil">
                     <i class="fa fa-user"></i>
                 </a>
-                <!--  Opciones para logueo -->
+                <!--  Opciones para logeo -->
                 <div class="w3-bar-item w3-button w3-right w3-hide-small w3-padding-large w3-hover-white">
                     <input type="button" class="w3-bar-item w3-button w3-padding-large" id="call-modal-register" value="Registrarse">
                     <input type="button" class="w3-bar-item w3-button w3-padding-large" id="call-modal-login" value="Iniciar Sesión">
@@ -42,13 +42,12 @@
             </div>
         </div>
         <!-- Navbar on small screens -->
-<div id="logged-in" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-    <input type="button" class="w3-bar-item w3-button w3-padding-large" id="navbar-call-modal-register" value="Registrarse">
-    <input type="button" class="w3-bar-item w3-button w3-padding-large" id="navbar-call-modal-login" value="Iniciar Sesión">
-    <input type="button" class="w3-bar-item w3-button w3-padding-large" id="feed-btn-navbar" value="Inicio">
-    <input type="button" class="w3-bar-item w3-button w3-padding-large" id="profile-btn-navbar" value="Mi perfil">
-    <input type="button" class="w3-bar-item w3-button w3-padding-large" id="navbar-logout" value="Cerrar Sesión">
-  </div>
+        <div id="logged-in" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
+            <a href="#" class="w3-bar-item w3-button w3-padding-large">Mi perfil</a>
+            <a id="login-navbar" class="w3-bar-item w3-button w3-padding-large">Iniciar sesión</a>
+            <!--       Aquí el usuario puede cerrar sesión. Debemos ponerlo en botón para que no burle la autentif-->
+            <a href="index.html" id="logout-navbar" class="w3-bar-item w3-button w3-padding-large">Cerrar sesión</a>
+        </div>
         <!-- Page Container -->
         <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
             <!-- The Grid -->
@@ -75,7 +74,7 @@
                     <br>
 
                     <!-- Accordion -->
-                    <div id= "acordeon" class="w3-card w3-round">
+                    <div class="w3-card w3-round">
                         <div class="w3-white">
                             <div id="Demo1" class="w3-hide w3-container">
                                 <p>Some text..</p>
