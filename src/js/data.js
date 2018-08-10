@@ -262,9 +262,11 @@ const showPostsUserProfile = (newPostsUser) => {
   author.setAttribute('class', "author");
   author.setAttribute('style', "margin-top: 22px");
 
+  const textPost = document.createElement('textarea');
+  textPost.setAttribute('class', 'w3-border w3-padding textarea');
 
-  const textPost = document.createElement('p');
-  textPost.setAttribute('class', "w3-left w3-circle w3-margin-right");
+/*   const textPost = document.createElement('p');
+  textPost.setAttribute('class', "w3-left w3-circle w3-margin-right"); */
   textPost.setAttribute('id', postskey);
   textPost.innerHTML = `${newPostsUser.val().body}`;
 
