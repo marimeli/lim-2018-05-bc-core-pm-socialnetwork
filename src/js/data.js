@@ -353,10 +353,7 @@ const showPostsUserProfile = (newPostsUser) => {
       author.innerHTML = `${newPostsUser.val().email}`
       image.setAttribute('src', 'https://png.icons8.com/ios/1600/user-male-circle-filled.png')
   }
-  // else if (`${newPostsUser.val().author}` ===  ) {
-  //   author.innerHTML = `${newPostsUser.val().email}`
-  //   image.setAttribute('src', 'https://png.icons8.com/ios/1600/user-male-circle-filled.png')
-  // }
+
   else {
       author.innerHTML = `${newPostsUser.val().author}`
       image.setAttribute('src', `${newPostsUser.val().image}`)
