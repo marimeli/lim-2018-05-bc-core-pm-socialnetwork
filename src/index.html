@@ -42,13 +42,13 @@
             </div>
         </div>
         <!-- Navbar on small screens -->
-<div id="logged-in" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-    <input type="button" class="w3-bar-item w3-button w3-padding-large" id="navbar-call-modal-register" value="Registrarse">
-    <input type="button" class="w3-bar-item w3-button w3-padding-large" id="navbar-call-modal-login" value="Iniciar Sesión">
-    <input type="button" class="w3-bar-item w3-button w3-padding-large" id="feed-btn-navbar" value="Inicio">
-    <input type="button" class="w3-bar-item w3-button w3-padding-large" id="profile-btn-navbar" value="Mi perfil">
-    <input type="button" class="w3-bar-item w3-button w3-padding-large" id="navbar-logout" value="Cerrar Sesión">
-  </div>
+        <div id="logged-in" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
+            <input type="button" class="w3-bar-item w3-button w3-padding-large" id="navbar-call-modal-register" value="Registrarse">
+            <input type="button" class="w3-bar-item w3-button w3-padding-large" id="navbar-call-modal-login" value="Iniciar Sesión">
+            <input type="button" class="w3-bar-item w3-button w3-padding-large" id="feed-btn-navbar" value="Inicio">
+            <input type="button" class="w3-bar-item w3-button w3-padding-large" id="profile-btn-navbar" value="Mi perfil">
+            <input type="button" class="w3-bar-item w3-button w3-padding-large" id="navbar-logout" value="Cerrar Sesión">
+        </div>
         <!-- Page Container -->
         <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
             <!-- The Grid -->
@@ -75,7 +75,7 @@
                     <br>
 
                     <!-- Accordion -->
-                    <div id= "acordeon" class="w3-card w3-round">
+                    <div id="acordeon" class="w3-card w3-round">
                         <div class="w3-white">
                             <div id="Demo1" class="w3-hide w3-container">
                                 <p>Some text..</p>
@@ -83,12 +83,18 @@
                             <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-theme-l1 w3-left-align">
                                 <i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> Eventos</button>
                             <div id="Demo2" class="w3-hide w3-container">
-                                <p> <a href="https://www.facebook.com/events/1038382732996447/"> Teatro: Adiós, Ayacucho</a> </p>
-                                <p> <a href="https://www.facebook.com/events/518520528597659/"> Pulgarcito, la verdadera historia</a> </p>
-                                <p> <a href="https://teleticket.com.pe/evento/V5617"> Mucho ruido por nada</a> </p>
+                                <p>
+                                    <a href="https://www.facebook.com/events/1038382732996447/"> Teatro: Adiós, Ayacucho</a>
+                                </p>
+                                <p>
+                                    <a href="https://www.facebook.com/events/518520528597659/"> Pulgarcito, la verdadera historia</a>
+                                </p>
+                                <p>
+                                    <a href="https://teleticket.com.pe/evento/V5617"> Mucho ruido por nada</a>
+                                </p>
                             </div>
-                            <button id= "my-photos" onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-left-align">
-                                <i class="fa fa-users fa-fw w3-margin-right"></i> Mis Fotos</button>
+                            <button id="my-photos" onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-left-align">
+                                <i class="fa fa-users fa-fw w3-margin-right"></i> Galería de fotos </button>
                             <div id="Demo3" class="w3-hide w3-container">
                                 <div class="w3-row-padding">
                                     <br>
@@ -104,7 +110,8 @@
                                         <img src="http://www.museodata.com/images/museums/MALI_Patio_central.jpg" style="width:100%" class="w3-margin-bottom" alt="mali interior">
                                     </div>
                                     <div class="w3-half">
-                                        <img src="http://dafo.cultura.pe/wp-content/uploads/2016/01/6-festival-lima-independiente.jpg" style="width:100%" class="w3-margin-bottom" alt="festival cine">
+                                        <img src="http://dafo.cultura.pe/wp-content/uploads/2016/01/6-festival-lima-independiente.jpg" style="width:100%" class="w3-margin-bottom"
+                                            alt="festival cine">
                                     </div>
                                     <div class="w3-half">
                                         <img src="https://img.elcomercio.pe/files/ec_article_multimedia_gallery/uploads/2018/03/07/5aa0286c21e54.jpeg" style="width:100%"
@@ -229,8 +236,7 @@
                     <label>
                         <b>Correo electrónico</b>
                     </label>
-                    <input class="w3-input w3-border w3-margin-bottom" id="email" placeholder="yourmail@example.com" name="email"
-                        type="email">
+                    <input class="w3-input w3-border w3-margin-bottom" id="email" placeholder="yourmail@example.com" name="email" type="email">
                     <!-- <input id="email" class="w3-input w3-border w3-margin-bottom" placeholder="yourmail@example.com" class="form-control" name="email" type="email" required> -->
                     <p id="error-email" style="color: red"></p>
                     <label>
@@ -269,8 +275,8 @@
                     <label>
                         <b>Correo electrónico</b>
                     </label>
-                    <input class="w3-input w3-border w3-margin-bottom" id="email-register" placeholder="yourmail@example.com"
-                        name="email" type="email" required>
+                    <input class="w3-input w3-border w3-margin-bottom" id="email-register" placeholder="yourmail@example.com" name="email" type="email"
+                        required>
                     <p id="advice-emailRegister" style="color: red"></p>
                     <label>
                         <b>Contraseña</b>
