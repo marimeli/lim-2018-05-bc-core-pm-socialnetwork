@@ -179,10 +179,11 @@ const printPublicPost = (newPublicPosts) => {
   author.setAttribute('style', "margin-top: 22px,");
   author.setAttribute('class', "author");
 
-  const textPost = document.createElement('p');
-  textPost.setAttribute('class', 'w3-left w3-circle w3-margin-right');
+  const textPost = document.createElement('textarea');
+  textPost.setAttribute('class', 'w3-left  w3-margin-right edit-textarea');
   textPost.setAttribute('id', postskey);
   textPost.innerHTML = `${newPublicPosts.val().body}`;
+  textPost.setAttribute('disabled', true);
 
   const lineBreak = document.createElement('br');
 
@@ -265,10 +266,12 @@ const showPostsUserProfile = (newPostsUser) => {
   const textPost = document.createElement('textarea');
   textPost.setAttribute('class', 'w3-border w3-padding textarea');
 
-/*   const textPost = document.createElement('p');
-  textPost.setAttribute('class', "w3-left w3-circle w3-margin-right"); */
+  const textPost = document.createElement('textarea');
+  textPost.setAttribute('class', "w3-left w3-margin-right edit-textarea");
   textPost.setAttribute('id', postskey);
+  textPost.setAttribute('disabled', true);
   textPost.innerHTML = `${newPostsUser.val().body}`;
+  textPost.setAttribute('disabled', true);
 
   const lineBreak = document.createElement('br');
   lineBreak.setAttribute('class', "w3-clear");
@@ -304,7 +307,8 @@ const showPostsUserProfile = (newPostsUser) => {
     
 
   btnEdit.addEventListener('click', (e) => {
-      textPost.contentEditable = "true";
+      textPost.disabled = false;
+      textPost.setAttribute('class', "w3-left w3-margin-right focus-textarea");
       btnEdit.style.display = 'none';
       const btnSave = document.createElement('input');
       btnSave.setAttribute('value', 'Guardar');
@@ -315,8 +319,8 @@ const showPostsUserProfile = (newPostsUser) => {
       btnSave.addEventListener('click', (e) => {
           if (postskey === e.target.id) {
               const currentUser = firebase.auth().currentUser;
-              const newUpdate = textPost.innerText
-              const newPostvalue = newUpdate
+              const newUpdate = textPost.value;
+              const newPostvalue = newUpdate;
               const nuevoPost = {
                   body: newPostvalue,
                   image: currentUser.photoURL || 'https://png.icons8.com/ios/1600/user-male-circle-filled.png',
@@ -336,7 +340,8 @@ const showPostsUserProfile = (newPostsUser) => {
               reloadPage();
           }
 
-          textPost.contentEditable = "false";
+          // textPost.contentEditable = "false";
+          // document.getElementById("postskey").disabled = true;
       })
       contPost.appendChild(btnSave);
   });
