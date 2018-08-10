@@ -11,6 +11,7 @@ const profileContainer = document.getElementById('profile-container');
 const userName = document.getElementById('userName');
 const userImage = document.getElementById('user-image');
 const alertBox = document.getElementById('alert-box');
+const myPhotos = document.getElementById('my-photos');
 //TIMELINE
 const addBanner = document.getElementById('add-banner');
 const postsContainer = document.getElementById('posts-container'); //contenedor que guardará todos los posts que se creen dinámicamente  */
@@ -72,6 +73,7 @@ const hideContainers = () => {
   profileButtonNavbar.style.display = 'block'
   alertBox.style.display = 'none';
   addBanner.style.display = 'none';
+  myPhotos.style.display = 'block';  
 };
 
 //Cuando cierra sesión, se ejecuta la función que muestra contenedores.
@@ -89,6 +91,8 @@ const showContainers = () => {
   feedButtonNavbar.style.display = 'none';
   profileButton.style.display = 'none';
   profileButtonNavbar.style.display = 'none';  
+  myPhotos.style.display = 'none';  
+  
 };
 
 
