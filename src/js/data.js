@@ -307,7 +307,7 @@ const showPostsUserProfile = (newPostsUser) => {
       const btnSave = document.createElement('input');
       btnSave.setAttribute('value', 'Guardar');
       btnSave.setAttribute('type', 'button');
-      btnSave.setAttribute('class', "w3-pink w3-button w3-margin-bottom");
+      btnSave.setAttribute('class', "w3-blue w3-button w3-margin-bottom");
       btnSave.setAttribute('id', postskey);
       btnSave.setAttribute('style', 'margin: 10px');
       btnSave.addEventListener('click', (e) => {
@@ -317,12 +317,14 @@ const showPostsUserProfile = (newPostsUser) => {
               const newPostvalue = newUpdate
               const nuevoPost = {
                   body: newPostvalue,
-                  image: currentUser.photoURL,
-                  author: currentUser.displayName,
+                  image: currentUser.photoURL || 'https://png.icons8.com/ios/1600/user-male-circle-filled.png',
+                  author: currentUser.displayName || currentUser.email,               
+                                    
                   uid: currentUser.uid,
                   key: postskey,
                   likeCount: 0,
               };
+              
               const updatesUser = {};
               const updatesPost = {};
               updatesUser[`/user-posts/${newPostsUser.val().uid}/${newPostsUser.key}`] = nuevoPost;
@@ -347,10 +349,11 @@ const showPostsUserProfile = (newPostsUser) => {
   contPost.appendChild(btnEdit);
   contPost.appendChild(btnDelete);
 
-  if (`${newPostsUser.val().author}` == 'undefined') {
+  if (`${newPostsUser.val().author}` === 'undefined' ) {
       author.innerHTML = `${newPostsUser.val().email}`
       image.setAttribute('src', 'https://png.icons8.com/ios/1600/user-male-circle-filled.png')
   }
+
   else {
       author.innerHTML = `${newPostsUser.val().author}`
       image.setAttribute('src', `${newPostsUser.val().image}`)

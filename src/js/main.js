@@ -11,6 +11,8 @@ const profileContainer = document.getElementById('profile-container');
 const userName = document.getElementById('userName');
 const userImage = document.getElementById('user-image');
 const alertBox = document.getElementById('alert-box');
+const accordion = document.getElementById('acordeon');
+
 //TIMELINE
 const addBanner = document.getElementById('add-banner');
 const postsContainer = document.getElementById('posts-container'); //contenedor que guardará todos los posts que se creen dinámicamente  */
@@ -46,6 +48,7 @@ const showFeed = () => {
   callModalLoginNavbar.style.display = 'none';
   publicContainer.style.display = 'block';
   privateContainer.style.display = 'none'; 
+  accordion.style.display = 'block';
 };
 
 const myProfile = () => {
@@ -53,6 +56,7 @@ const myProfile = () => {
     profileContainer.style.display = 'block'; //profileContainer
     publicContainer.style.display = 'none';
     privateContainer.style.display = 'block';   
+    accordion.style.display = 'none';
 };
 
 //Cuando inicia sesión, se ejecuta la función que oculta contenedores y modales.
@@ -72,6 +76,7 @@ const hideContainers = () => {
   profileButtonNavbar.style.display = 'block'
   alertBox.style.display = 'none';
   addBanner.style.display = 'none';
+   
 };
 
 //Cuando cierra sesión, se ejecuta la función que muestra contenedores.
@@ -89,6 +94,8 @@ const showContainers = () => {
   feedButtonNavbar.style.display = 'none';
   profileButton.style.display = 'none';
   profileButtonNavbar.style.display = 'none';  
+  myPhotos.style.display = 'none';  
+  
 };
 
 
@@ -127,4 +134,6 @@ sendPostButton.addEventListener('click', writtingPost);
 
 
 feedButton.addEventListener('click', showFeed);
+feedButtonNavbar.addEventListener('click', showFeed);
 profileButton.addEventListener('click', myProfile);
+profileButtonNavbar.addEventListener('click', myProfile);
