@@ -25,6 +25,7 @@ const textComposerArea = document.getElementById('text-composer-area'); //área 
 const sendPostButton = document.getElementById('send-post'); //botón para publicar
 
 const statusOfPrivacy = document.getElementById('status-of-privacy');
+
 const feedButton = document.getElementById('feed-button');
 const profileButton = document.getElementById('profile-button');
 const feedButtonNavbar = document.getElementById('feed-btn-navbar');
@@ -49,6 +50,7 @@ const showFeed = () => {
   publicContainer.style.display = 'block';
   privateContainer.style.display = 'none'; 
   accordion.style.display = 'block';
+  
 };
 
 const myProfile = () => {
