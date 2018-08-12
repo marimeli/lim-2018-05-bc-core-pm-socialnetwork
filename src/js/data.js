@@ -314,29 +314,31 @@ const showPostsUserProfile = (newPostsUser) => {
     btnSave.setAttribute('class', "w3-blue w3-button w3-margin-bottom");
     btnSave.setAttribute('id', postskey);
     btnSave.setAttribute('style', 'margin: 10px');
-    // const newPrivacySelector = document.createElement('select');
+    const newPrivacySelector = document.createElement('select');
 
-    // const statusArr = ['Público','Privado'];
+    const statusArr = ['Público','Privado'];
    
 
-    // statusArr.forEach((element, index) => {
-    //   const optionPrivacy = document.createElement("option");
-    //   optionPrivacy.textContent = statusArr[index];
-    //   optionPrivacy.setAttribute('value', statusArr[index]);
-    //   newPrivacySelector.appendChild(optionPrivacy);
+    statusArr.forEach((element, index) => {
+      const optionPrivacy = document.createElement("option");
+      optionPrivacy.textContent = statusArr[index];
+      optionPrivacy.setAttribute('value', statusArr[index]);
+      newPrivacySelector.appendChild(optionPrivacy);
       
-    // });
+    });
 
-    // const optionPublic = document.createElement('option');
-    // const optionTextPublic = document.createTextNode('Público');
-    // optionPublic.setAttribute('value', 'public');
-    // optionPublic.appendChild(optionTextPublic);
-    // newPrivacySelector.appendChild(optionPublic);
+    const optionPublic = document.createElement('option');
+    const optionTextPublic = document.createTextNode('Público');
+    optionPublic.setAttribute('value', 'public');
+    optionPublic.appendChild(optionTextPublic);
+    newPrivacySelector.appendChild(optionPublic);
 
-    // console.log(newPrivacySelector.value);
+    console.log(newPrivacySelector.value);
 
     btnSave.addEventListener('click', (e) => {
-      if (postskey === e.target.id && privacyValue === 'public') {
+      const newPrivacyValue = newPrivacySelector.value;
+      if (postskey === e.target.id && newPrivacyValue === 'public') {
+
         const currentUser = firebase.auth().currentUser;
         const newUpdate = textPost.value;
         const newPostvalue = newUpdate;
@@ -354,7 +356,7 @@ const showPostsUserProfile = (newPostsUser) => {
         reloadPage();
       }
 
-      else if (postskey === e.target.id && privacyValue === 'private') {
+      else if (postskey === e.target.id && newPrivacyValue === 'private') {
         const currentUser = firebase.auth().currentUser;
         const newUpdate = textPost.value;
         const newPostvalue = newUpdate;
@@ -376,7 +378,7 @@ const showPostsUserProfile = (newPostsUser) => {
 
     })
     contPost.appendChild(btnSave);
-    // contPost.appendChild(newPrivacySelector);
+    contPost.appendChild(newPrivacySelector);
   });
 
   privateContainer.appendChild(contPost);
