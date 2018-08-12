@@ -132,7 +132,7 @@ logoutButton.addEventListener('click', logoutWithFirebase);
 logoutButtonNavbar.addEventListener('click', logoutWithFirebase);
 
 sendPostButton.addEventListener('click', writtingPost);
-
+/* cleanTextarea */
 
 
 feedButton.addEventListener('click', showFeed);
