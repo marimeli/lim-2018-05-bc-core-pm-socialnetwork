@@ -19,6 +19,8 @@ const errorPassword = document.getElementById('error-password');
 const loginButton = document.getElementById('login-btn');
 const facebookButton = document.getElementById('facebook-button');
 const googleButton = document.getElementById('google-button');
+const facebookRegister = document.getElementById('facebook-register');
+const googleRegister = document.getElementById('google-register');
 
 //Register modal botones
 const cancelRegButton = document.getElementById('register-cancel-button');
@@ -86,6 +88,8 @@ loginButton.addEventListener('click', loginWithFirebase);
 
 //Login Facebook
 facebookButton.addEventListener('click', facebookLoginWithFirebase);
+facebookRegister.addEventListener('click', facebookLoginWithFirebase);
 
 //Login Google
 googleButton.addEventListener('click', googleLoginWithFirebase);
+googleRegister.addEventListener('click', googleLoginWithFirebase);
