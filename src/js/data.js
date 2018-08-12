@@ -159,7 +159,6 @@ window.writeUserData = (userId, name, email, imageUrl) => {
     });
 };
 
-
 //Imprimir post PÚBLICOS
 const printPublicPost = (newPublicPosts) => { //hacer otro parámetro que define si es público o priv. 
   // si ese parametro es publico, then 
@@ -302,8 +301,6 @@ const showPostsUserProfile = (newPostsUser) => {
       }
     }
   });
-
-
 
   btnEdit.addEventListener('click', (e) => {
     textPost.disabled = false;
@@ -453,11 +450,17 @@ const getPrivatePostbyFirebase = (uid) => {
 
 // Funcion refactorizada para escribir un post, que recibe como argumento el valor del select
 // "privado o público", y dependiendo de eso escribe en la rama correspondiente
-const writtingPost = (privacyValue) => {
+window.cleanTextarea = () => {
+  textComposerArea.value = '';
+  };
+
+const writtingPost = () => {
+  let privacyValue = statusOfPrivacy.value;
   const composerAreaValue = textComposerArea.value;
-  if (composerAreaValue.length === 0 && composerAreaValue === '') {
+  if (composerAreaValue.length === 0 && composerAreaValue === '') { //acá verifica si está en blanco
     alert('Escribe un texto antes de publicar');
   }
+  //Escribe nuevo post en firebase
   const currentUser = firebase.auth().currentUser;
   const messageAreaText = textComposerArea.value;
   const newPostKey = firebase.database().ref().child('posts').push().key;
@@ -470,16 +473,20 @@ const writtingPost = (privacyValue) => {
     likeCount: 0,
     email: currentUser.email
   };
+
   const updates = {};
 
-  updates['/user-posts/' + currentUser.uid + '/' + newPostKey] = postData;
+  updates['/user-posts/' + currentUser.uid + '/' + newPostKey] = postData; //si es privado solo se guarda en user-post
+  cleanTextarea();
 
 
   //condición para que escriba también en la rama post cuando es público
-  if (privacyValue === 'public') {
+  if (privacyValue == 'public') {
     updates['/posts/' + newPostKey] = postData;
+    cleanTextarea();
   }
   return firebase.database().ref().update(updates);
+  
 };
 
 
