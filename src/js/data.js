@@ -7,6 +7,7 @@ window.registerWithFirebase = () => {
       alert('Su usuario fue creado con éxito')
     })
     .catch((error) => {
+      //Corregir
       if (error.code === 'auth/email-already-in-use') {
         adviceEmailRegister.innerText = 'Ya existe un usuario con este correo. Por favor, ingrese otro';
       }
@@ -14,6 +15,7 @@ window.registerWithFirebase = () => {
       else if (error.code === 'auth/invalid-email') {
         adviceEmailRegister.innerText = 'Por favor, agregue un correo válido';
       }
+      //Corregir
       else if (error.code === 'auth/weak-password') {
         advicePasswordRegister.innerText = 'Ingresa una contraseña con más de 6 caracteres';
       }
@@ -161,41 +163,9 @@ window.writeUserData = (userId, name, email, imageUrl) => {
 //Imprimir post PÚBLICOS
 const printPublicPost = (newPublicPosts) => {
 
-  const postId = () => {
-    const postskey = newPublicPosts.key;
-  };
-
-
-  const contPost = document.getElementById(contPost);
-  const btnLike = document.getElementById(btnLike);
-
-  postContent += `
-     
-     <div id="contPost" class="w3-container w3-card w3-white w3-round w3-margin">
-       <br>
-       <img src="user.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-       <h4 id="author" style="margin-top: 22px">Nombre del usuario</h4>
-       <br>
-       <hr class="w3-clear">
-       <textarea class="w3-left  w3-margin-right edit-textarea">Aquí va el post que escriba el usuario</textarea>
-       <div class="w3-row-padding" style="margin:0-16px">
-         <div class="w3-half">
-           <img id="image" src="user.png" style="width:60px" alt="Avatar" class="w3-left w3-circle w3-margin-top">
-         </div>
-       </div>
-       <input type="button" id="btnLike" class="w3-button w3-theme-d1 w3-margin-bottom" value="Me gusta">
-     </div>
-     `
-  postsContainer.innerHTML = postContent;
-
-
-
-  /* const postskey = newPublicPosts.key;
+  const postskey = newPublicPosts.key;
   const contPost = document.createElement('div');
   contPost.setAttribute('class', "w3-container w3-card w3-white w3-round w3-margin")
-
-    <input type="button" class="w3-button w3-theme-d1 w3-margin-bottom" value=" Editar">
-       <input type="button" class="w3-button w3-theme-d1 w3-margin-bottom" value="Borrar">
 
   const image = document.createElement('img');
   image.setAttribute('class', "w3-left w3-circle w3-margin-top")
@@ -204,24 +174,25 @@ const printPublicPost = (newPublicPosts) => {
 
   const line = document.createElement('hr');
   line.setAttribute('class', "w3-clear")
- */
-  /*  const author = document.createElement('h4');
-   author.setAttribute('style', "margin-top: 22px"); */
 
+  const author = document.createElement('h4');
+  author.setAttribute('style', "margin-top: 22px,");
+  ;
 
-  /* const textPost = document.createElement('textarea');
-  textPost.setAttribute('class', 'w3-left  w3-margin-right edit-textarea'); */
+  const textPost = document.createElement('textarea');
+  textPost.setAttribute('class', 'w3-left  w3-margin-right edit-textarea');
   textPost.setAttribute('id', postskey);
   textPost.innerHTML = `${newPublicPosts.val().body}`;
   textPost.setAttribute('disabled', true);
 
-  /*  const lineBreak = document.createElement('br'); */
+  const lineBreak = document.createElement('br');
 
-  /*   const btnLike = document.createElement('input');
-    btnLike.setAttribute('value', 'Me gusta');
-    btnLike.setAttribute('type', 'button') */
+  const btnLike = document.createElement('input');
+  btnLike.setAttribute('value', 'Me gusta');
+  btnLike.setAttribute('type', 'button')
   btnLike.setAttribute('id', postskey);
-  /*   btnLike.setAttribute('class', "w3-button w3-theme-d1 w3-margin-bottom"); */
+
+  btnLike.setAttribute('class', "w3-button w3-theme-d1 w3-margin-bottom");
 
 
   const contadorlike = document.createElement('a');
@@ -251,17 +222,17 @@ const printPublicPost = (newPublicPosts) => {
     firebase.database().ref().update(updatesPost);
 
   })
-  /* 
-    publicContainer.appendChild(contPost);
-    contPost.appendChild(image);
-    contPost.appendChild(author);
-    contPost.appendChild(line);
-    contPost.appendChild(textPost);
-    contPost.appendChild(lineBreak);
-    contPost.appendChild(line);
-    contPost.appendChild(contadorlike);
-    contPost.appendChild(btnLike);
-     */
+
+  publicContainer.appendChild(contPost);
+  contPost.appendChild(image);
+  contPost.appendChild(author);
+  contPost.appendChild(line);
+  contPost.appendChild(textPost);
+  contPost.appendChild(lineBreak);
+  contPost.appendChild(line);
+  contPost.appendChild(contadorlike);
+  contPost.appendChild(btnLike);
+
   if (`${newPublicPosts.val().author}` == 'undefined') {
     author.innerHTML = `${newPublicPosts.val().email}`
     image.setAttribute('src', 'https://png.icons8.com/ios/1600/user-male-circle-filled.png')
@@ -289,7 +260,7 @@ const showPostsUserProfile = (newPostsUser) => {
   line.setAttribute('class', "w3-clear")
 
   const author = document.createElement('h4');
-  author.setAttribute('class', "author");
+
   author.setAttribute('style', "margin-top: 22px");
 
 
@@ -298,7 +269,7 @@ const showPostsUserProfile = (newPostsUser) => {
   textPost.setAttribute('id', postskey);
   textPost.setAttribute('disabled', true);
   textPost.innerHTML = `${newPostsUser.val().body}`;
-  textPost.setAttribute('disabled', true);
+
 
   const lineBreak = document.createElement('br');
   lineBreak.setAttribute('class', "w3-clear");
@@ -343,42 +314,69 @@ const showPostsUserProfile = (newPostsUser) => {
     btnSave.setAttribute('class', "w3-blue w3-button w3-margin-bottom");
     btnSave.setAttribute('id', postskey);
     btnSave.setAttribute('style', 'margin: 10px');
-    btnSave.addEventListener('click', (e) => {
-      if (postskey === e.target.id && privacyValue == 'public') {
-        const currentUser = firebase.auth().currentUser;
-        const newUpdate = textPost.value;
-        const newPostvalue = newUpdate;
-        const nuevoPost = {
-          body: newPostvalue,
-          image: currentUser.photoURL || 'https://png.icons8.com/ios/1600/user-male-circle-filled.png',
-          author: currentUser.displayName || currentUser.email,
-          uid: currentUser.uid,
-          key: postskey,
-          likeCount: 0,
-        };
-      } else if (postskey === e.target.id && privacyValue == 'private') {
-        const currentUser = firebase.auth().currentUser;
-        const newUpdate = textPost.value;
-        const newPostvalue = newUpdate;
-        const nuevoPost = {
-          body: newPostvalue,
-          image: currentUser.photoURL || 'https://png.icons8.com/ios/1600/user-male-circle-filled.png',
-          author: currentUser.displayName || currentUser.email,
-          uid: currentUser.uid,
-          key: postskey,
-          likeCount: 0,
-        };
-        const updatesUser = {};
-        updatesUser[`/user-posts/${newPostsUser.val().uid}/${newPostsUser.key}`] = nuevoPost;
-        firebase.database().ref().update(updatesUser);
+    // const newPrivacySelector = document.createElement('select');
 
+    // const statusArr = ['Público','Privado'];
+   
+
+    // statusArr.forEach((element, index) => {
+    //   const optionPrivacy = document.createElement("option");
+    //   optionPrivacy.textContent = statusArr[index];
+    //   optionPrivacy.setAttribute('value', statusArr[index]);
+    //   newPrivacySelector.appendChild(optionPrivacy);
+      
+    // });
+
+    // const optionPublic = document.createElement('option');
+    // const optionTextPublic = document.createTextNode('Público');
+    // optionPublic.setAttribute('value', 'public');
+    // optionPublic.appendChild(optionTextPublic);
+    // newPrivacySelector.appendChild(optionPublic);
+
+    // console.log(newPrivacySelector.value);
+
+    btnSave.addEventListener('click', (e) => {
+      if (postskey === e.target.id && privacyValue === 'public') {
+        const currentUser = firebase.auth().currentUser;
+        const newUpdate = textPost.value;
+        const newPostvalue = newUpdate;
+        const nuevoPost = {
+          body: newPostvalue,
+          image: currentUser.photoURL || 'https://png.icons8.com/ios/1600/user-male-circle-filled.png',
+          author: currentUser.displayName || currentUser.email,
+          uid: currentUser.uid,
+          key: postskey,
+          likeCount: 0,
+        }
         const updatesPost = {};
         updatesPost[`/posts/${newPostsUser.key}`] = nuevoPost;
         firebase.database().ref().update(updatesPost);
         reloadPage();
       }
+
+      else if (postskey === e.target.id && privacyValue === 'private') {
+        const currentUser = firebase.auth().currentUser;
+        const newUpdate = textPost.value;
+        const newPostvalue = newUpdate;
+        const nuevoPost = {
+          body: newPostvalue,
+          image: currentUser.photoURL || 'https://png.icons8.com/ios/1600/user-male-circle-filled.png',
+          author: currentUser.displayName || currentUser.email,
+          uid: currentUser.uid,
+          key: postskey,
+          likeCount: 0,
+        }
+        const updatesUser = {};
+        updatesUser[`/user-posts/${newPostsUser.val().uid}/${newPostsUser.key}`] = nuevoPost;
+        firebase.database().ref().update(updatesUser);
+        reloadPage();
+      }
+
+
+
     })
     contPost.appendChild(btnSave);
+    // contPost.appendChild(newPrivacySelector);
   });
 
   privateContainer.appendChild(contPost);
@@ -423,11 +421,12 @@ const getPrivatePostbyFirebase = (uid) => {
 
 
 
-//  Función para escribir un post
+//  Función para escribir un post  público en Firebase
 
 const writeNewPost = () => {
   const currentUser = firebase.auth().currentUser;
   const messageAreaText = textComposerArea.value;
+  const privacyValue = statusOfPrivacy.value;
   const newPostKey = firebase.database().ref().child('posts').push().key;
   const postData = {
     image: currentUser.photoURL,
@@ -436,7 +435,8 @@ const writeNewPost = () => {
     body: messageAreaText,
     key: newPostKey,
     likeCount: 0,
-    email: currentUser.email
+    email: currentUser.email,
+    privacy: privacyValue
   };
   const updates = {};
   updates['/posts/' + newPostKey] = postData;
@@ -444,10 +444,11 @@ const writeNewPost = () => {
   return firebase.database().ref().update(updates);
 };
 
-//  Función para escribir un post privado
+//  Función para escribir un post privado en FIREBASE
 const writePrivateUserPost = () => {
   const currentUser = firebase.auth().currentUser;
   const messageAreaText = textComposerArea.value;
+  const privacyValue = statusOfPrivacy.value;
   const newPostKey = firebase.database().ref().child('posts').push().key;
   const postData = {
     image: currentUser.photoURL,
@@ -456,8 +457,8 @@ const writePrivateUserPost = () => {
     body: messageAreaText,
     key: newPostKey,
     likeCount: 0,
-    email: currentUser.email
-
+    email: currentUser.email,
+    privacy: privacyValue
   };
   const updates = {};
   updates['/user-posts/' + currentUser.uid + '/' + newPostKey] = postData;
@@ -476,15 +477,22 @@ const writtingPost = () => {
     if (privacyValue == 'public') {
       console.log('post publico')
       writeNewPost();
+      cleanTextarea();
     } else if (privacyValue == 'private') {
       console.log('post privado')
       writePrivateUserPost();
+      cleanTextarea();
     } else {
       console.log('post no definido')
       writeNewPost();
+      cleanTextarea();
     }
   }
 }
+
+window.cleanTextarea = () => {
+  textComposerArea.value = '';
+};
 
 window.reloadPage = () => {
   window.location.reload();

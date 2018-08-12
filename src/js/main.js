@@ -25,6 +25,7 @@ const textComposerArea = document.getElementById('text-composer-area'); //área 
 const sendPostButton = document.getElementById('send-post'); //botón para publicar
 
 const statusOfPrivacy = document.getElementById('status-of-privacy');
+
 const feedButton = document.getElementById('feed-button');
 const profileButton = document.getElementById('profile-button');
 const feedButtonNavbar = document.getElementById('feed-btn-navbar');
@@ -49,6 +50,7 @@ const showFeed = () => {
   publicContainer.style.display = 'block';
   privateContainer.style.display = 'none'; 
   accordion.style.display = 'block';
+  
 };
 
 const myProfile = () => {
@@ -94,7 +96,7 @@ const showContainers = () => {
   feedButtonNavbar.style.display = 'none';
   profileButton.style.display = 'none';
   profileButtonNavbar.style.display = 'none';  
-  myPhotos.style.display = 'none';  
+  myPhotos.style.display = 'block';  
   
 };
 
@@ -130,7 +132,7 @@ logoutButton.addEventListener('click', logoutWithFirebase);
 logoutButtonNavbar.addEventListener('click', logoutWithFirebase);
 
 sendPostButton.addEventListener('click', writtingPost);
-
+/* cleanTextarea */
 
 
 feedButton.addEventListener('click', showFeed);
