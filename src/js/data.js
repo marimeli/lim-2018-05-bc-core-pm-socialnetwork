@@ -488,7 +488,7 @@ const writtingPost = () => {
       cleanTextarea();
     }
   }
-}
+};
 
 window.cleanTextarea = () => {
   textComposerArea.value = '';
@@ -497,3 +497,5 @@ window.cleanTextarea = () => {
 window.reloadPage = () => {
   window.location.reload();
 };
+
+//14 mas dos peques
