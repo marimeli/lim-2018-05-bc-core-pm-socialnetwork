@@ -477,15 +477,22 @@ const writtingPost = () => {
     if (privacyValue == 'public') {
       console.log('post publico')
       writeNewPost();
+      cleanTextarea();
     } else if (privacyValue == 'private') {
       console.log('post privado')
       writePrivateUserPost();
+      cleanTextarea();
     } else {
       console.log('post no definido')
       writeNewPost();
+      cleanTextarea();
     }
   }
 }
+
+window.cleanTextarea = () => {
+  textComposerArea.value = '';
+};
 
 window.reloadPage = () => {
   window.location.reload();
