@@ -94,7 +94,7 @@ const showContainers = () => {
   feedButtonNavbar.style.display = 'none';
   profileButton.style.display = 'none';
   profileButtonNavbar.style.display = 'none';  
-  myPhotos.style.display = 'none';  
+  myPhotos.style.display = 'block';  
   
 };
 

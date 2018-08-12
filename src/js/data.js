@@ -177,7 +177,7 @@ const printPublicPost = (newPublicPosts) => { //hacer otro parámetro que define
 
   const author = document.createElement('h4');
   author.setAttribute('style', "margin-top: 22px,");
-  author.setAttribute('class', "author");
+;
 
   const textPost = document.createElement('textarea');
   textPost.setAttribute('class', 'w3-left  w3-margin-right edit-textarea');
@@ -260,7 +260,7 @@ const showPostsUserProfile = (newPostsUser) => {
   line.setAttribute('class', "w3-clear")
 
   const author = document.createElement('h4');
-  author.setAttribute('class', "author");
+
   author.setAttribute('style', "margin-top: 22px");
 
 
@@ -269,7 +269,7 @@ const showPostsUserProfile = (newPostsUser) => {
   textPost.setAttribute('id', postskey);
   textPost.setAttribute('disabled', true);
   textPost.innerHTML = `${newPostsUser.val().body}`;
-  textPost.setAttribute('disabled', true);
+  
 
   const lineBreak = document.createElement('br');
   lineBreak.setAttribute('class', "w3-clear");
@@ -479,6 +479,7 @@ const writtingPost = () => {
   updates['/user-posts/' + currentUser.uid + '/' + newPostKey] = postData; //si es privado solo se guarda en user-post
   cleanTextarea();
 
+
   //condición para que escriba también en la rama post cuando es público
   if (privacyValue == 'public') {
     updates['/posts/' + newPostKey] = postData;
@@ -487,6 +488,7 @@ const writtingPost = () => {
   return firebase.database().ref().update(updates);
   
 };
+
 
 window.reloadPage = () => {
   window.location.reload();
