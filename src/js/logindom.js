@@ -1,5 +1,3 @@
-/* alert('4'); */
-
 /* Almacenando las variables para la selección de DOM */
 
 //Llamando modal

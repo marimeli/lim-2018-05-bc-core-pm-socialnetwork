@@ -1,8 +1,8 @@
-html, body, h1, h2, h3, h4, p {
+html, body, h4, h5 {
     font-family: "Open Sans", sans-serif
 }
 
-p {
+h5 {
     text-align: center;   
 }
 
@@ -13,8 +13,6 @@ p {
     text-align: center;
     text-decoration: none;
     vertical-align: middle;
-   /*  margin: 5px 2px;
-    border-radius: 50%;  */
   }
 
 .fa:hover {
@@ -44,11 +42,11 @@ p {
     resize: none;
 }
 
-#add-banner {
+.banner {
     width:100%;
 }
 
-#logged-in {
+.nav {
     padding:80px 0 0 0;
 }
 
@@ -56,11 +54,30 @@ p {
     resize: none;
     border: none;
     background: transparent;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 .focus-textarea {
-    background: yellow;
+    background:#ffff66;
     resize: none;
     border: none;
     height: 40%;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.writer {
+    margin-top: 25px;
+    padding: 12px 25px
 }
