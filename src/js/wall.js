@@ -179,14 +179,15 @@ window.showPostsUserProfile = (newPostsUser) => {
           body: newPostvalue,
           image: currentUser.photoURL || 'https://png.icons8.com/ios/1600/user-male-circle-filled.png',
           author: currentUser.displayName || currentUser.email,
-
           uid: currentUser.uid,
           key: postskey,
           likeCount: 0,
         };
+
+        const updatesUser = {};
         const updatesPost = {};
         updatesUser[`/user-posts/${newPostsUser.val().uid}/${newPostsUser.key}`] = nuevoPost;
-        updatesPost[`/posts/${newPublicPosts.key}`] = nuevoPost; 
+        updatesPost[`/posts/${newPostsUser.key}`] = nuevoPost;
         firebase.database().ref().update(updatesUser);
         firebase.database().ref().update(updatesPost);
         reloadPage();
