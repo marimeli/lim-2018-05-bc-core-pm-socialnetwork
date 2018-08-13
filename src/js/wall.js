@@ -1,3 +1,5 @@
+/* alert('3'); */
+
 //*********WINDOWS ONLOAD***********
 window.onload = () => {
   //Listener en tiempo real EL CHISMOSO
@@ -306,12 +308,4 @@ window.writtingPost = () => {
     cleanTextarea();
   }
   return firebase.database().ref().update(updates);
-};
-
-window.cleanTextarea = () => {
-  textComposerArea.value = '';
-  };
-
-window.reloadPage = () => {
-  window.location.reload();
 };

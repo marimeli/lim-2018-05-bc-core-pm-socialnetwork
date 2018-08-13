@@ -1,3 +1,5 @@
+/* alert('4'); */
+
 /* Almacenando las variables para la selección de DOM */
 
 //Llamando modal
@@ -61,6 +63,35 @@ const xButtonCloseRegister = () => {
     document.getElementById('registerModal').style.display = 'none';
 };
 
+const callbackRegister = (error) => {
+    if (error.code === 'auth/email-already-in-use') {
+        adviceEmailRegister.innerText = 'Ya existe un usuario con este correo. Por favor, ingrese otro';
+    } else if (error.code === 'auth/invalid-email') {
+        adviceEmailRegister.innerText = 'Por favor, agregue un correo válido';
+    } else if (error.code === 'auth/weak-password') {
+        advicePasswordRegister.innerText = 'Ingresa una contraseña con más de 6 caracteres';
+    }
+};
+
+const callbackLogin = (error) => {
+    if (error.code === 'auth/wrong-password') {
+        errorPassword.innerText = 'Su contraseña es incorrecta';
+    }
+    else if (error.code === 'auth/invalid-email') {
+        errorEmail.innerText = 'Por favor, agregue un correo válido';
+    }
+    else if (error.code === 'auth/user-not-found') {
+        errorEmail.innerText = 'No existe un usuario con este correo. Por favor, regístrese';
+    }
+};
+
+const hideSections = () => {
+    publicContainer.style.display = 'none';
+    privateContainer.style.display = 'none';
+    addBanner.style.display = 'block';
+    accordion.style.display = 'block';
+    alertBox.style.display = 'block';
+};
 
 /* DOM EVENTS */
 
