@@ -84,26 +84,28 @@ window.printPublicPost = (newPublicPosts) => { //hacer otro parámetro que defin
   contadorlike.setAttribute('class', 'w3-button w3-margin-bottom ')
   contadorlike.setAttribute('id', postskey);
   contadorlike.innerHTML = `${newPublicPosts.val().likeCount}`;
-  var clicks = 0;
-  btnLike.addEventListener('click', () => {
-    clicks += 1;
-    contadorlike.innerHTML = clicks;
 
-    const newUpdate = textPost.innerText
+  btnLike.addEventListener('click', () => {
+    
+    
+    let clickLike = newPublicPosts.val().likeCount + 1;
+    contadorlike.innerHTML = clickLike;
+    let newUpdate = textPost.innerText;
     const newPostvalue = newUpdate
     const nuevoPost = {
-      body: newPostvalue,
+      body:  `${newPublicPosts.val().body}`,
       image: `${newPublicPosts.val().image}`,
-      author: `${newPublicPosts.val().author}`,
+      author: `${newPublicPosts.val().author}`||`${newPublicPosts.val().email}`,
+      email:  `${newPublicPosts.val().email}`,
       uid: `${newPublicPosts.val().uid}`,
       key: postskey,
-      likeCount: clicks,
+      likeCount: clickLike,
     };
     const updatesUser = {};
     const updatesPost = {};
 
-    updatesPost[`/posts/${newPublicPosts.key}`] = nuevoPost; // aquí va la condicion
-    firebase.database().ref().update(updatesUser);
+    updatesPost[`/posts/${newPublicPosts.key}`] = nuevoPost; 
+    // firebase.database().ref().update(updatesUser);
     firebase.database().ref().update(updatesPost);
 
   })
@@ -206,7 +208,7 @@ window.showPostsUserProfile = (newPostsUser) => {
           body: newPostvalue,
           image: currentUser.photoURL || 'https://png.icons8.com/ios/1600/user-male-circle-filled.png',
           author: currentUser.displayName || currentUser.email,
-
+          
           uid: currentUser.uid,
           key: postskey,
           likeCount: 0,
