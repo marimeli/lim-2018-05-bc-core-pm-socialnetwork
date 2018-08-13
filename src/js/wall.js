@@ -1,21 +1,16 @@
-/* alert('3'); */
-
 //*********WINDOWS ONLOAD***********
 window.onload = () => {
-  //Listener en tiempo real 
   firebase.auth().onAuthStateChanged((user) => {
-    if (user) {//Si está logeado mostramos la opcion de logout y nombre de usuario
+    if (user) {
       console.log('Usuario logueado');
       //Ocultar botones que abren modales de registro y login
       dontShowModalRegister();
       dontShowModal();
       userInformation(user);
       //Muestra perfil y container para publicar
-
       hideContainers();
       writeUserData(user.uid, user.displayName, user.email, user.photoURL);
-
-    } else {//Si NO está logueado, mostramos formulario(OPCION LOGGEDOUT)
+    } else {
       console.log('Usuario NO logueado');
       showContainers();
     }
@@ -23,10 +18,8 @@ window.onload = () => {
     console.log('User > ' + JSON.stringify(user));
     getPrivatePostbyFirebase(user.uid);
     getPublicPostByFirebase(user.uid);
-
     myProfile();
   });
-
 };
 
 //  Función para guardar dato de usuario en Firebase cuando está logeado. 
@@ -45,9 +38,7 @@ window.writeUserData = (userId, name, email, imageUrl) => {
 };
 
 //Imprimir post PÚBLICOS
-window.printPublicPost = (newPublicPosts) => { //hacer otro parámetro que define si es público o priv. 
-  // si ese parametro es publico, then 
-
+window.printPublicPost = (newPublicPosts) => { 
   const postskey = newPublicPosts.key;
   const contPost = document.createElement('div');
   contPost.setAttribute('class', "w3-container w3-card w3-white w3-round w3-margin")
@@ -57,28 +48,20 @@ window.printPublicPost = (newPublicPosts) => { //hacer otro parámetro que defin
   image.setAttribute('style', "width:60px")
   image.setAttribute('alt', "Avatar")
 
-  const line = document.createElement('hr');
-  line.setAttribute('class', "w3-clear")
-
   const author = document.createElement('h4');
-  author.setAttribute('style', "margin-top: 22px,");
-
+  author.setAttribute('class', "writer");
 
   const textPost = document.createElement('textarea');
-  textPost.setAttribute('class', 'w3-left  w3-margin-right edit-textarea');
+  textPost.setAttribute('class', 'edit-textarea');
   textPost.setAttribute('id', postskey);
   textPost.innerHTML = `${newPublicPosts.val().body}`;
   textPost.setAttribute('disabled', true);
-
-  const lineBreak = document.createElement('br');
 
   const btnLike = document.createElement('input');
   btnLike.setAttribute('value', 'Me gusta');
   btnLike.setAttribute('type', 'button')
   btnLike.setAttribute('id', postskey);
-
   btnLike.setAttribute('class', "w3-button w3-theme-d1 w3-margin-bottom");
-
 
   const contadorlike = document.createElement('a');
   contadorlike.setAttribute('class', 'w3-button w3-margin-bottom ')
@@ -111,14 +94,11 @@ window.printPublicPost = (newPublicPosts) => { //hacer otro parámetro que defin
   publicContainer.appendChild(contPost);
   contPost.appendChild(image);
   contPost.appendChild(author);
-  contPost.appendChild(line);
   contPost.appendChild(textPost);
-  contPost.appendChild(lineBreak);
-  contPost.appendChild(line);
   contPost.appendChild(contadorlike);
   contPost.appendChild(btnLike);
 
-  if (`${newPublicPosts.val().author}` == 'undefined') {
+  if (`${newPublicPosts.val().author}` === 'undefined') {
     author.innerHTML = `${newPublicPosts.val().email}`
     image.setAttribute('src', 'https://png.icons8.com/ios/1600/user-male-circle-filled.png')
   }
@@ -130,7 +110,6 @@ window.printPublicPost = (newPublicPosts) => { //hacer otro parámetro que defin
 
 // Esta es la función para pintar dinámicamente los post personales(privados)
 window.showPostsUserProfile = (newPostsUser) => {
-
   const postskey = newPostsUser.key
 
   const contPost = document.createElement('div');
@@ -141,13 +120,8 @@ window.showPostsUserProfile = (newPostsUser) => {
   image.setAttribute('style', "width:60px")
   image.setAttribute('alt', "Avatar")
 
-  const line = document.createElement('hr');
-  line.setAttribute('class', "w3-clear")
-
   const author = document.createElement('h4');
-
-  author.setAttribute('style', "margin-top: 22px");
-
+  author.setAttribute('class', "writer");
 
   const textPost = document.createElement('textarea');
   textPost.setAttribute('class', "w3-left w3-margin-right edit-textarea");
@@ -156,9 +130,6 @@ window.showPostsUserProfile = (newPostsUser) => {
   textPost.innerHTML = `${newPostsUser.val().body}`;
   textPost.setAttribute('disabled', true);
 
-  const lineBreak = document.createElement('br');
-  lineBreak.setAttribute('class', "w3-clear");
-
   const btnEdit = document.createElement('input');
   btnEdit.setAttribute('value', 'Editar');
   btnEdit.setAttribute('type', 'button');
@@ -166,14 +137,12 @@ window.showPostsUserProfile = (newPostsUser) => {
   btnEdit.setAttribute('class', "w3-button w3-theme-d1 w3-margin-bottom")
   btnEdit.setAttribute('style', 'margin: 10px')
 
-
   const btnDelete = document.createElement('input');
   btnDelete.setAttribute('value', 'Borrar');
   btnDelete.setAttribute('type', 'button');
   btnDelete.setAttribute('id', postskey);
   btnDelete.setAttribute('class', "w3-button w3-theme-d1 w3-margin-bottom");
   btnDelete.setAttribute('style', 'margin: 10px');
-
 
   btnDelete.addEventListener('click', (e) => {
     if (newPostsUser.key === e.target.id) {
@@ -220,8 +189,6 @@ window.showPostsUserProfile = (newPostsUser) => {
         firebase.database().ref().update(updatesPost);
         reloadPage();
       }
-
-
     })
     contPost.appendChild(btnSave);
   });
@@ -229,10 +196,7 @@ window.showPostsUserProfile = (newPostsUser) => {
   privateContainer.appendChild(contPost);
   contPost.appendChild(image);
   contPost.appendChild(author);
-  contPost.appendChild(line);
   contPost.appendChild(textPost);
-  contPost.appendChild(lineBreak);
-  contPost.appendChild(line);
   contPost.appendChild(btnEdit);
   contPost.appendChild(btnDelete);
 
@@ -247,19 +211,16 @@ window.showPostsUserProfile = (newPostsUser) => {
   }
 };
 
-//  Función para traer todos los posts publicos almacenados en Firebase. 
-
+//  Función para traer los posts de todos los usuarios (Públicos) de Firebase
 window.getPublicPostByFirebase = (uid) => {
-  // Trae los posts de todos los usuarios (Públicos)
   const allUsersPosts = firebase.database().ref('posts');
   allUsersPosts.on("child_added", newPublicPosts => {
     printPublicPost(newPublicPosts);
   });
 };
 
-//  Función para traer todos los posts privados almacenados en Firebase. 
+//  Función para traer solo los posts del usuario (Personales) de Firebase
 window.getPrivatePostbyFirebase = (uid) => {
-  //Trae solo los posts del usuario (Personales)
   const userPosts = firebase.database().ref('user-posts').child(uid);
   userPosts.on("child_added", newUserPosts => {
     showPostsUserProfile(newUserPosts);
@@ -289,7 +250,6 @@ window.writtingPost = () => {
   const updates = {};
   updates['/user-posts/' + currentUser.uid + '/' + newPostKey] = postData; //si es privado solo se guarda en user-post
   cleanTextarea();
-
   //condición para que escriba también en la rama post cuando es público
   if (privacyValue === 'public') {
     updates['/posts/' + newPostKey] = postData;
