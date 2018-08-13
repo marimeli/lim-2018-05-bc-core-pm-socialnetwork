@@ -2,7 +2,7 @@
 
 //*********WINDOWS ONLOAD***********
 window.onload = () => {
-  //Listener en tiempo real EL CHISMOSO
+  //Listener en tiempo real 
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {//Si está logeado mostramos la opcion de logout y nombre de usuario
       console.log('Usuario logueado');
@@ -62,7 +62,7 @@ window.printPublicPost = (newPublicPosts) => { //hacer otro parámetro que defin
 
   const author = document.createElement('h4');
   author.setAttribute('style', "margin-top: 22px,");
-  author.setAttribute('class', "author");
+
 
   const textPost = document.createElement('textarea');
   textPost.setAttribute('class', 'w3-left  w3-margin-right edit-textarea');
@@ -145,7 +145,7 @@ window.showPostsUserProfile = (newPostsUser) => {
   line.setAttribute('class', "w3-clear")
 
   const author = document.createElement('h4');
-  author.setAttribute('class', "author");
+
   author.setAttribute('style', "margin-top: 22px");
 
 
@@ -221,8 +221,7 @@ window.showPostsUserProfile = (newPostsUser) => {
         reloadPage();
       }
 
-      // textPost.contentEditable = "false";
-      // document.getElementById("postskey").disabled = true;
+
     })
     contPost.appendChild(btnSave);
   });
