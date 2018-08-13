@@ -259,7 +259,7 @@ window.showPostsUserProfile = (newPostsUser) => {
   }
 };
 
-//  Función para traer todos los posts almacenados en Firebase. 
+//  Función para traer todos los posts publicos almacenados en Firebase. 
 
 window.getPublicPostByFirebase = (uid) => {
   // Trae los posts de todos los usuarios (Públicos)
@@ -269,7 +269,7 @@ window.getPublicPostByFirebase = (uid) => {
   });
 };
 
-
+//  Función para traer todos los posts privados almacenados en Firebase. 
 window.getPrivatePostbyFirebase = (uid) => {
   //Trae solo los posts del usuario (Personales)
   const userPosts = firebase.database().ref('user-posts').child(uid);

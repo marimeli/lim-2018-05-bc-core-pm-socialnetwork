@@ -106,9 +106,6 @@ const showContainers = () => {
   /*   myPhotos.style.display = 'block';   */
 };
 
-
-
-
 // Accordion
 const myFunction = (id) => {
   var x = document.getElementById(id);
@@ -140,7 +137,6 @@ logoutButton.addEventListener('click', logoutWithFirebase);
 logoutButtonNavbar.addEventListener('click', logoutWithFirebase);
 
 sendPostButton.addEventListener('click', writtingPost);
-
 
 
 feedButton.addEventListener('click', showFeed);
