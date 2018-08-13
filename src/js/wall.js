@@ -11,10 +11,8 @@ window.onload = () => {
       dontShowModal();
       userInformation(user);
       //Muestra perfil y container para publicar
-
       hideContainers();
       writeUserData(user.uid, user.displayName, user.email, user.photoURL);
-
     } else {//Si NO está logueado, mostramos formulario(OPCION LOGGEDOUT)
       console.log('Usuario NO logueado');
       showContainers();
