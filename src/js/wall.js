@@ -1,5 +1,3 @@
-
-
 //*********WINDOWS ONLOAD***********
 window.onload = () => {
   //Listener en tiempo real EL CHISMOSO
@@ -22,7 +20,7 @@ window.onload = () => {
         userImage.setAttribute('src', user.photoURL);
       }
       //Muestra perfil y container para publicar
-      
+
       hideContainers();
       writeUserData(user.uid, user.displayName, user.email, user.photoURL);
 
@@ -40,10 +38,6 @@ window.onload = () => {
 
 };
 
-
-
-//TIMELINE
-
 //  Función para guardar dato de usuario en Firebase cuando está logeado. 
 window.writeUserData = (userId, name, email, imageUrl) => {
   firebase.database().ref('users/' + userId).set({
@@ -59,9 +53,9 @@ window.writeUserData = (userId, name, email, imageUrl) => {
     });
 };
 
-
 //Imprimir post PÚBLICOS
-const printPublicPost = (newPublicPosts) => {
+window.printPublicPost = (newPublicPosts) => { //hacer otro parámetro que define si es público o priv. 
+  // si ese parametro es publico, then 
 
   const postskey = newPublicPosts.key;
   const contPost = document.createElement('div');
@@ -77,6 +71,7 @@ const printPublicPost = (newPublicPosts) => {
 
   const author = document.createElement('h4');
   author.setAttribute('style', "margin-top: 22px,");
+  author.setAttribute('class', "author");
 
   const textPost = document.createElement('textarea');
   textPost.setAttribute('class', 'w3-left  w3-margin-right edit-textarea');
@@ -93,7 +88,7 @@ const printPublicPost = (newPublicPosts) => {
 
   btnLike.setAttribute('class', "w3-button w3-theme-d1 w3-margin-bottom");
 
-  
+
   const contadorlike = document.createElement('a');
   contadorlike.setAttribute('class', 'w3-button w3-margin-bottom ')
   contadorlike.setAttribute('id', postskey);
@@ -116,7 +111,7 @@ const printPublicPost = (newPublicPosts) => {
     const updatesUser = {};
     const updatesPost = {};
 
-    updatesPost[`/posts/${newPublicPosts.key}`] = nuevoPost;
+    updatesPost[`/posts/${newPublicPosts.key}`] = nuevoPost; // aquí va la condicion
     firebase.database().ref().update(updatesUser);
     firebase.database().ref().update(updatesPost);
 
@@ -131,7 +126,7 @@ const printPublicPost = (newPublicPosts) => {
   contPost.appendChild(line);
   contPost.appendChild(contadorlike);
   contPost.appendChild(btnLike);
-  
+
   if (`${newPublicPosts.val().author}` == 'undefined') {
     author.innerHTML = `${newPublicPosts.val().email}`
     image.setAttribute('src', 'https://png.icons8.com/ios/1600/user-male-circle-filled.png')
@@ -143,7 +138,7 @@ const printPublicPost = (newPublicPosts) => {
 };
 
 // Esta es la función para pintar dinámicamente los post personales(privados)
-const showPostsUserProfile = (newPostsUser) => {
+window.showPostsUserProfile = (newPostsUser) => {
 
   const postskey = newPostsUser.key
 
@@ -159,7 +154,7 @@ const showPostsUserProfile = (newPostsUser) => {
   line.setAttribute('class', "w3-clear")
 
   const author = document.createElement('h4');
-
+  author.setAttribute('class', "author");
   author.setAttribute('style', "margin-top: 22px");
 
 
@@ -168,7 +163,7 @@ const showPostsUserProfile = (newPostsUser) => {
   textPost.setAttribute('id', postskey);
   textPost.setAttribute('disabled', true);
   textPost.innerHTML = `${newPostsUser.val().body}`;
-  
+  textPost.setAttribute('disabled', true);
 
   const lineBreak = document.createElement('br');
   lineBreak.setAttribute('class', "w3-clear");
@@ -190,57 +185,55 @@ const showPostsUserProfile = (newPostsUser) => {
 
 
   btnDelete.addEventListener('click', (e) => {
-      if (newPostsUser.key === e.target.id) {
-          const question = confirm('¿Esta seguro que desea eliminar esta publicación?')
-          if (question === true) {
-              firebase.database().ref().child(`/posts/${newPostsUser.key}`).remove();
-              firebase.database().ref().child(`/user-posts/${newPostsUser.val().uid}/${newPostsUser.key}`).remove();
-              contPost.remove();
-              alert('El post fue borrado exitosamente');
-          }
+    if (newPostsUser.key === e.target.id) {
+      const question = confirm('¿Esta seguro que desea eliminar esta publicación?')
+      if (question === true) {
+        firebase.database().ref().child(`/posts/${newPostsUser.key}`).remove();
+        firebase.database().ref().child(`/user-posts/${newPostsUser.val().uid}/${newPostsUser.key}`).remove();
+        contPost.remove();
+        alert('El post fue borrado exitosamente');
       }
+    }
   });
 
-    
-
   btnEdit.addEventListener('click', (e) => {
-      textPost.disabled = false;
-      textPost.setAttribute('class', "w3-left w3-margin-right focus-textarea");
-      btnEdit.style.display = 'none';
-      const btnSave = document.createElement('input');
-      btnSave.setAttribute('value', 'Guardar');
-      btnSave.setAttribute('type', 'button');
-      btnSave.setAttribute('class', "w3-blue w3-button w3-margin-bottom");
-      btnSave.setAttribute('id', postskey);
-      btnSave.setAttribute('style', 'margin: 10px');
-      btnSave.addEventListener('click', (e) => {
-          if (postskey === e.target.id) {
-              const currentUser = firebase.auth().currentUser;
-              const newUpdate = textPost.value;
-              const newPostvalue = newUpdate;
-              const nuevoPost = {
-                  body: newPostvalue,
-                  image: currentUser.photoURL || 'https://png.icons8.com/ios/1600/user-male-circle-filled.png',
-                  author: currentUser.displayName || currentUser.email,               
-                                    
-                  uid: currentUser.uid,
-                  key: postskey,
-                  likeCount: 0,
-              };
-              
-              const updatesUser = {};
-              const updatesPost = {};
-              updatesUser[`/user-posts/${newPostsUser.val().uid}/${newPostsUser.key}`] = nuevoPost;
-              updatesPost[`/posts/${newPostsUser.key}`] = nuevoPost;
-              firebase.database().ref().update(updatesUser);
-              firebase.database().ref().update(updatesPost);
-              reloadPage();
-          }
+    textPost.disabled = false;
+    textPost.setAttribute('class', "w3-left w3-margin-right focus-textarea");
+    btnEdit.style.display = 'none';
+    const btnSave = document.createElement('input');
+    btnSave.setAttribute('value', 'Guardar');
+    btnSave.setAttribute('type', 'button');
+    btnSave.setAttribute('class', "w3-blue w3-button w3-margin-bottom");
+    btnSave.setAttribute('id', postskey);
+    btnSave.setAttribute('style', 'margin: 10px');
+    btnSave.addEventListener('click', (e) => {
+      if (postskey === e.target.id) {
+        const currentUser = firebase.auth().currentUser;
+        const newUpdate = textPost.value;
+        const newPostvalue = newUpdate;
+        const nuevoPost = {
+          body: newPostvalue,
+          image: currentUser.photoURL || 'https://png.icons8.com/ios/1600/user-male-circle-filled.png',
+          author: currentUser.displayName || currentUser.email,
 
-          // textPost.contentEditable = "false";
-          // document.getElementById("postskey").disabled = true;
-      })
-      contPost.appendChild(btnSave);
+          uid: currentUser.uid,
+          key: postskey,
+          likeCount: 0,
+        };
+
+        const updatesUser = {};
+        const updatesPost = {};
+        updatesUser[`/user-posts/${newPostsUser.val().uid}/${newPostsUser.key}`] = nuevoPost;
+        updatesPost[`/posts/${newPostsUser.key}`] = nuevoPost;
+        firebase.database().ref().update(updatesUser);
+        firebase.database().ref().update(updatesPost);
+        reloadPage();
+      }
+
+      // textPost.contentEditable = "false";
+      // document.getElementById("postskey").disabled = true;
+    })
+    contPost.appendChild(btnSave);
   });
 
   privateContainer.appendChild(contPost);
@@ -253,20 +246,20 @@ const showPostsUserProfile = (newPostsUser) => {
   contPost.appendChild(btnEdit);
   contPost.appendChild(btnDelete);
 
-  if (`${newPostsUser.val().author}` === 'undefined' ) {
-      author.innerHTML = `${newPostsUser.val().email}`
-      image.setAttribute('src', 'https://png.icons8.com/ios/1600/user-male-circle-filled.png')
+  if (`${newPostsUser.val().author}` === 'undefined') {
+    author.innerHTML = `${newPostsUser.val().email}`
+    image.setAttribute('src', 'https://png.icons8.com/ios/1600/user-male-circle-filled.png')
   }
 
   else {
-      author.innerHTML = `${newPostsUser.val().author}`
-      image.setAttribute('src', `${newPostsUser.val().image}`)
+    author.innerHTML = `${newPostsUser.val().author}`
+    image.setAttribute('src', `${newPostsUser.val().image}`)
   }
 };
 
 //  Función para traer todos los posts almacenados en Firebase. 
 
-const getPublicPostByFirebase = (uid) => {
+window.getPublicPostByFirebase = (uid) => {
   // Trae los posts de todos los usuarios (Públicos)
   const allUsersPosts = firebase.database().ref('posts');
   allUsersPosts.on("child_added", newPublicPosts => {
@@ -275,7 +268,7 @@ const getPublicPostByFirebase = (uid) => {
 };
 
 
-const getPrivatePostbyFirebase = (uid) => {
+window.getPrivatePostbyFirebase = (uid) => {
   //Trae solo los posts del usuario (Personales)
   const userPosts = firebase.database().ref('user-posts').child(uid);
   userPosts.on("child_added", newUserPosts => {
@@ -283,11 +276,14 @@ const getPrivatePostbyFirebase = (uid) => {
   });
 };
 
-
-
-//  Función para escribir un post
-
-const writeNewPost = () => {
+// Funcion que escribe un post en Firebase
+window.writtingPost = () => {
+  let privacyValue = statusOfPrivacy.value;
+  const composerAreaValue = textComposerArea.value;
+  if (composerAreaValue.length === 0 && composerAreaValue === '') { //acá verifica si está en blanco
+    alert('Escribe un texto antes de publicar');
+  }
+  //Escribe nuevo post en firebase
   const currentUser = firebase.auth().currentUser;
   const messageAreaText = textComposerArea.value;
   const newPostKey = firebase.database().ref().child('posts').push().key;
@@ -301,62 +297,21 @@ const writeNewPost = () => {
     email: currentUser.email
   };
   const updates = {};
-  updates['/posts/' + newPostKey] = postData;
-  updates['/user-posts/' + currentUser.uid + '/' + newPostKey] = postData;
+  updates['/user-posts/' + currentUser.uid + '/' + newPostKey] = postData; //si es privado solo se guarda en user-post
+  cleanTextarea();
+
+  //condición para que escriba también en la rama post cuando es público
+  if (privacyValue === 'public') {
+    updates['/posts/' + newPostKey] = postData;
+    cleanTextarea();
+  }
   return firebase.database().ref().update(updates);
 };
 
-//  Función para escribir un post privado
-const writePrivateUserPost = () => {
-  const currentUser = firebase.auth().currentUser;
-  const messageAreaText = textComposerArea.value;
-  const newPostKey = firebase.database().ref().child('posts').push().key;
-  const postData = {
-    image: currentUser.photoURL,
-    author: currentUser.displayName,
-    uid: currentUser.uid,
-    body: messageAreaText,
-    key: newPostKey,
-    likeCount: 0,
-    email: currentUser.email
-
+window.cleanTextarea = () => {
+  textComposerArea.value = '';
   };
-  const updates = {};
-  updates['/user-posts/' + currentUser.uid + '/' + newPostKey] = postData;
-  return firebase.database().ref().update(updates);
-}
-
-//Función condicional para verificar que escriba algo, y que sea público o privado
-const writtingPost = () => {
-  const composerAreaValue = textComposerArea.value;
-  const privacyValue = statusOfPrivacy.value;
-  /* const select = selectPublicPrivate.value; */
-  if (composerAreaValue.length === 0 && composerAreaValue === '') {
-    alert('Escribe un texto antes de publicar');
- 
-  } else {
-    if (privacyValue == 'public') {
-      console.log('post publico')
-      writeNewPost();
-      cleanTextarea();
-    } else if (privacyValue == 'private') {
-      console.log('post privado')
-      writePrivateUserPost();
-      cleanTextarea();
-    } else {
-      console.log('post no definido')
-      writeNewPost();
-      cleanTextarea();
-    }
-  }
- };
- 
- window.cleanTextarea = () => {
- textComposerArea.value = '';
- };
 
 window.reloadPage = () => {
   window.location.reload();
 };
-
-//14 mas dos peques
