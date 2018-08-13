@@ -1,3 +1,4 @@
+/* alert('5'); */
 /* Almacenando las variables para la selección de DOM */
 
 //Logout
@@ -17,7 +18,7 @@ const accordion = document.getElementById('acordeon');
 const addBanner = document.getElementById('add-banner');
 const postsContainer = document.getElementById('posts-container'); //contenedor que guardará todos los posts que se creen dinámicamente  */
 const privateContainer = document.getElementById('private-container'); //contenedor de post privados
-const publicContainer= document.getElementById('public-container'); //contenedor de post publicos
+const publicContainer = document.getElementById('public-container'); //contenedor de post publicos
 
 
 const postComposerContainer = document.getElementById('post-composer-container'); //contenedor de base de datos
@@ -37,6 +38,14 @@ const hamburgerMenu = document.getElementById('hamburger-menu');
 
 /* FUNCIONES */
 
+const cleanTextarea = () => {
+  textComposerArea.value = '';
+};
+
+const reloadPage = () => {
+  window.location.reload();
+};
+
 const showFeed = () => {
   postComposerContainer.style.display = 'none';
   profileContainer.style.display = 'none';
@@ -47,16 +56,16 @@ const showFeed = () => {
   callModalLogin.style.display = 'none';
   callModalLoginNavbar.style.display = 'none';
   publicContainer.style.display = 'block';
-  privateContainer.style.display = 'none'; 
+  privateContainer.style.display = 'none';
   accordion.style.display = 'block';
 };
 
 const myProfile = () => {
   postComposerContainer.style.display = 'block';
-    profileContainer.style.display = 'block'; //profileContainer
-    publicContainer.style.display = 'none';
-    privateContainer.style.display = 'block';   
-    accordion.style.display = 'none';
+  profileContainer.style.display = 'block'; //profileContainer
+  publicContainer.style.display = 'none';
+  privateContainer.style.display = 'block';
+  accordion.style.display = 'none';
 };
 
 //Cuando inicia sesión, se ejecuta la función que oculta contenedores y modales.
@@ -76,7 +85,7 @@ const hideContainers = () => {
   profileButtonNavbar.style.display = 'block'
   alertBox.style.display = 'none';
   addBanner.style.display = 'none';
-   
+
 };
 
 //Cuando cierra sesión, se ejecuta la función que muestra contenedores.
@@ -93,22 +102,20 @@ const showContainers = () => {
   feedButton.style.display = 'none';
   feedButtonNavbar.style.display = 'none';
   profileButton.style.display = 'none';
-  profileButtonNavbar.style.display = 'none';  
-  myPhotos.style.display = 'block';  
-  
+  profileButtonNavbar.style.display = 'none';
+  /*   myPhotos.style.display = 'block';   */
 };
-
 
 // Accordion
 const myFunction = (id) => {
   var x = document.getElementById(id);
   if (x.className.indexOf("w3-show") == -1) {
-      x.className += " w3-show";
-      x.previousElementSibling.className += " w3-theme-d1";
+    x.className += " w3-show";
+    x.previousElementSibling.className += " w3-theme-d1";
   } else {
-      x.className = x.className.replace("w3-show", "");
-      x.previousElementSibling.className =
-          x.previousElementSibling.className.replace(" w3-theme-d1", "");
+    x.className = x.className.replace("w3-show", "");
+    x.previousElementSibling.className =
+      x.previousElementSibling.className.replace(" w3-theme-d1", "");
   }
 };
 
@@ -130,7 +137,6 @@ logoutButton.addEventListener('click', logoutWithFirebase);
 logoutButtonNavbar.addEventListener('click', logoutWithFirebase);
 
 sendPostButton.addEventListener('click', writtingPost);
-
 
 
 feedButton.addEventListener('click', showFeed);

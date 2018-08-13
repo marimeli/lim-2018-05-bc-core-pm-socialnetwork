@@ -1,95 +1,83 @@
-/* Almacenando las variables para la selección de DOM */
-
-//Llamando modal
-const callModalRegister = document.getElementById('call-modal-register');
-const callModalLogin = document.getElementById('call-modal-login');
-
-//Llamando modal NAVBAR
-const callModalRegisterNavbar = document.getElementById('navbar-call-modal-register');
-const callModalLoginNavbar = document.getElementById('navbar-call-modal-login');
-
-//Login modal botones
-const cancelButton = document.getElementById('cancel-button');
-const xButton = document.getElementById('x-button');
-
-const mail = document.getElementById('email');
-const errorEmail = document.getElementById('error-email')
-const password = document.getElementById('password');
-const errorPassword = document.getElementById('error-password');
-const loginButton = document.getElementById('login-btn');
-const facebookButton = document.getElementById('facebook-button');
-const googleButton = document.getElementById('google-button');
-const facebookRegister = document.getElementById('facebook-register');
-const googleRegister = document.getElementById('google-register');
-
-//Register modal botones
-const cancelRegButton = document.getElementById('register-cancel-button');
-const xRegButton = document.getElementById('x-register-button');
-
-const emailRegister = document.getElementById('email-register');
-const adviceEmailRegister = document.getElementById('advice-emailRegister');
-const passwordRegister = document.getElementById('password-register');
-const advicePasswordRegister = document.getElementById('advice-passwordRegister');
-
-const registerButton = document.getElementById('register-button');
-
-/* FUNCIONES MODALES */
-
-//Login
-const showModal = () => {
-    document.getElementById('loginModal').style.display = 'block';
+/* alert('2'); */
+ 
+//*********REGISTER***********
+window.registerWithFirebase = () => {
+  //Crea usuario con email y password
+  firebase.auth().createUserWithEmailAndPassword(emailRegister.value, passwordRegister.value)
+    .then(() => {
+      console.log('usuario creado con éxito');
+      alert('Su usuario fue creado con éxito')
+    })
+    .catch((error) => {
+      callbackRegister(error);
+      console.log('Error Firebase > código > ' + error.code);
+      console.log('Error Firebase > Mensaje > ' + error.messaje);
+    });
 };
 
-const dontShowModal = () => {
-    document.getElementById('loginModal').style.display = 'none';
+//*********LOGIN EMAIL***********
+window.loginWithFirebase = () => {
+  firebase.auth().signInWithEmailAndPassword(email.value, password.value)
+    .then((result) => {
+      console.log('usuario inició sesiòn con éxito');
+      console.log(result);
+      const user = result.user;
+      writeUserData(user.uid, user.displayName, user.email, user.photoURL);
+    })
+    .catch((error) => {
+      callbackLogin(error);
+      console.log('Error Firebase > código > ' + error.code); 
+      console.log('Error Firebase > Mensaje > ' + error.message);
+    });
 };
 
-const xButtonClose = () => {
-    document.getElementById('loginModal').style.display = 'none';
+//LOGIN CON FACEBOOK
+window.facebookLoginWithFirebase = () => {
+  const provider = new firebase.auth.FacebookAuthProvider(); //Nuevo objeto con el proveedor
+  provider.setCustomParameters({ //Crea un login con facebook y enlace un popup
+    'display': 'popup'
+  });
+
+  firebase.auth().signInWithPopup(provider)
+    .then((result) => {
+      console.log('Login con Facebook exitoso');
+      console.log(result);
+      const user = result.user;
+      writeUserData(user.uid, user.displayName, user.email, user.photoURL);
+    })
+    .catch((error) => {
+      console.log('Error Firebase > código > ' + error.code);
+      console.log('Error Firebase > Mensaje > ' + error.messaje);
+    });
 };
 
-//Register
-const showModalRegister = () => {
-    document.getElementById('registerModal').style.display = 'block';
+//*********LOGIN GOOGLE***********
+window.googleLoginWithFirebase = () => {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  firebase.auth().signInWithPopup(provider)
+    .then((result) => {
+      console.log('Sesión con Google')
+      console.log(result);
+      const user = result.user;
+      writeUserData(user.uid, user.displayName, user.email, user.photoURL);
+    })
+    .catch((error) => {
+      console.log(error.code);
+      console.log(error.message);;
+      console.log(error.email);
+      console.log(error.credential);
+    });
 };
 
-const dontShowModalRegister = () => {
-    document.getElementById('registerModal').style.display = 'none';
+//*********LOGOUT***********
+window.logoutWithFirebase = () => {
+  firebase.auth().signOut()
+    .then(() => {
+      console.log('Usuario finalizó su sesión');
+    })
+    .catch((error) => {
+      console.log('Error Firebase > código > ' + error.code);
+      console.log('Error Firebase > Mensaje > ' + error.message);
+    });
+    hideSections();
 };
-
-const xButtonCloseRegister = () => {
-    document.getElementById('registerModal').style.display = 'none';
-};
-
-
-/* DOM EVENTS */
-
-// Modal login
-callModalLogin.addEventListener('click', showModal);
-cancelButton.addEventListener('click', dontShowModal);
-xButton.addEventListener('click', xButtonClose);
-
-// Modal login navbar
-callModalLoginNavbar.addEventListener('click', showModal);
-
-//Modal register 
-callModalRegister.addEventListener('click', showModalRegister);
-cancelRegButton.addEventListener('click', dontShowModalRegister);
-xRegButton.addEventListener('click', xButtonCloseRegister);
-
-// Modal register navbar
-callModalRegisterNavbar.addEventListener('click', showModalRegister);
-
-//Register
-registerButton.addEventListener('click', registerWithFirebase);
-
-//Login Email
-loginButton.addEventListener('click', loginWithFirebase);
-
-//Login Facebook
-facebookButton.addEventListener('click', facebookLoginWithFirebase);
-facebookRegister.addEventListener('click', facebookLoginWithFirebase);
-
-//Login Google
-googleButton.addEventListener('click', googleLoginWithFirebase);
-googleRegister.addEventListener('click', googleLoginWithFirebase);

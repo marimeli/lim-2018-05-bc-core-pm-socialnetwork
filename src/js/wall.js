@@ -1,28 +1,4 @@
-//*********REGISTRO***********
-window.registerWithFirebase = () => {
-  //Crea usuario con email y password
-  firebase.auth().createUserWithEmailAndPassword(emailRegister.value, passwordRegister.value)
-    .then(() => {
-      console.log('usuario creado con éxito');
-      alert('Su usuario fue creado con éxito')
-    })
-    .catch((error) => {
-      //Corregir
-      if (error.code === 'auth/email-already-in-use') {
-        adviceEmailRegister.innerText = 'Ya existe un usuario con este correo. Por favor, ingrese otro';
-      }
-      //Comentario cuando falta el @ ok
-      else if (error.code === 'auth/invalid-email') {
-        adviceEmailRegister.innerText = 'Por favor, agregue un correo válido';
-      }
-      //Corregir
-      else if (error.code === 'auth/weak-password') {
-        advicePasswordRegister.innerText = 'Ingresa una contraseña con más de 6 caracteres';
-      }
-      console.log('Error Firebase > código > ' + error.code);
-      console.log('Error Firebase > Mensaje > ' + error.messaje);
-    });
-};
+/* alert('3'); */
 
 //*********WINDOWS ONLOAD***********
 window.onload = () => {
@@ -64,86 +40,6 @@ window.onload = () => {
 
 };
 
-//*********LOGIN EMAIL***********
-const loginWithFirebase = () => {
-  firebase.auth().signInWithEmailAndPassword(email.value, password.value)
-    .then((result) => {
-      console.log('usuario inició sesiòn con éxito');
-      console.log(result);
-
-      const user = result.user;
-      writeUserData(user.uid, user.displayName, user.email, user.photoURL);
-    })
-    .catch((error) => {
-      if (error.code === 'auth/wrong-password') {
-        errorPassword.innerText = 'Su contraseña es incorrecta';
-      }
-      else if (error.code === 'auth/invalid-email') {
-        errorEmail.innerText = 'Por favor, agregue un correo válido';
-      }
-      else if (error.code === 'auth/user-not-found') {
-        errorEmail.innerText = 'No existe un usuario con este correo. Por favor, regístrese';
-      }
-      console.log('Error Firebase > código > ' + error.code); //Contraseña o correo no valido
-      console.log('Error Firebase > Mensaje > ' + error.message);
-    });
-};
-
-//LOGIN CON FACEBOOK
-const facebookLoginWithFirebase = () => {
-  const provider = new firebase.auth.FacebookAuthProvider(); //Nuevo objeto con el proveedor
-  provider.setCustomParameters({ //Crea un login con facebook y enlace un popup
-    'display': 'popup'
-  });
-
-  firebase.auth().signInWithPopup(provider)
-    .then((result) => {
-      console.log('Login con Facebook exitoso');
-      console.log(result);
-      const user = result.user;
-      writeUserData(user.uid, user.displayName, user.email, user.photoURL);
-    })
-    .catch((error) => {
-      console.log('Error Firebase > código > ' + error.code);
-      console.log('Error Firebase > Mensaje > ' + error.messaje);
-    });
-};
-
-//*********LOGIN GOOGLE***********
-const googleLoginWithFirebase = () => {
-  const provider = new firebase.auth.GoogleAuthProvider();
-  firebase.auth().signInWithPopup(provider)
-    .then((result) => {
-      console.log('Sesión con Google')
-      console.log(result);
-      const user = result.user;
-      writeUserData(user.uid, user.displayName, user.email, user.photoURL);
-    })
-    .catch((error) => {
-      console.log(error.code);
-      console.log(error.message);;
-      console.log(error.email);
-      console.log(error.credential);
-    });
-};
-
-//*********LOGOUT***********
-const logoutWithFirebase = () => {
-  firebase.auth().signOut()
-    .then(() => {
-      console.log('Usuario finalizó su sesión');
-    })
-    .catch((error) => {
-      console.log('Error Firebase > código > ' + error.code);
-      console.log('Error Firebase > Mensaje > ' + error.message);
-    });
-  publicContainer.style.display = 'none';
-  privateContainer.style.display = 'none';
-  addBanner.style.display = 'block';
-};
-
-//TIMELINE
-
 //  Función para guardar dato de usuario en Firebase cuando está logeado. 
 window.writeUserData = (userId, name, email, imageUrl) => {
   firebase.database().ref('users/' + userId).set({
@@ -160,7 +56,7 @@ window.writeUserData = (userId, name, email, imageUrl) => {
 };
 
 //Imprimir post PÚBLICOS
-const printPublicPost = (newPublicPosts) => { //hacer otro parámetro que define si es público o priv. 
+window.printPublicPost = (newPublicPosts) => { //hacer otro parámetro que define si es público o priv. 
   // si ese parametro es publico, then 
 
   const postskey = newPublicPosts.key;
@@ -177,7 +73,7 @@ const printPublicPost = (newPublicPosts) => { //hacer otro parámetro que define
 
   const author = document.createElement('h4');
   author.setAttribute('style', "margin-top: 22px,");
-;
+  author.setAttribute('class', "author");
 
   const textPost = document.createElement('textarea');
   textPost.setAttribute('class', 'w3-left  w3-margin-right edit-textarea');
@@ -244,7 +140,7 @@ const printPublicPost = (newPublicPosts) => { //hacer otro parámetro que define
 };
 
 // Esta es la función para pintar dinámicamente los post personales(privados)
-const showPostsUserProfile = (newPostsUser) => {
+window.showPostsUserProfile = (newPostsUser) => {
 
   const postskey = newPostsUser.key
 
@@ -260,7 +156,7 @@ const showPostsUserProfile = (newPostsUser) => {
   line.setAttribute('class', "w3-clear")
 
   const author = document.createElement('h4');
-
+  author.setAttribute('class', "author");
   author.setAttribute('style', "margin-top: 22px");
 
 
@@ -269,7 +165,7 @@ const showPostsUserProfile = (newPostsUser) => {
   textPost.setAttribute('id', postskey);
   textPost.setAttribute('disabled', true);
   textPost.innerHTML = `${newPostsUser.val().body}`;
-  
+  textPost.setAttribute('disabled', true);
 
   const lineBreak = document.createElement('br');
   lineBreak.setAttribute('class', "w3-clear");
@@ -363,9 +259,9 @@ const showPostsUserProfile = (newPostsUser) => {
   }
 };
 
-//  Función para traer todos los posts almacenados en Firebase. 
+//  Función para traer todos los posts publicos almacenados en Firebase. 
 
-const getPublicPostByFirebase = (uid) => {
+window.getPublicPostByFirebase = (uid) => {
   // Trae los posts de todos los usuarios (Públicos)
   const allUsersPosts = firebase.database().ref('posts');
   allUsersPosts.on("child_added", newPublicPosts => {
@@ -373,8 +269,8 @@ const getPublicPostByFirebase = (uid) => {
   });
 };
 
-
-const getPrivatePostbyFirebase = (uid) => {
+//  Función para traer todos los posts privados almacenados en Firebase. 
+window.getPrivatePostbyFirebase = (uid) => {
   //Trae solo los posts del usuario (Personales)
   const userPosts = firebase.database().ref('user-posts').child(uid);
   userPosts.on("child_added", newUserPosts => {
@@ -382,13 +278,8 @@ const getPrivatePostbyFirebase = (uid) => {
   });
 };
 
-// Funcion refactorizada para escribir un post, que recibe como argumento el valor del select
-// "privado o público", y dependiendo de eso escribe en la rama correspondiente
-window.cleanTextarea = () => {
-  textComposerArea.value = '';
-  };
-
-const writtingPost = () => {
+// Funcion que escribe un post en Firebase
+window.writtingPost = () => {
   let privacyValue = statusOfPrivacy.value;
   const composerAreaValue = textComposerArea.value;
   if (composerAreaValue.length === 0 && composerAreaValue === '') { //acá verifica si está en blanco
@@ -407,23 +298,14 @@ const writtingPost = () => {
     likeCount: 0,
     email: currentUser.email
   };
-
   const updates = {};
-
   updates['/user-posts/' + currentUser.uid + '/' + newPostKey] = postData; //si es privado solo se guarda en user-post
   cleanTextarea();
 
-
   //condición para que escriba también en la rama post cuando es público
-  if (privacyValue == 'public') {
+  if (privacyValue === 'public') {
     updates['/posts/' + newPostKey] = postData;
     cleanTextarea();
   }
   return firebase.database().ref().update(updates);
-  
-};
-
-
-window.reloadPage = () => {
-  window.location.reload();
 };
