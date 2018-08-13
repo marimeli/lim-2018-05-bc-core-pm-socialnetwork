@@ -148,9 +148,8 @@ Al presentar los sketchs de baja fidelidad con las distintas vistas de Cooltural
 
 ### - Prototipo alta fidelidad
 
-
-![figma-screens2](https://user-images.githubusercontent.com/38727384/44048748-e4ed84be-9ef7-11e8-9389-49bde821a4d4.jpg)
 ![figma-screens](https://user-images.githubusercontent.com/38727384/44048749-e51ff868-9ef7-11e8-9237-2e39adac6611.jpg)
+![figma-screens2](https://user-images.githubusercontent.com/38727384/44048748-e4ed84be-9ef7-11e8-9389-49bde821a4d4.jpg)
 
 [Ver en Figma](https://www.figma.com/file/bFp2KSQNXLA33ndHvjCXKAsP/Cooltural-Social-Network?node-id=0%3A1)
 
