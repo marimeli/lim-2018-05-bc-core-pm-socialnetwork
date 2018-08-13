@@ -47,3 +47,20 @@ p {
 #add-banner {
     width:100%;
 }
+
+#logged-in {
+    padding:80px 0 0 0;
+}
+
+.edit-textarea {
+    resize: none;
+    border: none;
+    background: transparent;
+}
+
+.focus-textarea {
+    background: yellow;
+    resize: none;
+    border: none;
+    height: 40%;
+}

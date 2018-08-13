@@ -8,7 +8,7 @@ La cultura y las artes juegan un papel importante en nuestra sociedad,porque pro
 Cooltural es una red social que permite conectar a artistas, organizaciones y personas interesadas en actividades culturales y artísticas. 
 
 ## ¿Quiénes son los principales usuarios de Cooltural?
- Personas interesadas en cultura y arte, y artistas. 
+ Personas interesadas en cultura y arte, y artistas. Nuestro target son hombres y mujeres de entre 18 a 35 años. 
 
 ## Antes de empezar: ¿Cuáles son los elementos de una red social?
 
