@@ -3,11 +3,9 @@ window.onload = () => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       console.log('Usuario logueado');
-      //Ocultar botones que abren modales de registro y login
-      dontShowModalRegister();
+      dontShowModalRegister();  //Ocultar botones que abren modales de registro y login
       dontShowModal();
-      userInformation(user);
-      //Muestra perfil y container para publicar
+      userInformation(user);  //Muestra perfil y container para publicar
       hideContainers();
       writeUserData(user.uid, user.displayName, user.email, user.photoURL);
     } else {
@@ -29,16 +27,13 @@ window.writeUserData = (userId, name, email, imageUrl) => {
     email: email,
     profile_picture: imageUrl
   })
-    .then(result => {
-      console.log(result);
-    })
     .catch(error => {
       console.log(error);
     });
 };
 
 //Imprimir post PÚBLICOS
-window.printPublicPost = (newPublicPosts) => { 
+window.printPublicPost = (newPublicPosts) => {
   const postskey = newPublicPosts.key;
   const contPost = document.createElement('div');
   contPost.setAttribute('class', "w3-container w3-card w3-white w3-round w3-margin")
@@ -64,16 +59,16 @@ window.printPublicPost = (newPublicPosts) => {
   btnLike.setAttribute('class', "w3-button w3-theme-d1 w3-margin-bottom");
 
   const contadorlike = document.createElement('a');
-  contadorlike.setAttribute('class', 'w3-button w3-margin-bottom ')
+  contadorlike.setAttribute('class', 'w3-button w3-margin-bottom')
   contadorlike.setAttribute('id', postskey);
   contadorlike.innerHTML = `${newPublicPosts.val().likeCount}`;
-  var clicks = 0;
+  let clicks = 0;
+
   btnLike.addEventListener('click', () => {
     clicks += 1;
-    contadorlike.innerHTML = clicks;
 
-    const newUpdate = textPost.innerText
-    const newPostvalue = newUpdate
+    contadorlike.innerHTML = clicks;
+    const newPostvalue = textPost.value
     const nuevoPost = {
       body: newPostvalue,
       image: `${newPublicPosts.val().image}`,
@@ -82,14 +77,21 @@ window.printPublicPost = (newPublicPosts) => {
       key: postskey,
       likeCount: clicks,
     };
-    const updatesUser = {};
+
+/*     const objRefLike = nuevoPost.likeCount;
+    console.log(objRefLike);
+    
+    if (objRefLike === -1) {
+      objRefLike.push(likeCount);
+     nuevoPost.likeCount = objRefLike.length;
+    }  */
+
     const updatesPost = {};
-
-    updatesPost[`/posts/${newPublicPosts.key}`] = nuevoPost; // aquí va la condicion
-    firebase.database().ref().update(updatesUser);
+    updatesPost[`/posts/${newPublicPosts.key}`] = nuevoPost; 
     firebase.database().ref().update(updatesPost);
-
   })
+
+  
 
   publicContainer.appendChild(contPost);
   contPost.appendChild(image);
@@ -156,6 +158,8 @@ window.showPostsUserProfile = (newPostsUser) => {
     }
   });
 
+
+  
   btnEdit.addEventListener('click', (e) => {
     textPost.disabled = false;
     textPost.setAttribute('class', "w3-left w3-margin-right focus-textarea");
@@ -180,11 +184,9 @@ window.showPostsUserProfile = (newPostsUser) => {
           key: postskey,
           likeCount: 0,
         };
-
-        const updatesUser = {};
         const updatesPost = {};
         updatesUser[`/user-posts/${newPostsUser.val().uid}/${newPostsUser.key}`] = nuevoPost;
-        updatesPost[`/posts/${newPostsUser.key}`] = nuevoPost;
+        updatesPost[`/posts/${newPublicPosts.key}`] = nuevoPost; 
         firebase.database().ref().update(updatesUser);
         firebase.database().ref().update(updatesPost);
         reloadPage();
