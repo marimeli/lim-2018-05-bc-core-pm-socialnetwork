@@ -452,7 +452,8 @@ const getPrivatePostbyFirebase = (uid) => {
 
 // Funcion refactorizada para escribir un post, que recibe como argumento el valor del select
 // "privado o público", y dependiendo de eso escribe en la rama correspondiente
-const writtingPost = (privacyValue) => {
+const writtingPost = () => {
+  let privacyValue = statusOfPrivacy.value;
   const composerAreaValue = textComposerArea.value;
   if (composerAreaValue.length === 0 && composerAreaValue === '') {
     alert('Escribe un texto antes de publicar');
@@ -473,12 +474,14 @@ const writtingPost = (privacyValue) => {
 
   updates['/user-posts/' + currentUser.uid + '/' + newPostKey] = postData;
 
-
   //condición para que escriba también en la rama post cuando es público
-  if (privacyValue === 'public') {
+  if (privacyValue == 'public') {
     updates['/posts/' + newPostKey] = postData;
+    updates['/user-posts/' + currentUser.uid + '/' + newPostKey] = postData;
+    return firebase.database().ref().update(updates); 
   }
   return firebase.database().ref().update(updates);
+  
 };
 
 
