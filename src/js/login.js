@@ -80,4 +80,5 @@ window.logoutWithFirebase = () => {
       console.log('Error Firebase > Mensaje > ' + error.message);
     });
     hideSections();
+    reloadPage();
 };

@@ -9,18 +9,7 @@ window.onload = () => {
       //Ocultar botones que abren modales de registro y login
       dontShowModalRegister();
       dontShowModal();
-      //Imprime nombre de usuario
-      if (user.displayName == null) {
-        userName.innerHTML = user.email;
-      } else {
-        userName.innerHTML = user.displayName;
-      }
-      //Imprime foto en perfil
-      if (user.photoURL == null) {
-        userImage.setAttribute('src', "https://png.icons8.com/ios/1600/user-male-circle-filled.png");
-      } else {
-        userImage.setAttribute('src', user.photoURL);
-      }
+      userInformation(user);
       //Muestra perfil y container para publicar
 
       hideContainers();
