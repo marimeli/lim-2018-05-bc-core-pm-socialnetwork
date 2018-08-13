@@ -128,10 +128,6 @@ Quizás, la red social más utilizada por ilustradores en el mundo. En ella pued
 
 Behance es la red social pensada para artistas e ilustradores propiedad de Adobe. Sin duda, una de las plataformas online líder a nivel mundial. El sitio web muestra el talento de profesionales del sector, da visibilidad a escuelas y organizaciones creativas, distribuye el trabajo a otras galerías online y se sincroniza con ProSite, un creador de portfolios online totalmente personalizable.
 
-Resumen de entrevistas con usuarios
- Link/screenshots del prototipo de alta fidelidad.
- Conclusiones de testing con el producto en HTML.
-
 ## Prototipado
 
 ### - Prototipo de baja fidelidad
@@ -142,13 +138,25 @@ Resumen de entrevistas con usuarios
 ![photo5105341124570097635](https://user-images.githubusercontent.com/38727384/43291545-688ef492-90f7-11e8-948a-65dc4763ab3a.jpg)
 ![photo5105341124570097636](https://user-images.githubusercontent.com/38727384/43291546-68b756ee-90f7-11e8-929a-0a88df9d133e.jpg)
 
+###  Testing del prototipo de baja fidelidad
+
+Al presentar los sketchs de baja fidelidad con las distintas vistas de Cooltural, pudimos observar:
+- Los usuarios comprenden visualmente las pantallas y cómo acceder a cada una.
+- Existe tedio por la cantidad de pantallas para iniciar sesión, así que se plantea reducir el número de pantallas y, además, utilizar un modal para inicio de sesión y registro. 
+- Los usuarios comprenden los elementos de las pantallas, al asociarlos con otras redes sociales más populares (como Instagram o Facebook).
+
 
 ### - Prototipo alta fidelidad
 
+![figma-screens](https://user-images.githubusercontent.com/38727384/44048749-e51ff868-9ef7-11e8-9237-2e39adac6611.jpg)
+![figma-screens2](https://user-images.githubusercontent.com/38727384/44048748-e4ed84be-9ef7-11e8-9389-49bde821a4d4.jpg)
+
 [Ver en Figma](https://www.figma.com/file/bFp2KSQNXLA33ndHvjCXKAsP/Cooltural-Social-Network?node-id=0%3A1)
 
-### - Prototipo ideal
-###  Test con usuario: conclusiones 
+
+### Testing del HTML
+Luego de varias iteraciones, se presenta el prototipo de alta fidelidad a 3 usuarios, con el objetivo de verificar que puedan, de una manera rápida y sencilla reconocer: cómo registrarse o iniciar sesión, acceder al muro y a su perfil, hacer un post público y privado, dar 'me gusta', borrar un post y cerrar sesión. Se les solicita que comenten en voz alta cómo y por qué están interactuando con cada elemento. Los usuarios no muestran dificultades para reconocer los distintos elementos y pantallas que conforman el flujo de la aplicación. 
+
 
 ## Creación de marca: Cooltural
 
@@ -176,6 +184,3 @@ Para desarrollar este producto decidimos usar la metodología ágil. El tablero 
 ![trello](https://user-images.githubusercontent.com/39272944/43022533-395ad1b0-8c2d-11e8-9589-4ec38b191725.jpg)
 
 ![issues](https://user-images.githubusercontent.com/39272944/43022557-4623e0e4-8c2d-11e8-88c7-d89ccb79cd70.png)
-
-
-

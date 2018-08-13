@@ -1,3 +1,5 @@
+/* alert('2'); */
+ 
 //*********REGISTER***********
 window.registerWithFirebase = () => {
   //Crea usuario con email y password

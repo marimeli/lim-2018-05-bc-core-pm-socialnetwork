@@ -1,3 +1,4 @@
+/* alert('5'); */
 /* Almacenando las variables para la selección de DOM */
 
 //Logout
@@ -18,9 +19,12 @@ const addBanner = document.getElementById('add-banner');
 const postsContainer = document.getElementById('posts-container'); //contenedor que guardará todos los posts que se creen dinámicamente  */
 const privateContainer = document.getElementById('private-container'); //contenedor de post privados
 const publicContainer = document.getElementById('public-container'); //contenedor de post publicos
+
+
 const postComposerContainer = document.getElementById('post-composer-container'); //contenedor de base de datos
 const textComposerArea = document.getElementById('text-composer-area'); //área para hacer una publicación
 const sendPostButton = document.getElementById('send-post'); //botón para publicar
+
 const statusOfPrivacy = document.getElementById('status-of-privacy');
 const feedButton = document.getElementById('feed-button');
 const profileButton = document.getElementById('profile-button');
@@ -28,7 +32,9 @@ const feedButtonNavbar = document.getElementById('feed-btn-navbar');
 const profileButtonNavbar = document.getElementById('profile-btn-navbar');
 
 //MOBILE
+
 const hamburgerMenu = document.getElementById('hamburger-menu');
+
 
 /* FUNCIONES */
 
@@ -56,7 +62,7 @@ const showFeed = () => {
 
 const myProfile = () => {
   postComposerContainer.style.display = 'block';
-  profileContainer.style.display = 'block'; 
+  profileContainer.style.display = 'block'; //profileContainer
   publicContainer.style.display = 'none';
   privateContainer.style.display = 'block';
   accordion.style.display = 'none';
@@ -79,6 +85,7 @@ const hideContainers = () => {
   profileButtonNavbar.style.display = 'block'
   alertBox.style.display = 'none';
   addBanner.style.display = 'none';
+
 };
 
 //Cuando cierra sesión, se ejecuta la función que muestra contenedores.
@@ -96,6 +103,7 @@ const showContainers = () => {
   feedButtonNavbar.style.display = 'none';
   profileButton.style.display = 'none';
   profileButtonNavbar.style.display = 'none';
+  /*   myPhotos.style.display = 'block';   */
 };
 
 const userInformation = (user) => {
@@ -115,7 +123,7 @@ const userInformation = (user) => {
 
 // Accordion
 const myFunction = (id) => {
-  const x = document.getElementById(id);
+  var x = document.getElementById(id);
   if (x.className.indexOf("w3-show") == -1) {
     x.className += " w3-show";
     x.previousElementSibling.className += " w3-theme-d1";
@@ -128,7 +136,7 @@ const myFunction = (id) => {
 
 // Used to toggle the menu on smaller screens when clicking on the menu button
 const openNav = () => {
-  const logged = document.getElementById("logged-in");
+  var logged = document.getElementById("logged-in");
   if (logged.className.indexOf("w3-show") == -1) {
     logged.className += " w3-show";
   } else {
@@ -137,9 +145,15 @@ const openNav = () => {
 };
 
 /* EVENTOS DEL DOM */
+
 logoutButton.addEventListener('click', logoutWithFirebase);
+
+// Logout navbar
 logoutButtonNavbar.addEventListener('click', logoutWithFirebase);
+
 sendPostButton.addEventListener('click', writtingPost);
+
+
 feedButton.addEventListener('click', showFeed);
 feedButtonNavbar.addEventListener('click', showFeed);
 profileButton.addEventListener('click', myProfile);

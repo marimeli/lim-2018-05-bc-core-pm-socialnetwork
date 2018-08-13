@@ -1,8 +1,8 @@
-html, body, h4, h5 {
+html, body, h1, h2, h3, h4, p {
     font-family: "Open Sans", sans-serif
 }
 
-h5 {
+p {
     text-align: center;   
 }
 
@@ -42,11 +42,11 @@ h5 {
     resize: none;
 }
 
-.banner {
+#add-banner {
     width:100%;
 }
 
-.nav {
+#logged-in {
     padding:80px 0 0 0;
 }
 
@@ -54,30 +54,11 @@ h5 {
     resize: none;
     border: none;
     background: transparent;
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
 }
 
 .focus-textarea {
-    background:#ffff66;
+    background: yellow;
     resize: none;
     border: none;
     height: 40%;
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-.writer {
-    margin-top: 25px;
-    padding: 12px 25px
 }
